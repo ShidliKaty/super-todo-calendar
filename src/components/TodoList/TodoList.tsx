@@ -19,6 +19,17 @@ const TodoList = (props: TodoListProps) => {
         <TodoItem />
         <TodoItem />
         <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
+        <TodoItem />
       </List>
     </div>
   );

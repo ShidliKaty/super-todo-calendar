@@ -1,7 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./pages/Layout";
-import MyPlansMain from "./pages/MyPlansMain";
 import ErrorPage from "./pages/ErrorPage";
+import ImportantPage from "./pages/ImportantPage/ImportantPage";
+import MyPlansMain from "./pages/MyPlansMain/MyPlansMain";
+import DonePage from "./pages/DonePage/DonePage";
+import MyListPage from "./pages/MyListPage/MyListPage";
 
 export const router = createBrowserRouter([
   {
@@ -12,6 +15,18 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <MyPlansMain />,
+      },
+      {
+        path: "/important",
+        element: <ImportantPage />,
+      },
+      {
+        path: "/done",
+        element: <DonePage />,
+      },
+      {
+        path: "/mylist",
+        element: <MyListPage />,
       },
     ],
   },
