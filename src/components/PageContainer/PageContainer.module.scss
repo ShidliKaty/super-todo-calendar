@@ -1,7 +1,8 @@
 .PageContainer {
+  position: relative;
   flex-grow: 1;
-  height: 100vh;
-  padding: 20px;
+  min-height: 100vh;
+  padding: 40px;
   flex-shrink: 100;
-  background-color: #f7fafc;
+  background-color: #edf2f7;
 }

@@ -1,4 +1,11 @@
 import {
+  CheckCircleIcon,
+  SearchIcon,
+  StarIcon,
+  SunIcon,
+} from "@chakra-ui/icons";
+import {
+  Divider,
   Input,
   InputGroup,
   InputLeftElement,
@@ -7,14 +14,10 @@ import {
   ListItem,
   VStack,
 } from "@chakra-ui/react";
+
 import { classNames } from "../../lib/classNames";
+import ListsGroup from "../ListsGroup/ListsGroup";
 import cls from "./Sidebar.module.scss";
-import {
-  CheckCircleIcon,
-  SearchIcon,
-  StarIcon,
-  SunIcon,
-} from "@chakra-ui/icons";
 
 interface SidebarProps {
   className?: string;
@@ -24,7 +27,7 @@ const Sidebar = (props: SidebarProps) => {
   const { className } = props;
   return (
     <div className={classNames(cls.Sidebar, {}, [className])}>
-      <VStack p={10} spacing={5} align="flex-start">
+      <VStack spacing={5} align="flex-start">
         <InputGroup>
           <InputLeftElement pointerEvents="none">
             <SearchIcon color="gray.300" />
@@ -33,25 +36,40 @@ const Sidebar = (props: SidebarProps) => {
             variant="outline"
             borderColor="purple.300"
             backgroundColor="white"
+            borderRadius="50"
             type="search"
             placeholder="Поиск"
           />
         </InputGroup>
         <List spacing={5}>
-          <ListItem color="purple.500">
+          <ListItem
+            color="blackAlpha.600"
+            _hover={{ color: "#6B46C1" }}
+            cursor="pointer"
+          >
             <ListIcon as={SunIcon} />
             Мои Планы
           </ListItem>
-          <ListItem color="purple.500">
+          <ListItem
+            color="blackAlpha.600"
+            _hover={{ color: "#6B46C1" }}
+            cursor="pointer"
+          >
             <ListIcon as={StarIcon} />
             Важно
           </ListItem>
-          <ListItem color="purple.500">
+          <ListItem
+            color="blackAlpha.600"
+            _hover={{ color: "#6B46C1" }}
+            cursor="pointer"
+          >
             <ListIcon as={CheckCircleIcon} />
             Завершено
           </ListItem>
         </List>
+        <Divider w="100%" />
       </VStack>
+      <ListsGroup />
     </div>
   );
 };
