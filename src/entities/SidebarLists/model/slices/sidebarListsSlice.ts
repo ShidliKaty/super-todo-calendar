@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { SidebarList, SidebarListsState } from "../../types";
+import { createSlice } from "@reduxjs/toolkit";
+import { SidebarListsState } from "../../types";
 import { fetchSidebarLists } from "../services/fetchSidebarLists";
 
 const initialState: SidebarListsState = {
@@ -11,11 +11,7 @@ const initialState: SidebarListsState = {
 export const sidebarListsSlice = createSlice({
   name: "sidebarLists",
   initialState,
-  reducers: {
-    setLists(state, action: PayloadAction<SidebarList[]>) {
-      state.lists = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchSidebarLists.pending, (state) => {
