@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 import { classNames } from "../../lib/classNames";
-import ListsGroup from "../ListsGroup/ListsGroup";
+import ListsGroup from "../../entities/SidebarLists/ui/ListsGroup/ListsGroup";
 import cls from "./Sidebar.module.scss";
 
 interface SidebarProps {
