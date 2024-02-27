@@ -16,7 +16,7 @@ import { PiDotsThreeOutlineVerticalBold } from "react-icons/pi";
 import { FaListAlt } from "react-icons/fa";
 import { SidebarList } from "../../types";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { updateListName } from "../../model/services/updateListName";
 import { useAppDispatch } from "../../../../redux/store";
 
@@ -29,6 +29,26 @@ const ListsItem = ({ list }: ListsItemProps) => {
   const [isEditing, setIsEditing] = useState(list.isEditing || false);
   const dispatch = useAppDispatch();
   const nameRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (formRef.current && !formRef.current.contains(event.target as Node)) {
+      setIsEditing(false);
+    }
+
+    console.log(isEditing);
+  };
+
+  useEffect(() => {
+    document.body.addEventListener("click", handleClickOutside);
+
+    return () => document.body.removeEventListener("click", handleClickOutside);
+  }, []);
+
+  const toggleVisibility = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setIsEditing((prev) => !prev);
+  };
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -38,7 +58,6 @@ const ListsItem = ({ list }: ListsItemProps) => {
     const name = nameRef.current?.value || "";
 
     dispatch(updateListName({ id, name }));
-    console.log(nameRef.current?.value);
 
     setIsEditing(false);
   }
@@ -54,14 +73,16 @@ const ListsItem = ({ list }: ListsItemProps) => {
         <HStack justify="space-between" w="100%">
           <HStack spacing={0.5}>
             <ListIcon as={FaListAlt} />
-            <form onSubmit={handleSubmit}>
-              <input
-                autoFocus
-                type="text"
-                defaultValue={list.name}
-                ref={nameRef}
-              />
-            </form>
+            <div ref={formRef}>
+              <form onSubmit={handleSubmit}>
+                <input
+                  autoFocus
+                  type="text"
+                  defaultValue={list.name}
+                  ref={nameRef}
+                />
+              </form>
+            </div>
           </HStack>
         </HStack>
       ) : (
@@ -85,7 +106,7 @@ const ListsItem = ({ list }: ListsItemProps) => {
                     color="blackAlpha.600"
                     _hover={{ color: "#6B46C1" }}
                     alignItems="center"
-                    onClick={() => setIsEditing(true)}
+                    onClick={toggleVisibility}
                   >
                     <EditIcon />
                   </Button>
