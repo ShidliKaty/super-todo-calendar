@@ -1,5 +1,4 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import { classNames } from "../../lib/classNames";
 import cls from "./AddButton.module.scss";
 
 interface AddButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -8,14 +7,12 @@ interface AddButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const AddButton = (props: AddButtonProps) => {
-  const { className, children, ...otherProps } = props;
+  const { children, ...otherProps } = props;
 
   return (
-    <div className={classNames(cls.AddButton, {}, [className])}>
-      <button className={cls.Button} type="button" {...otherProps}>
-        {children}
-      </button>
-    </div>
+    <button className={cls.Button} type="button" {...otherProps}>
+      {children}
+    </button>
   );
 };
 

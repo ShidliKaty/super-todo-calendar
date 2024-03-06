@@ -7,11 +7,12 @@ import { router } from "./router.tsx";
 // import StoreProvider from "./redux/StoreProvider/StoreProvider.tsx";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.ts";
+import theme from "./theme.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <RouterProvider router={router} />
       </ChakraProvider>
     </Provider>

@@ -38,7 +38,10 @@ const Sidebar = (props: SidebarProps) => {
             backgroundColor="white"
             borderRadius="50"
             type="search"
+            color="black"
             placeholder="Поиск"
+            focusBorderColor="purple.600"
+            _hover={{ borderColor: "purple.300" }}
           />
         </InputGroup>
         <List spacing={5}>
@@ -67,8 +70,9 @@ const Sidebar = (props: SidebarProps) => {
             Завершено
           </ListItem>
         </List>
-        <Divider w="100%" />
+        <Divider w="100%" borderColor="gray.300" />
       </VStack>
+
       <ListsGroup />
     </div>
   );
