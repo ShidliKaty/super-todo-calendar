@@ -21,6 +21,11 @@ body {
   display: flex;
 }
 
+input {
+  padding: 5px 10px;
+  outline-color: blueviolet;
+}
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

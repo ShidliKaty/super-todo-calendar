@@ -21,6 +21,7 @@ import { updateListName } from "../../model/services/updateListName";
 import { useAppDispatch } from "../../../../redux/store";
 import { addSidebarList } from "../../model/services/addSidebarList";
 import { removeSidebarList } from "../../model/slices/sidebarListsSlice";
+import { deleteSidebarList } from "../../model/services/deleteSidebarList";
 
 interface ListsItemProps {
   list: SidebarList;
@@ -38,13 +39,13 @@ const ListsItem = ({ list, isEdditing, isNew }: ListsItemProps) => {
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {
       if (formRef.current && !formRef.current.contains(event.target as Node)) {
-        if (nameRef.current?.value === "") {
+        if (isNew && nameRef.current?.value.trim() === "") {
           dispatch(removeSidebarList(id));
         }
         setIsEditing(false);
       }
     },
-    [dispatch, id]
+    [dispatch, id, isNew]
   );
 
   useEffect(() => {
@@ -56,19 +57,23 @@ const ListsItem = ({ list, isEdditing, isNew }: ListsItemProps) => {
     }
   }, [handleClickOutside, isEditing]);
 
-  const toggleVisibility = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onToggleEditing = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setIsEditing((prev) => !prev);
+  };
+
+  const onDeleteList = () => {
+    dispatch(deleteSidebarList(id));
   };
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    if (nameRef.current?.value === "") return;
+    const name = nameRef.current?.value.trim();
 
-    const name = nameRef.current?.value || "";
+    if (!name) return;
 
-    if (isNew) {
+    if (name && isNew) {
       dispatch(addSidebarList({ id, name }));
     } else {
       dispatch(updateListName({ id, name }));
@@ -108,7 +113,7 @@ const ListsItem = ({ list, isEdditing, isNew }: ListsItemProps) => {
           </HStack>
           <Popover>
             <PopoverTrigger>
-              <Box as="button">
+              <Box as="button" mr="13px">
                 <Icon as={PiDotsThreeOutlineVerticalBold}></Icon>
               </Box>
             </PopoverTrigger>
@@ -121,7 +126,7 @@ const ListsItem = ({ list, isEdditing, isNew }: ListsItemProps) => {
                     color="blackAlpha.600"
                     _hover={{ color: "#6B46C1" }}
                     alignItems="center"
-                    onClick={toggleVisibility}
+                    onClick={onToggleEditing}
                   >
                     <EditIcon />
                   </Button>
@@ -130,6 +135,7 @@ const ListsItem = ({ list, isEdditing, isNew }: ListsItemProps) => {
                     variant="ghost"
                     color="blackAlpha.600"
                     _hover={{ color: "#6B46C1" }}
+                    onClick={onDeleteList}
                   >
                     <DeleteIcon />
                   </Button>

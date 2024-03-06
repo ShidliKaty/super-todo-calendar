@@ -47,7 +47,6 @@ const ListsGroup = () => {
     };
 
     dispatch(addingSidebarList(newList));
-    // dispatch(addSidebarList("new"));
   };
 
   const MyLists = () => {
