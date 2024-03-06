@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { SidebarListsState } from "../../types";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { SidebarList, SidebarListsState } from "../../types";
 import { fetchSidebarLists } from "../services/fetchSidebarLists";
 
 const initialState: SidebarListsState = {
@@ -11,7 +11,14 @@ const initialState: SidebarListsState = {
 export const sidebarListsSlice = createSlice({
   name: "sidebarLists",
   initialState,
-  reducers: {},
+  reducers: {
+    addingSidebarList(state, action: PayloadAction<SidebarList>) {
+      state.lists = [action.payload, ...state.lists];
+    },
+    removeSidebarList(state, action: PayloadAction<string>) {
+      state.lists = state.lists.filter((list) => list.id !== action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchSidebarLists.pending, (state) => {
@@ -31,3 +38,5 @@ export const sidebarListsSlice = createSlice({
 });
 
 export const { reducer: sidebarListsSliceReducer } = sidebarListsSlice;
+export const { addingSidebarList, removeSidebarList } =
+  sidebarListsSlice.actions;

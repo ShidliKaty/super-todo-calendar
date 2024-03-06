@@ -3,14 +3,12 @@ import { SidebarList } from "../../types";
 import { baseAPI } from "../../../../api/baseAPI";
 import { fetchSidebarLists } from "./fetchSidebarLists";
 
-export const updateListName = createAsyncThunk<SidebarList[], SidebarList>(
+export const addSidebarList = createAsyncThunk<SidebarList, SidebarList>(
   "lists/updateListName",
-  async (
-    { id, name }: { id: string; name: string },
-    { dispatch, rejectWithValue }
-  ) => {
+  async ({ id, name }, { dispatch, rejectWithValue }) => {
     try {
-      const { data } = await baseAPI.patch<SidebarList[]>(`lists/${id}`, {
+      const { data } = await baseAPI.post<SidebarList>("lists", {
+        id,
         name,
       });
 

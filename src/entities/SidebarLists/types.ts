@@ -1,7 +1,8 @@
 export type SidebarList = {
-  id: number;
+  id: string;
   name: string;
   isEditing?: boolean;
+  isNew?: boolean;
 };
 
 export interface SidebarListsState {

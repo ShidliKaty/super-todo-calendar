@@ -16,34 +16,45 @@ import { PiDotsThreeOutlineVerticalBold } from "react-icons/pi";
 import { FaListAlt } from "react-icons/fa";
 import { SidebarList } from "../../types";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { updateListName } from "../../model/services/updateListName";
 import { useAppDispatch } from "../../../../redux/store";
+import { addSidebarList } from "../../model/services/addSidebarList";
+import { removeSidebarList } from "../../model/slices/sidebarListsSlice";
 
 interface ListsItemProps {
   list: SidebarList;
+  isEdditing: boolean | undefined;
+  isNew: boolean | undefined;
 }
 
-const ListsItem = ({ list }: ListsItemProps) => {
+const ListsItem = ({ list, isEdditing, isNew }: ListsItemProps) => {
   const { id } = list;
-  const [isEditing, setIsEditing] = useState(list.isEditing || false);
+  const [isEditing, setIsEditing] = useState(isEdditing || false);
   const dispatch = useAppDispatch();
   const nameRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (formRef.current && !formRef.current.contains(event.target as Node)) {
-      setIsEditing(false);
-    }
-
-    console.log(isEditing);
-  };
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      if (formRef.current && !formRef.current.contains(event.target as Node)) {
+        if (nameRef.current?.value === "") {
+          dispatch(removeSidebarList(id));
+        }
+        setIsEditing(false);
+      }
+    },
+    [dispatch, id]
+  );
 
   useEffect(() => {
-    document.body.addEventListener("click", handleClickOutside);
+    if (isEditing) {
+      document.body.addEventListener("click", handleClickOutside);
 
-    return () => document.body.removeEventListener("click", handleClickOutside);
-  }, []);
+      return () =>
+        document.body.removeEventListener("click", handleClickOutside);
+    }
+  }, [handleClickOutside, isEditing]);
 
   const toggleVisibility = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -57,7 +68,11 @@ const ListsItem = ({ list }: ListsItemProps) => {
 
     const name = nameRef.current?.value || "";
 
-    dispatch(updateListName({ id, name }));
+    if (isNew) {
+      dispatch(addSidebarList({ id, name }));
+    } else {
+      dispatch(updateListName({ id, name }));
+    }
 
     setIsEditing(false);
   }
@@ -98,7 +113,7 @@ const ListsItem = ({ list }: ListsItemProps) => {
               </Box>
             </PopoverTrigger>
             <Portal>
-              <PopoverContent w="50px">
+              <PopoverContent bg="white" w="50px" borderColor="gray.100">
                 <VStack p={1} spacing={1}>
                   <Button
                     p="8px"
