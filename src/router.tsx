@@ -25,7 +25,7 @@ export const router = createBrowserRouter([
         element: <DonePage />,
       },
       {
-        path: "/mylist",
+        path: "/mylist/:name",
         element: <MyListPage />,
       },
     ],

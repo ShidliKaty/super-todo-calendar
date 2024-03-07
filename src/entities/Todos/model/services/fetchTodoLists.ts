@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { SidebarList } from "../../types/sidebarListTypes";
 import { baseAPI } from "../../../../api/baseAPI";
+import { Todo } from "../../types/todoTypes";
 
-export const fetchSidebarLists = createAsyncThunk<SidebarList[]>(
-  "lists/fetchSidebarLists",
+export const fetchTodoLists = createAsyncThunk<Todo[]>(
+  "lists/fetchTodoLists",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await baseAPI.get<SidebarList[]>("lists");
+      const { data } = await baseAPI.get<Todo[]>("todos");
 
       if (!data) {
         throw new Error();

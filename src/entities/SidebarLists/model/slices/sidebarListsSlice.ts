@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { SidebarList, SidebarListsState } from "../../types";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit/react";
+import { SidebarList, SidebarListsState } from "../../types/sidebarListTypes";
 import { fetchSidebarLists } from "../services/fetchSidebarLists";
 
 const initialState: SidebarListsState = {

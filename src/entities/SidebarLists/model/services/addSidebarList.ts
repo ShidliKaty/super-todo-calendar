@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { SidebarList } from "../../types";
+import { SidebarList } from "../../types/sidebarListTypes";
 import { baseAPI } from "../../../../api/baseAPI";
 import { fetchSidebarLists } from "./fetchSidebarLists";
 
 export const addSidebarList = createAsyncThunk<SidebarList, SidebarList>(
-  "lists/updateListName",
+  "lists/addSidebarList",
   async ({ id, name }, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await baseAPI.post<SidebarList>("lists", {

@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { PiDotsThreeOutlineVerticalBold } from "react-icons/pi";
 import { FaListAlt } from "react-icons/fa";
-import { SidebarList } from "../../types";
+import { SidebarList } from "../../types/sidebarListTypes";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { updateListName } from "../../model/services/updateListName";
@@ -22,6 +22,7 @@ import { useAppDispatch } from "../../../../redux/store";
 import { addSidebarList } from "../../model/services/addSidebarList";
 import { removeSidebarList } from "../../model/slices/sidebarListsSlice";
 import { deleteSidebarList } from "../../model/services/deleteSidebarList";
+import { Link } from "react-router-dom";
 
 interface ListsItemProps {
   list: SidebarList;
@@ -107,10 +108,12 @@ const ListsItem = ({ list, isEdditing, isNew }: ListsItemProps) => {
         </HStack>
       ) : (
         <HStack justify="space-between" w="100%">
-          <HStack spacing={0.5}>
-            <ListIcon as={FaListAlt} />
-            <Text>{list.name}</Text>
-          </HStack>
+          <Link to={"/mylist/" + list.name}>
+            <HStack spacing={0.5}>
+              <ListIcon as={FaListAlt} />
+              <Text>{list.name}</Text>
+            </HStack>
+          </Link>
           <Popover>
             <PopoverTrigger>
               <Box as="button" mr="13px">

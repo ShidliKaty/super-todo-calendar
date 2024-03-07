@@ -17,5 +17,52 @@
       "id": "b8c5a663-913e-4281-8dd9-3294b1473a4b",
       "name": "аааал"
     }
+  ],
+  "todos": [
+    {
+      "id": 1,
+      "name": "my todo 1",
+      "date": "01.03.2024",
+      "note": "",
+      "completed": true,
+      "important": false,
+      "listId": ""
+    },
+    {
+      "id": 2,
+      "name": "my todo 2",
+      "date": "02.03.2024",
+      "note": "my note",
+      "completed": false,
+      "important": false,
+      "listId": "1"
+    },
+    {
+      "id": 3,
+      "name": "my todo 3",
+      "date": "03.03.2024",
+      "note": "note",
+      "completed": false,
+      "important": false,
+      "listId": "2"
+    },
+    {
+      "id": 4,
+      "name": "my todo 4",
+      "date": "04.03.2024",
+      "note": "",
+      "completed": false,
+      "important": true,
+      "listId": ""
+    },
+    {
+      "id": 5,
+      "name": "my todo 5",
+      "date": "05.03.2024",
+      "note": "",
+      "completed": false,
+      "important": false,
+      "listId": ""
+    }
   ]
 }

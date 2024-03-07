@@ -6,18 +6,19 @@ import cls from "./Header.module.scss";
 
 interface HeaderProps {
   className?: string;
+  name?: string;
 }
 
 const Header = (props: HeaderProps) => {
-  const { className } = props;
+  const { className, name = "Мои планы" } = props;
   return (
     <div className={classNames(cls.Header, {}, [className])}>
       <HStack justify="space-between">
         <VStack align="flex-start" spacing={1}>
           <Heading as="h1" size="xl">
-            Мои Планы
+            {name}
           </Heading>
-          <Text color="blackAlpha.600">Четверг, 22 фев 2024</Text>
+          <Text color="blackAlpha.600">Сегодня Четверг, 22 фев 2024</Text>
         </VStack>
         <AddButton>
           <Icon as={BsPlusLg} boxSize={6} />

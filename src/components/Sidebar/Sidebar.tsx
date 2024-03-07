@@ -18,6 +18,7 @@ import {
 import { classNames } from "../../lib/classNames";
 import ListsGroup from "../../entities/SidebarLists/ui/ListsGroup/ListsGroup";
 import cls from "./Sidebar.module.scss";
+import { Link } from "react-router-dom";
 
 interface SidebarProps {
   className?: string;
@@ -50,8 +51,10 @@ const Sidebar = (props: SidebarProps) => {
             _hover={{ color: "#6B46C1" }}
             cursor="pointer"
           >
-            <ListIcon as={SunIcon} />
-            Мои Планы
+            <Link to="/">
+              <ListIcon as={SunIcon} />
+              Мои Планы
+            </Link>
           </ListItem>
           <ListItem
             color="blackAlpha.600"

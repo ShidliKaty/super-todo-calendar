@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { SidebarList } from "../../types";
+import { SidebarList } from "../../types/sidebarListTypes";
 import { baseAPI } from "../../../../api/baseAPI";
 import { fetchSidebarLists } from "./fetchSidebarLists";
 
