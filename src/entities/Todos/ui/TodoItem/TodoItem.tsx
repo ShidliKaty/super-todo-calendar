@@ -29,10 +29,9 @@ const TodoItem = ({ todo }: TodoItemProps) => {
         borderRadius={10}
       >
         <Checkbox
-          isChecked={todo.completed}
+          defaultChecked={todo.completed}
           colorScheme="purple"
           spacing={3}
-          borderColor="blackAlpha.500"
         >
           <VStack spacing={0.5} align="flex-start">
             <Text color="black" fontSize="l">

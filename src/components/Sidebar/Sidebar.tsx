@@ -15,7 +15,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import { classNames } from "../../lib/classNames";
+import { classNames } from "../../utils/classNames";
 import ListsGroup from "../../entities/SidebarLists/ui/ListsGroup/ListsGroup";
 import cls from "./Sidebar.module.scss";
 import { Link } from "react-router-dom";
