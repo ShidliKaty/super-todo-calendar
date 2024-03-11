@@ -13,12 +13,20 @@ import {
 } from "@chakra-ui/react";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { Todo } from "../../types/todoTypes";
+import { useAppDispatch } from "../../../../redux/store";
+import { deleteTodo } from "../../model/services/deleteTodo";
 
 interface TodoItemProps {
   todo: Todo;
 }
 
 const TodoItem = ({ todo }: TodoItemProps) => {
+  const dispatch = useAppDispatch();
+
+  const onDeleteTodo = () => {
+    dispatch(deleteTodo(todo.id));
+  };
+
   return (
     <ListItem>
       <Box
@@ -60,7 +68,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
           <Button p="8px">
             <EditIcon color="blackAlpha.600" />
           </Button>
-          <Button p="8px">
+          <Button p="8px" onClick={onDeleteTodo}>
             <DeleteIcon color="blackAlpha.600" />
           </Button>
         </ButtonGroup>

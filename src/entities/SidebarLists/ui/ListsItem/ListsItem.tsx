@@ -108,7 +108,7 @@ const ListsItem = ({ list, isEdditing, isNew }: ListsItemProps) => {
         </HStack>
       ) : (
         <HStack justify="space-between" w="100%">
-          <Link to={"/mylist/" + list.name}>
+          <Link to={"/mylist/" + list.name + "/" + list.id}>
             <HStack spacing={0.5}>
               <ListIcon as={FaListAlt} />
               <Text>{list.name}</Text>

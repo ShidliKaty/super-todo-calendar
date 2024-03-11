@@ -14,6 +14,8 @@ import { getSidebarLists } from "../SidebarLists/model/selectors/sidebarLists";
 import { FormEvent, useRef } from "react";
 import { Todo } from "../Todos/types/todoTypes";
 import { formatDate } from "../../utils/formatDate";
+import { useAppDispatch } from "../../redux/store";
+import { addNewTodo } from "../Todos/model/services/addNewTodo";
 
 type TodoModalProps = {
   date: Date;
@@ -27,10 +29,12 @@ const TodoModal = (props: TodoModalProps) => {
   const noteRef = useRef<HTMLTextAreaElement>(null);
   const selectRef = useRef<HTMLSelectElement>(null);
 
+  const dispatch = useAppDispatch();
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    const todo = todoRef.current?.value;
+    const todo = todoRef.current?.value.trim();
     const note = noteRef.current?.value;
     const listName = selectRef.current?.value;
     const newId = crypto.randomUUID();
@@ -43,13 +47,14 @@ const TodoModal = (props: TodoModalProps) => {
       id: newId,
       name: todo,
       date: formattedDate,
-      note: note || "",
+      note: note || undefined,
       completed: false,
       important: false,
-      listId: listName,
+      listId: listName || undefined,
     };
 
-    console.log(newTodo);
+    dispatch(addNewTodo(newTodo));
+    modalProps.onClose();
   };
   return (
     <Modal {...modalProps}>
@@ -58,6 +63,7 @@ const TodoModal = (props: TodoModalProps) => {
         <FormControl onSubmit={handleSubmit}>
           <VStack w="500px">
             <Input
+              isRequired
               ref={todoRef}
               placeholder="Новая запись"
               focusBorderColor="purple.600"

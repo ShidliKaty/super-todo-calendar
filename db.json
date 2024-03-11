@@ -20,15 +20,6 @@
   ],
   "todos": [
     {
-      "id": 1,
-      "name": "my todo 1",
-      "date": "01.03.2024",
-      "note": "",
-      "completed": true,
-      "important": false,
-      "listId": ""
-    },
-    {
       "id": 2,
       "name": "my todo 2",
       "date": "02.03.2024",
@@ -47,22 +38,51 @@
       "listId": "2"
     },
     {
-      "id": 4,
-      "name": "my todo 4",
-      "date": "04.03.2024",
-      "note": "",
-      "completed": false,
-      "important": true,
-      "listId": ""
-    },
-    {
-      "id": 5,
-      "name": "my todo 5",
-      "date": "05.03.2024",
-      "note": "",
+      "id": "b20c379b-56e4-4189-a255-5fed01bf63cb",
+      "name": "new todo",
+      "note": "note",
+      "date": "11.03.2024",
       "completed": false,
       "important": false,
-      "listId": ""
+      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
+    },
+    {
+      "id": "80f7db34-1ad6-49e4-b158-1387476106ff",
+      "name": "qwerete uy yerg iuiuiruirh",
+      "note": "ffrfr",
+      "date": "11.03.2024",
+      "completed": false,
+      "important": false
+    },
+    {
+      "id": "65821d1f-dd82-4f31-890a-d6a6e9d33884",
+      "name": "frgrgrg ggtht",
+      "date": "11.03.2024",
+      "completed": false,
+      "important": false
+    },
+    {
+      "id": "6124c80a-f7f9-492e-af5f-1a5f017ecfad",
+      "name": "grgthth th h h hththth",
+      "date": "11.03.2024",
+      "completed": false,
+      "important": false
+    },
+    {
+      "id": "bb3e67a1-af77-490a-9acb-af39416e3c31",
+      "name": "jbcjbcj",
+      "note": "vdvdv",
+      "date": "11.03.2024",
+      "completed": false,
+      "important": false
+    },
+    {
+      "id": "66c8928d-d930-4b24-aec0-1f9c992d84fd",
+      "name": "cscsc",
+      "note": "dvdv",
+      "date": "11.03.2024",
+      "completed": false,
+      "important": false
     }
   ]
 }

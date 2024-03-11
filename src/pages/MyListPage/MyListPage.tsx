@@ -4,11 +4,11 @@ import PageContainer from "../../components/PageContainer/PageContainer";
 import TodoList from "../../entities/Todos/ui/TodoList/TodoList";
 
 const MyListPage = () => {
-  const { name } = useParams();
+  const { name, id } = useParams();
   return (
     <PageContainer>
       <Header name={name} />
-      <TodoList />
+      <TodoList id={id} />
     </PageContainer>
   );
 };

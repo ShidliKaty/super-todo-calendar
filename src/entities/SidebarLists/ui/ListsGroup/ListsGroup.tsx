@@ -34,7 +34,6 @@ const ListsGroup = () => {
   const lists = useSelector(getSidebarLists);
   const isLoading = useSelector(getSidebarListsIsLoading);
   const error = useSelector(getSidebarListsIsError);
-  console.log(lists);
 
   const addList = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -57,10 +56,20 @@ const ListsGroup = () => {
           <Text color="blackAlpha.600">Нет списков</Text>
         ) : null}
         {isLoading && (
-          <HStack spacing={2}>
-            <SkeletonCircle size="5" />
-            <Skeleton width="130px" height="15px" />
-          </HStack>
+          <VStack align="flex-start" spacing={5}>
+            <HStack spacing={2}>
+              <SkeletonCircle size="5" />
+              <Skeleton width="130px" height="15px" />
+            </HStack>
+            <HStack spacing={2}>
+              <SkeletonCircle size="5" />
+              <Skeleton width="130px" height="15px" />
+            </HStack>
+            <HStack spacing={2}>
+              <SkeletonCircle size="5" />
+              <Skeleton width="130px" height="15px" />
+            </HStack>
+          </VStack>
         )}
         {sortedLists.map((list) => (
           <ListsItem
