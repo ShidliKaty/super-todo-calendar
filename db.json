@@ -60,7 +60,8 @@
       "name": "grgthth th h h hththth",
       "date": "11.03.2024",
       "completed": false,
-      "important": false
+      "important": true,
+      "note": "hhh"
     },
     {
       "id": "bb3e67a1-af77-490a-9acb-af39416e3c31",
@@ -68,7 +69,7 @@
       "note": "vdvdv",
       "date": "11.03.2024",
       "completed": false,
-      "important": false
+      "important": true
     },
     {
       "id": "545e5429-cce3-4818-bfba-46bc54c0281f",
@@ -116,7 +117,7 @@
       "note": "hhh",
       "date": "12.03.2024",
       "completed": false,
-      "important": false
+      "important": true
     },
     {
       "id": "5a282e69-21c2-43d3-87e2-cc7edaf4d318",

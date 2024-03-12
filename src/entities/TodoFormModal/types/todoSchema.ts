@@ -1,8 +1,7 @@
 import { Todo } from "../../Todos/types/todoTypes";
 
 export interface TodoState {
-  todo?: Todo;
-  form?: Todo;
+  data?: Todo;
   isLoading?: boolean;
   error?: string;
 }

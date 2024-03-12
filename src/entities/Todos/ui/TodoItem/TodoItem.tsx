@@ -16,7 +16,8 @@ import { Todo } from "../../types/todoTypes";
 import { useAppDispatch } from "../../../../redux/store";
 import { deleteTodo } from "../../model/services/deleteTodo";
 import TodoModal from "../../../TodoFormModal/ui/TodoModal/TodoModal";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { updateTodoImportance } from "../../model/services/updateTodoImportance";
 
 interface TodoItemProps {
   todo: Todo;
@@ -26,12 +27,25 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   const dispatch = useAppDispatch();
 
   const [isEditing, setIsEditing] = useState(false);
+  const [isImportant, setIsImportant] = useState(todo.important);
 
   const onDeleteTodo = () => {
     if (todo && todo.id) {
       dispatch(deleteTodo(todo.id));
     }
   };
+
+  const onToggleImportant = useCallback(async () => {
+    const updatedImportant = !isImportant;
+    setIsImportant(updatedImportant);
+    const result = await dispatch(
+      updateTodoImportance({ id: todo.id, important: updatedImportant })
+    );
+
+    if (result.meta.requestStatus === "rejected") {
+      setIsImportant(!updatedImportant);
+    }
+  }, [dispatch, isImportant, todo]);
 
   return (
     <>
@@ -69,8 +83,8 @@ const TodoItem = ({ todo }: TodoItemProps) => {
             spacing={1}
           >
             <Divider orientation="vertical" borderColor="gray.300" />
-            <Button p="8px">
-              {todo.important ? (
+            <Button p="8px" onClick={onToggleImportant}>
+              {isImportant ? (
                 <Icon as={FaStar} color="purple.600" />
               ) : (
                 <Icon as={FaRegStar} color="blackAlpha.600" />

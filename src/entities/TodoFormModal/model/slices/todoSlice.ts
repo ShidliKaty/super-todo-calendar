@@ -4,7 +4,7 @@ import { fetchTodoById } from "../services/fetchTodoById";
 import { Todo } from "../../../Todos/types/todoTypes";
 
 const initialState: TodoState = {
-  todo: undefined,
+  data: undefined,
   isLoading: false,
   error: undefined,
 };
@@ -14,16 +14,16 @@ export const todoSlice = createSlice({
   initialState,
   reducers: {
     updateTodoForm: (state, action: PayloadAction<Todo>) => {
-      state.form = {
-        ...state.form,
+      state.data = {
+        ...state.data,
         ...action.payload,
       };
     },
     clearTodoForm: (state) => {
-      state.form = undefined;
+      state.data = undefined;
     },
     cancelEdit: (state) => {
-      state.form = undefined;
+      state.data = undefined;
     },
   },
   extraReducers: (builder) => {
@@ -36,8 +36,7 @@ export const todoSlice = createSlice({
         fetchTodoById.fulfilled,
         (state, action: PayloadAction<Todo>) => {
           state.isLoading = false;
-          state.todo = action.payload;
-          state.form = action.payload;
+          state.data = action.payload;
         }
       )
       .addCase(fetchTodoById.rejected, (state) => {
