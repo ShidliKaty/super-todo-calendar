@@ -15,6 +15,8 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 import { Todo } from "../../types/todoTypes";
 import { useAppDispatch } from "../../../../redux/store";
 import { deleteTodo } from "../../model/services/deleteTodo";
+import TodoModal from "../../../TodoFormModal/ui/TodoModal/TodoModal";
+import { useState } from "react";
 
 interface TodoItemProps {
   todo: Todo;
@@ -23,57 +25,74 @@ interface TodoItemProps {
 const TodoItem = ({ todo }: TodoItemProps) => {
   const dispatch = useAppDispatch();
 
+  const [isEditing, setIsEditing] = useState(false);
+
   const onDeleteTodo = () => {
-    dispatch(deleteTodo(todo.id));
+    if (todo && todo.id) {
+      dispatch(deleteTodo(todo.id));
+    }
   };
 
   return (
-    <ListItem>
-      <Box
-        display="flex"
-        bg="white"
-        justifyContent="space-between"
-        p="10px 20px"
-        borderRadius={10}
-      >
-        <Checkbox
-          defaultChecked={todo.completed}
-          colorScheme="purple"
-          spacing={3}
+    <>
+      <ListItem>
+        <Box
+          display="flex"
+          bg="white"
+          justifyContent="space-between"
+          p="10px 20px"
+          borderRadius={10}
         >
-          <VStack spacing={0.5} align="flex-start">
-            <Text color="black" fontSize="l">
-              {todo.name}
-            </Text>
-            <HStack>
-              <Text color="blackAlpha.600" fontSize="xs">
-                {todo.date}
+          <Checkbox
+            defaultChecked={todo.completed}
+            colorScheme="purple"
+            spacing={3}
+          >
+            <VStack spacing={0.5} align="flex-start">
+              <Text color="black" fontSize="l">
+                {todo.name}
               </Text>
-              <Text color="blackAlpha.600" fontSize="xs">
-                {todo.note}
-              </Text>
-            </HStack>
-          </VStack>
-        </Checkbox>
-        <ButtonGroup size="sm" variant="ghost" alignItems="center" spacing={1}>
-          <Divider orientation="vertical" borderColor="gray.300" />
-          <Button p="8px">
-            {todo.important ? (
-              <Icon as={FaStar} color="purple.600" />
-            ) : (
-              <Icon as={FaRegStar} color="blackAlpha.600" />
-            )}
-          </Button>
+              <HStack>
+                <Text color="blackAlpha.600" fontSize="xs">
+                  {todo.date}
+                </Text>
+                <Text color="blackAlpha.600" fontSize="xs">
+                  {todo.note}
+                </Text>
+              </HStack>
+            </VStack>
+          </Checkbox>
+          <ButtonGroup
+            size="sm"
+            variant="ghost"
+            alignItems="center"
+            spacing={1}
+          >
+            <Divider orientation="vertical" borderColor="gray.300" />
+            <Button p="8px">
+              {todo.important ? (
+                <Icon as={FaStar} color="purple.600" />
+              ) : (
+                <Icon as={FaRegStar} color="blackAlpha.600" />
+              )}
+            </Button>
 
-          <Button p="8px">
-            <EditIcon color="blackAlpha.600" />
-          </Button>
-          <Button p="8px" onClick={onDeleteTodo}>
-            <DeleteIcon color="blackAlpha.600" />
-          </Button>
-        </ButtonGroup>
-      </Box>
-    </ListItem>
+            <Button p="8px" onClick={() => setIsEditing(true)}>
+              <EditIcon color="blackAlpha.600" />
+            </Button>
+            <Button p="8px" onClick={onDeleteTodo}>
+              <DeleteIcon color="blackAlpha.600" />
+            </Button>
+          </ButtonGroup>
+        </Box>
+      </ListItem>
+      <TodoModal
+        isOpen={isEditing}
+        onClose={() => setIsEditing(false)}
+        editingId={todo.id}
+        editing={isEditing}
+      />
+    </>
   );
 };
 

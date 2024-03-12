@@ -9,7 +9,7 @@ const initialState: TodoListsState = {
 };
 
 export const todosSlice = createSlice({
-  name: "sidebarLists",
+  name: "todos",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -17,7 +17,6 @@ export const todosSlice = createSlice({
       .addCase(fetchTodoLists.pending, (state) => {
         state.error = undefined;
         state.isLoading = true;
-        state.todos = [];
       })
       .addCase(fetchTodoLists.fulfilled, (state, action) => {
         state.isLoading = false;

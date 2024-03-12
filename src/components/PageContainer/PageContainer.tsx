@@ -9,6 +9,7 @@ interface PageContainerProps {
 
 const PageContainer = (props: PageContainerProps) => {
   const { className, children } = props;
+
   return (
     <div className={classNames(cls.PageContainer, {}, [className])}>
       {children}

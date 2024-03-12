@@ -24,6 +24,7 @@ export const addNewTodo = createAsyncThunk<Todo, Todo>(
         throw new Error();
       }
       dispatch(fetchTodoLists());
+
       return data;
     } catch (e) {
       console.log(e);

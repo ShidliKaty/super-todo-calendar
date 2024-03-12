@@ -1,7 +1,7 @@
 import { List, Skeleton, Text, VStack } from "@chakra-ui/react";
 import TodoItem from "../TodoItem/TodoItem";
 import { useAppDispatch } from "../../../../redux/store";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { fetchTodoLists } from "../../model/services/fetchTodoLists";
 import { useSelector } from "react-redux";
 import {
@@ -25,9 +25,13 @@ const TodoList = ({ id }: TodoListProps) => {
   const isLoading = useSelector(getTodosIsLoading);
   const error = useSelector(getTodosIsError);
 
-  const filteredTodos = id
-    ? todos.filter((todo) => todo.listId === id)
-    : todos.filter((todo) => !todo.listId);
+  const filteredTodos = useMemo(
+    () =>
+      id
+        ? todos.filter((todo) => todo.listId === id)
+        : todos.filter((todo) => !todo.listId),
+    [id, todos]
+  );
 
   return (
     <>

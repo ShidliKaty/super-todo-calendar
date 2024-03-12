@@ -4,11 +4,14 @@ import { sidebarListsSliceReducer } from "../entities/SidebarLists/model/slices/
 import { useDispatch } from "react-redux";
 import { TodoListsState } from "../entities/Todos/types/todoTypes";
 import { todosSliceReducer } from "../entities/Todos/model/slices/todosSlice";
+import { todoSliceReducer } from "../entities/TodoFormModal/model/slices/todoSlice";
+import { TodoState } from "../entities/TodoFormModal/types/todoSchema";
 // import { rtkApi } from "../api/rtkApi";
 
 export interface StateSchema {
   sidebarLists: SidebarListsState;
   todos: TodoListsState;
+  todo: TodoState;
 }
 
 // // создаем отдельную функцию для переиспользования в jest, storybook
@@ -27,6 +30,7 @@ export const store = configureStore({
   reducer: {
     sidebarLists: sidebarListsSliceReducer,
     todos: todosSliceReducer,
+    todo: todoSliceReducer,
   },
   devTools: true,
 });
