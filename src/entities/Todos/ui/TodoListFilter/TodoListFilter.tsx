@@ -27,20 +27,49 @@ const TodoListFilter = ({ id }: TodoListFilterProps) => {
   const isLoading = useSelector(getTodosIsLoading);
   const error = useSelector(getTodosIsError);
 
+  const incompletedTodos = useMemo(
+    () => todos.filter((todo) => !todo.completed),
+    [todos]
+  );
+
   const importantTodos = useMemo(
-    () => todos.filter((todo) => todo.important),
+    () => incompletedTodos.filter((todo) => todo.important),
+    [incompletedTodos]
+  );
+
+  const noListTodos = useMemo(
+    () => incompletedTodos.filter((todo) => !todo.listId),
+    [incompletedTodos]
+  );
+
+  const myListTodos = useMemo(
+    () => todos.filter((todo) => todo.listId === id),
+    [todos, id]
+  );
+
+  const completedTodos = useMemo(
+    () => todos.filter((todo) => todo.completed && !todo.listId),
     [todos]
   );
 
   const filteredTodos = useMemo(() => {
     if (location.pathname.includes("mylist")) {
-      return () => todos.filter((todo) => todo.listId === id);
+      return () => myListTodos;
     }
     if (location.pathname.includes("important")) {
       return () => importantTodos;
     }
-    return () => todos.filter((todo) => !todo.listId);
-  }, [id, todos, location.pathname, importantTodos]);
+    if (location.pathname.includes("done")) {
+      return () => completedTodos;
+    }
+    return () => noListTodos;
+  }, [
+    location.pathname,
+    noListTodos,
+    importantTodos,
+    myListTodos,
+    completedTodos,
+  ]);
 
   const filteredList = filteredTodos();
 

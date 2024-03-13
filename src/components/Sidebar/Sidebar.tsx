@@ -51,7 +51,7 @@ const Sidebar = (props: SidebarProps) => {
             _hover={{ color: "#6B46C1" }}
             cursor="pointer"
           >
-            <Link to="/">
+            <Link to="/plans">
               <ListIcon as={SunIcon} />
               Мои Планы
             </Link>
@@ -71,8 +71,10 @@ const Sidebar = (props: SidebarProps) => {
             _hover={{ color: "#6B46C1" }}
             cursor="pointer"
           >
-            <ListIcon as={CheckCircleIcon} />
-            Завершено
+            <Link to="/done">
+              <ListIcon as={CheckCircleIcon} />
+              Завершено
+            </Link>
           </ListItem>
         </List>
         <Divider w="100%" borderColor="gray.300" />

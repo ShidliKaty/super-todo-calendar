@@ -13,19 +13,19 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
+        path: "plans",
         element: <MyPlansMain />,
       },
       {
-        path: "/important",
+        path: "important",
         element: <ImportantPage />,
       },
       {
-        path: "/done",
+        path: "done",
         element: <DonePage />,
       },
       {
-        path: "/mylist/:name/:id",
+        path: "mylist/:name/:id",
         element: <MyListPage />,
       },
     ],

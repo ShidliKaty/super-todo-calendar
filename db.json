@@ -42,7 +42,7 @@
       "name": "new todo111",
       "note": "note1111",
       "date": "11.03.2024",
-      "completed": false,
+      "completed": true,
       "important": true,
       "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
     },
@@ -59,7 +59,7 @@
       "id": "6124c80a-f7f9-492e-af5f-1a5f017ecfad",
       "name": "grgthth th h h hththth",
       "date": "11.03.2024",
-      "completed": false,
+      "completed": true,
       "important": false,
       "note": "hhh"
     },
@@ -68,7 +68,7 @@
       "name": "jbcjbcj",
       "note": "vdvdv",
       "date": "11.03.2024",
-      "completed": false,
+      "completed": true,
       "important": true
     },
     {
@@ -92,7 +92,7 @@
       "name": "hhhhhhhhh",
       "note": "hhhhh",
       "date": "12.03.2024",
-      "completed": false,
+      "completed": true,
       "important": false,
       "listId": "2"
     },
@@ -101,7 +101,7 @@
       "name": "yjghg",
       "note": "ygygy",
       "date": "12.03.2024",
-      "completed": false,
+      "completed": true,
       "important": true
     },
     {

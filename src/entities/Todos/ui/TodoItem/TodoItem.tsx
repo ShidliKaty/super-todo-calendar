@@ -16,10 +16,11 @@ import { Todo } from "../../types/todoTypes";
 import { useAppDispatch } from "../../../../redux/store";
 import { deleteTodo } from "../../model/services/deleteTodo";
 import TodoModal from "../TodoFormModal/TodoModal/TodoModal";
-import { useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import { updateTodoImportance } from "../../model/services/updateTodoImportance";
 import { fetchTodoLists } from "../../model/services/fetchTodoLists";
 import { useLocation } from "react-router-dom";
+import { updateTodoCompleted } from "../../model/services/updateTodoCompleted";
 
 interface TodoItemProps {
   todo: Todo;
@@ -31,6 +32,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [isImportant, setIsImportant] = useState(todo.important);
+  const [isCompleted, setIsCompleted] = useState(todo.completed);
 
   const onDeleteTodo = () => {
     if (todo && todo.id) {
@@ -39,6 +41,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   };
 
   const onImportantPage = location.pathname.includes("important");
+  const onMyList = location.pathname.includes("mylist");
 
   const onToggleImportant = useCallback(async () => {
     const updatedImportant = !isImportant;
@@ -55,6 +58,25 @@ const TodoItem = ({ todo }: TodoItemProps) => {
     }
   }, [dispatch, isImportant, todo, onImportantPage]);
 
+  const onToggleCompleted = useCallback(
+    async (e: ChangeEvent<HTMLInputElement>) => {
+      const isChecked = e.target.checked;
+      setIsCompleted(isChecked);
+      const result = await dispatch(
+        updateTodoCompleted({ id: todo.id, completed: isChecked })
+      );
+
+      if (result.meta.requestStatus === "rejected") {
+        setIsCompleted(!isChecked);
+      }
+
+      if (result.meta.requestStatus === "fulfilled" && !onMyList) {
+        dispatch(fetchTodoLists());
+      }
+    },
+    [dispatch, todo.id, onMyList]
+  );
+
   return (
     <>
       <ListItem>
@@ -66,6 +88,8 @@ const TodoItem = ({ todo }: TodoItemProps) => {
           borderRadius={10}
         >
           <Checkbox
+            isChecked={isCompleted}
+            onChange={onToggleCompleted}
             defaultChecked={todo.completed}
             colorScheme="purple"
             spacing={3}
