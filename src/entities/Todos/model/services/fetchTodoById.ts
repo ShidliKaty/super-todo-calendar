@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseAPI } from "../../../../api/baseAPI";
-import { Todo } from "../../../Todos/types/todoTypes";
+import { Todo } from "../../types/todoTypes";
 
 export const fetchTodoById = createAsyncThunk<Todo, string>(
   "todos/fetchTodoById",

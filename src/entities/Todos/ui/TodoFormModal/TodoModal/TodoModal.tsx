@@ -1,4 +1,4 @@
-import Modal, { ModalProps } from "../../../../components/Modal/Modal";
+import Modal, { ModalProps } from "../../../../../components/Modal/Modal";
 import TodoForm from "../TodoForm/TodoForm";
 
 type TodoModalProps = {

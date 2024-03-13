@@ -9,20 +9,20 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import { getSidebarLists } from "../../../SidebarLists/model/selectors/sidebarLists";
-import { useAppDispatch } from "../../../../redux/store";
-import { addNewTodo } from "../../../Todos/model/services/addNewTodo";
-import { getTodoForm } from "../../model/selectors/todo";
+import { getSidebarLists } from "../../../../SidebarLists/model/selectors/sidebarLists";
+import { useAppDispatch } from "../../../../../redux/store";
+import { addNewTodo } from "../../../model/services/addNewTodo";
+import { getTodoForm } from "../../../model/selectors/todo";
 import {
   cancelEdit,
   clearTodoForm,
   updateTodoForm,
-} from "../../model/slices/todoSlice";
+} from "../../../model/slices/todoSlice";
 import { ChangeEvent, FormEvent, useEffect } from "react";
-import { formatDate } from "../../../../utils/formatDate";
-import { Todo } from "../../../Todos/types/todoTypes";
-import { updateTodo } from "../../model/services/updateTodo";
-import { fetchTodoById } from "../../model/services/fetchTodoById";
+import { formatDate } from "../../../../../utils/formatDate";
+import { Todo } from "../../../types/todoTypes";
+import { updateTodo } from "../../../model/services/updateTodo";
+import { fetchTodoById } from "../../../model/services/fetchTodoById";
 
 interface TodoFormProps {
   onClose: () => void;

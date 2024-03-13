@@ -15,7 +15,7 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 import { Todo } from "../../types/todoTypes";
 import { useAppDispatch } from "../../../../redux/store";
 import { deleteTodo } from "../../model/services/deleteTodo";
-import TodoModal from "../../../TodoFormModal/ui/TodoModal/TodoModal";
+import TodoModal from "../TodoFormModal/TodoModal/TodoModal";
 import { useCallback, useState } from "react";
 import { updateTodoImportance } from "../../model/services/updateTodoImportance";
 import { fetchTodoLists } from "../../model/services/fetchTodoLists";

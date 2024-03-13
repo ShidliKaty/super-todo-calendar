@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit/react";
 import { baseAPI } from "../../../../api/baseAPI";
-import { Todo } from "../../../Todos/types/todoTypes";
-import { fetchTodoLists } from "../../../Todos/model/services/fetchTodoLists";
+import { Todo } from "../../types/todoTypes";
+import { fetchTodoLists } from "./fetchTodoLists";
 
 interface UpdateProps {
   todo: Todo;

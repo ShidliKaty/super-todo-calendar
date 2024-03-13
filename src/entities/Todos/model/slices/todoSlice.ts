@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit/react";
 import { TodoState } from "../../types/todoSchema";
 import { fetchTodoById } from "../services/fetchTodoById";
-import { Todo } from "../../../Todos/types/todoTypes";
+import { Todo } from "../../types/todoTypes";
 
 const initialState: TodoState = {
   data: undefined,

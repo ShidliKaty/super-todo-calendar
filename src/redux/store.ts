@@ -4,8 +4,8 @@ import { sidebarListsSliceReducer } from "../entities/SidebarLists/model/slices/
 import { useDispatch } from "react-redux";
 import { TodoListsState } from "../entities/Todos/types/todoTypes";
 import { todosSliceReducer } from "../entities/Todos/model/slices/todosSlice";
-import { todoSliceReducer } from "../entities/TodoFormModal/model/slices/todoSlice";
-import { TodoState } from "../entities/TodoFormModal/types/todoSchema";
+import { todoSliceReducer } from "../entities/Todos/model/slices/todoSlice";
+import { TodoState } from "../entities/Todos/types/todoSchema";
 // import { rtkApi } from "../api/rtkApi";
 
 export interface StateSchema {
