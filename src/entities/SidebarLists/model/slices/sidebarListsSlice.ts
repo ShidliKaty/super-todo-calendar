@@ -24,7 +24,6 @@ export const sidebarListsSlice = createSlice({
       .addCase(fetchSidebarLists.pending, (state) => {
         state.error = undefined;
         state.isLoading = true;
-        state.lists = [];
       })
       .addCase(fetchSidebarLists.fulfilled, (state, action) => {
         state.isLoading = false;

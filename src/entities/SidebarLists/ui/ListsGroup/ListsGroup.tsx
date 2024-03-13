@@ -1,16 +1,6 @@
-import {
-  Divider,
-  HStack,
-  Heading,
-  Icon,
-  List,
-  Skeleton,
-  SkeletonCircle,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Divider, HStack, Heading, Icon, Text, VStack } from "@chakra-ui/react";
 
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import AddButton from "../../../../components/AddButton/AddButton";
@@ -22,9 +12,9 @@ import {
 } from "../../model/selectors/sidebarLists";
 import { fetchSidebarLists } from "../../model/services/fetchSidebarLists";
 import { addingSidebarList } from "../../model/slices/sidebarListsSlice";
-import ListsItem from "../ListsItem/ListsItem";
+import { MyLists } from "./MyLists";
 
-const ListsGroup = () => {
+export const ListsGroup = memo(() => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -48,40 +38,6 @@ const ListsGroup = () => {
     dispatch(addingSidebarList(newList));
   };
 
-  const MyLists = () => {
-    const sortedLists = [...lists].sort((a, b) => a.name.localeCompare(b.name));
-    return (
-      <List spacing={5} w="100%">
-        {!isLoading && !lists.length ? (
-          <Text color="blackAlpha.600">Нет списков</Text>
-        ) : null}
-        {isLoading && (
-          <VStack align="flex-start" spacing={5}>
-            <HStack spacing={2}>
-              <SkeletonCircle size="5" />
-              <Skeleton width="130px" height="15px" />
-            </HStack>
-            <HStack spacing={2}>
-              <SkeletonCircle size="5" />
-              <Skeleton width="130px" height="15px" />
-            </HStack>
-            <HStack spacing={2}>
-              <SkeletonCircle size="5" />
-              <Skeleton width="130px" height="15px" />
-            </HStack>
-          </VStack>
-        )}
-        {sortedLists.map((list) => (
-          <ListsItem
-            key={list.id}
-            list={list}
-            isEdditing={list.isEditing}
-            isNew={list.isNew}
-          />
-        ))}
-      </List>
-    );
-  };
   return (
     <VStack align="flex-start" spacing={5} mt={5}>
       <HStack justify="space-between" w="100%">
@@ -97,12 +53,10 @@ const ListsGroup = () => {
           Произошла ошибка! Попробуйте перезагрузить страницу
         </Text>
       ) : (
-        <MyLists />
+        <MyLists lists={lists} isLoading={isLoading} />
       )}
 
       <Divider w="100%" borderColor="gray.300" />
     </VStack>
   );
-};
-
-export default ListsGroup;
+});

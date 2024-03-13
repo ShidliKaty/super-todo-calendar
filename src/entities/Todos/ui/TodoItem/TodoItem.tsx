@@ -18,6 +18,8 @@ import { deleteTodo } from "../../model/services/deleteTodo";
 import TodoModal from "../../../TodoFormModal/ui/TodoModal/TodoModal";
 import { useCallback, useState } from "react";
 import { updateTodoImportance } from "../../model/services/updateTodoImportance";
+import { fetchTodoLists } from "../../model/services/fetchTodoLists";
+import { useLocation } from "react-router-dom";
 
 interface TodoItemProps {
   todo: Todo;
@@ -25,6 +27,7 @@ interface TodoItemProps {
 
 const TodoItem = ({ todo }: TodoItemProps) => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   const [isEditing, setIsEditing] = useState(false);
   const [isImportant, setIsImportant] = useState(todo.important);
@@ -34,6 +37,8 @@ const TodoItem = ({ todo }: TodoItemProps) => {
       dispatch(deleteTodo(todo.id));
     }
   };
+
+  const onImportantPage = location.pathname.includes("important");
 
   const onToggleImportant = useCallback(async () => {
     const updatedImportant = !isImportant;
@@ -45,7 +50,10 @@ const TodoItem = ({ todo }: TodoItemProps) => {
     if (result.meta.requestStatus === "rejected") {
       setIsImportant(!updatedImportant);
     }
-  }, [dispatch, isImportant, todo]);
+    if (result.meta.requestStatus === "fulfilled" && onImportantPage) {
+      dispatch(fetchTodoLists());
+    }
+  }, [dispatch, isImportant, todo, onImportantPage]);
 
   return (
     <>

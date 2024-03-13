@@ -1,38 +1,15 @@
 import { List, Skeleton, Text, VStack } from "@chakra-ui/react";
+import { Todo } from "../../types/todoTypes";
 import TodoItem from "../TodoItem/TodoItem";
-import { useAppDispatch } from "../../../../redux/store";
-import { useEffect, useMemo } from "react";
-import { fetchTodoLists } from "../../model/services/fetchTodoLists";
-import { useSelector } from "react-redux";
-import {
-  getTodos,
-  getTodosIsError,
-  getTodosIsLoading,
-} from "../../model/selectors/todos";
 
 interface TodoListProps {
-  id?: string;
+  todos: Todo[];
+  isLoading?: boolean;
+  error?: string;
+  onImportantPage?: boolean;
 }
 
-const TodoList = ({ id }: TodoListProps) => {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchTodoLists());
-  }, [dispatch]);
-
-  const todos = useSelector(getTodos);
-  const isLoading = useSelector(getTodosIsLoading);
-  const error = useSelector(getTodosIsError);
-
-  const filteredTodos = useMemo(
-    () =>
-      id
-        ? todos.filter((todo) => todo.listId === id)
-        : todos.filter((todo) => !todo.listId),
-    [id, todos]
-  );
-
+const TodoList = ({ todos, isLoading, error }: TodoListProps) => {
   return (
     <>
       {error && (
@@ -47,11 +24,11 @@ const TodoList = ({ id }: TodoListProps) => {
           <Skeleton width="100%" height="60px" borderRadius={10} />
         </VStack>
       ) : null}
-      {!isLoading && filteredTodos.length === 0 ? (
+      {!isLoading && todos.length === 0 ? (
         <Text mt={5}>Нет записей</Text>
       ) : null}
       <List spacing={3} mt="20px">
-        {filteredTodos.map((todo) => (
+        {todos.map((todo) => (
           <TodoItem key={todo.id} todo={todo} />
         ))}
       </List>

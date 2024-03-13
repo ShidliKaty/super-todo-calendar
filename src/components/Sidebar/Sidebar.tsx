@@ -15,10 +15,10 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import { classNames } from "../../utils/classNames";
-import ListsGroup from "../../entities/SidebarLists/ui/ListsGroup/ListsGroup";
-import cls from "./Sidebar.module.scss";
 import { Link } from "react-router-dom";
+import { ListsGroup } from "../../entities/SidebarLists/ui/ListsGroup/ListsGroup";
+import { classNames } from "../../utils/classNames";
+import cls from "./Sidebar.module.scss";
 
 interface SidebarProps {
   className?: string;
@@ -61,8 +61,10 @@ const Sidebar = (props: SidebarProps) => {
             _hover={{ color: "#6B46C1" }}
             cursor="pointer"
           >
-            <ListIcon as={StarIcon} />
-            Важно
+            <Link to="/important">
+              <ListIcon as={StarIcon} />
+              Важно
+            </Link>
           </ListItem>
           <ListItem
             color="blackAlpha.600"

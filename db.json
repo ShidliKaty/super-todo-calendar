@@ -43,7 +43,7 @@
       "note": "note1111",
       "date": "11.03.2024",
       "completed": false,
-      "important": false,
+      "important": true,
       "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
     },
     {
@@ -51,7 +51,7 @@
       "name": "frgrgrg ggtht 111",
       "date": "11.03.2024",
       "completed": false,
-      "important": false,
+      "important": true,
       "note": "11116666",
       "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
     },
@@ -60,7 +60,7 @@
       "name": "grgthth th h h hththth",
       "date": "11.03.2024",
       "completed": false,
-      "important": true,
+      "important": false,
       "note": "hhh"
     },
     {
@@ -70,13 +70,6 @@
       "date": "11.03.2024",
       "completed": false,
       "important": true
-    },
-    {
-      "id": "545e5429-cce3-4818-bfba-46bc54c0281f",
-      "name": "гпгн н не нен  ннпн пнпнаота  оорагар раграшгрцша оцщрдфра рфцу гругрк  ргргцру уркгу кркругркшрцкгр ркгуркгцушфдрк гурцкфдшгрк гкрфшгурк ш",
-      "date": "12.03.2024",
-      "completed": false,
-      "important": false
     },
     {
       "id": "421caae8-115f-4c6b-b70c-bfae80d06790",
@@ -109,7 +102,7 @@
       "note": "ygygy",
       "date": "12.03.2024",
       "completed": false,
-      "important": false
+      "important": true
     },
     {
       "id": "4aa10685-7f8d-4d19-a23e-865308f7ae36",
@@ -123,6 +116,13 @@
       "id": "5a282e69-21c2-43d3-87e2-cc7edaf4d318",
       "name": "uuu",
       "date": "12.03.2024",
+      "completed": false,
+      "important": false
+    },
+    {
+      "id": "16f4a980-5d09-4e3e-893f-13f29ddb8a48",
+      "name": "hhh111233",
+      "date": "13.03.2024",
       "completed": false,
       "important": false
     }
