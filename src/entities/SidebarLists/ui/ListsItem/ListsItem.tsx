@@ -22,7 +22,7 @@ import { useAppDispatch } from "../../../../redux/store";
 import { addSidebarList } from "../../model/services/addSidebarList";
 import { removeSidebarList } from "../../model/slices/sidebarListsSlice";
 import { deleteSidebarList } from "../../model/services/deleteSidebarList";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 interface ListsItemProps {
   list: SidebarList;
@@ -67,6 +67,9 @@ const ListsItem = ({ list, isEdditing, isNew }: ListsItemProps) => {
     dispatch(deleteSidebarList(id));
   };
 
+  const { id: paramsId } = useParams();
+  const navigate = useNavigate();
+
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
@@ -76,8 +79,10 @@ const ListsItem = ({ list, isEdditing, isNew }: ListsItemProps) => {
 
     if (name && isNew) {
       dispatch(addSidebarList({ id, name }));
-    } else {
-      dispatch(updateListName({ id, name }));
+    }
+    dispatch(updateListName({ id, name }));
+    if (id === paramsId) {
+      navigate("/mylist/" + name + "/" + list.id);
     }
 
     setIsEditing(false);
