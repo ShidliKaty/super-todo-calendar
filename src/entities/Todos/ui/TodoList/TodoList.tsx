@@ -27,7 +27,7 @@ const TodoList = ({ todos, isLoading, error }: TodoListProps) => {
       {!isLoading && todos.length === 0 ? (
         <Text mt={5}>Нет записей</Text>
       ) : null}
-      <List spacing={3} mt="20px">
+      <List spacing={3} my="20px">
         {todos.map((todo) => (
           <TodoItem key={todo.id} todo={todo} />
         ))}

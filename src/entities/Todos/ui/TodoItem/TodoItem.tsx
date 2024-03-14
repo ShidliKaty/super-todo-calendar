@@ -41,7 +41,6 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   };
 
   const onImportantPage = location.pathname.includes("important");
-  const onMyList = location.pathname.includes("mylist");
 
   const onToggleImportant = useCallback(async () => {
     const updatedImportant = !isImportant;
@@ -70,11 +69,11 @@ const TodoItem = ({ todo }: TodoItemProps) => {
         setIsCompleted(!isChecked);
       }
 
-      if (result.meta.requestStatus === "fulfilled" && !onMyList) {
+      if (result.meta.requestStatus === "fulfilled") {
         dispatch(fetchTodoLists());
       }
     },
-    [dispatch, todo.id, onMyList]
+    [dispatch, todo.id]
   );
 
   return (
@@ -95,7 +94,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
             spacing={3}
           >
             <VStack spacing={0.5} align="flex-start">
-              <Text color="black" fontSize="l">
+              <Text color={isCompleted ? "gray.500" : "black"} fontSize="l">
                 {todo.name}
               </Text>
               <HStack>

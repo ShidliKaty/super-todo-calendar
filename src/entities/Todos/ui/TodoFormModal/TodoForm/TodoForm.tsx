@@ -23,6 +23,7 @@ import { formatDate } from "../../../../../utils/formatDate";
 import { Todo } from "../../../types/todoTypes";
 import { updateTodo } from "../../../model/services/updateTodo";
 import { fetchTodoById } from "../../../model/services/fetchTodoById";
+import { useParams } from "react-router-dom";
 
 interface TodoFormProps {
   onClose: () => void;
@@ -37,14 +38,19 @@ const TodoForm = (props: TodoFormProps) => {
   const lists = useSelector(getSidebarLists);
   const dispatch = useAppDispatch();
 
+  const { id: paramsId } = useParams();
+
   useEffect(() => {
     if (editing && editingId) {
       dispatch(fetchTodoById(editingId));
     }
+    if (paramsId) {
+      dispatch(updateTodoForm({ listId: paramsId }));
+    }
     return () => {
       dispatch(clearTodoForm());
     };
-  }, [editing, editingId, dispatch]);
+  }, [editing, editingId, dispatch, paramsId]);
 
   const todoForm = useSelector(getTodoForm);
 
@@ -97,7 +103,7 @@ const TodoForm = (props: TodoFormProps) => {
   };
 
   const onChangeList = (e: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(updateTodoForm({ listId: e.target.value || undefined }));
+    dispatch(updateTodoForm({ listId: e.target.value || paramsId }));
   };
 
   return (
@@ -123,7 +129,7 @@ const TodoForm = (props: TodoFormProps) => {
           <Select
             placeholder="Выберите список"
             focusBorderColor="purple.600"
-            value={todoForm?.listId || ""}
+            value={todoForm?.listId || paramsId || ""}
             onChange={onChangeList}
           >
             {lists.map((list) => (

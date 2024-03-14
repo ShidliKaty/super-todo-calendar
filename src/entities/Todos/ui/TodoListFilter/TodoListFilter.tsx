@@ -1,14 +1,17 @@
-import { useEffect, useMemo } from "react";
+import { Heading } from "@chakra-ui/react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { useAppDispatch } from "../../../../redux/store";
+import { getSidebarLists } from "../../../SidebarLists/model/selectors/sidebarLists";
 import {
   getTodos,
   getTodosIsError,
   getTodosIsLoading,
 } from "../../model/selectors/todos";
 import { fetchTodoLists } from "../../model/services/fetchTodoLists";
+import { Todo } from "../../types/todoTypes";
 import TodoList from "../TodoList/TodoList";
-import { useLocation } from "react-router-dom";
 
 interface TodoListFilterProps {
   id?: string;
@@ -26,9 +29,15 @@ const TodoListFilter = ({ id }: TodoListFilterProps) => {
   const todos = useSelector(getTodos);
   const isLoading = useSelector(getTodosIsLoading);
   const error = useSelector(getTodosIsError);
+  const lists = useSelector(getSidebarLists);
 
   const incompletedTodos = useMemo(
     () => todos.filter((todo) => !todo.completed),
+    [todos]
+  );
+
+  const completedTodos = useMemo(
+    () => todos.filter((todo) => todo.completed),
     [todos]
   );
 
@@ -37,43 +46,88 @@ const TodoListFilter = ({ id }: TodoListFilterProps) => {
     [incompletedTodos]
   );
 
-  const noListTodos = useMemo(
-    () => incompletedTodos.filter((todo) => !todo.listId),
-    [incompletedTodos]
-  );
-
   const myListTodos = useMemo(
-    () => todos.filter((todo) => todo.listId === id),
-    [todos, id]
+    () => incompletedTodos.filter((todo) => todo.listId === id),
+    [incompletedTodos, id]
   );
 
-  const completedTodos = useMemo(
-    () => todos.filter((todo) => todo.completed && !todo.listId),
-    [todos]
+  const [myListTodosMap, setMyListTodosMap] = useState<Record<string, Todo[]>>(
+    {}
   );
 
-  const filteredTodos = useMemo(() => {
-    if (location.pathname.includes("mylist")) {
-      return () => myListTodos;
-    }
+  useEffect(() => {
+    const updatedMap: Record<string, Todo[]> = {};
+
     if (location.pathname.includes("important")) {
-      return () => importantTodos;
+      updatedMap["0"] = importantTodos.filter((todo) => !todo.listId);
+      lists.forEach((list) => {
+        const myListTodos = importantTodos.filter(
+          (todo) => todo.listId === String(list.id)
+        );
+        updatedMap[String(list.id)] = myListTodos;
+      });
+      setMyListTodosMap(updatedMap);
+      return;
     }
+
     if (location.pathname.includes("done")) {
-      return () => completedTodos;
+      updatedMap["0"] = completedTodos.filter((todo) => !todo.listId);
+      lists.forEach((list) => {
+        const myListTodos = completedTodos.filter(
+          (todo) => todo.listId === String(list.id)
+        );
+        updatedMap[String(list.id)] = myListTodos;
+      });
+      setMyListTodosMap(updatedMap);
+      return;
     }
-    return () => noListTodos;
+
+    lists.forEach((list) => {
+      updatedMap["0"] = incompletedTodos.filter((todo) => !todo.listId);
+      const myListTodos = incompletedTodos.filter(
+        (todo) => todo.listId === String(list.id)
+      );
+      updatedMap[String(list.id)] = myListTodos;
+    });
+
+    setMyListTodosMap(updatedMap);
   }, [
+    lists,
+    incompletedTodos,
     location.pathname,
-    noListTodos,
     importantTodos,
-    myListTodos,
     completedTodos,
   ]);
 
-  const filteredList = filteredTodos();
-
-  return <TodoList todos={filteredList} isLoading={isLoading} error={error} />;
+  return (
+    <>
+      {location.pathname.includes("mylist") ? (
+        <TodoList todos={myListTodos} isLoading={isLoading} error={error} />
+      ) : (
+        <>
+          <TodoList
+            todos={myListTodosMap["0"] || []}
+            isLoading={isLoading}
+            error={error}
+          />
+          {lists.map((list) => {
+            return (
+              <Fragment key={list.id}>
+                <Heading as="h4" size="md">
+                  {list.name}
+                </Heading>
+                <TodoList
+                  todos={myListTodosMap[list.id] || []}
+                  isLoading={isLoading}
+                  error={error}
+                />
+              </Fragment>
+            );
+          })}
+        </>
+      )}
+    </>
+  );
 };
 
 export default TodoListFilter;
