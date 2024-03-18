@@ -1,3 +1,4 @@
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -9,30 +10,30 @@ import {
   PopoverContent,
   PopoverTrigger,
   Portal,
-  VStack,
   Text,
+  VStack,
 } from "@chakra-ui/react";
-import { PiDotsThreeOutlineVerticalBold } from "react-icons/pi";
-import { FaListAlt } from "react-icons/fa";
-import { SidebarList } from "../../types/sidebarListTypes";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
-import { updateListName } from "../../model/services/updateListName";
+import { FaListAlt } from "react-icons/fa";
+import { PiDotsThreeOutlineVerticalBold } from "react-icons/pi";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../../../redux/store";
 import { addSidebarList } from "../../model/services/addSidebarList";
+import { updateListName } from "../../model/services/updateListName";
 import { removeSidebarList } from "../../model/slices/sidebarListsSlice";
-import { deleteSidebarList } from "../../model/services/deleteSidebarList";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { SidebarList } from "../../types/sidebarListTypes";
 
 interface ListsItemProps {
   list: SidebarList;
   isEdditing: boolean | undefined;
   isNew: boolean | undefined;
+  onDelete: (id: string) => void;
 }
 
-const ListsItem = ({ list, isEdditing, isNew }: ListsItemProps) => {
+const ListsItem = ({ list, isEdditing, isNew, onDelete }: ListsItemProps) => {
   const { id } = list;
   const [isEditing, setIsEditing] = useState(isEdditing || false);
+
   const dispatch = useAppDispatch();
   const nameRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
@@ -88,10 +89,7 @@ const ListsItem = ({ list, isEdditing, isNew }: ListsItemProps) => {
   };
 
   const onDeleteList = () => {
-    dispatch(deleteSidebarList(id));
-    if (id === paramsId) {
-      navigate("/plans");
-    }
+    onDelete(id);
   };
 
   function handleSubmit(e: FormEvent) {
