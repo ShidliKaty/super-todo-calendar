@@ -40,9 +40,10 @@
       "id": "761709aa-5060-498b-86fd-c68eafd5512b",
       "name": "добавить дату завершения",
       "date": "14.03.2024",
-      "completed": false,
+      "completed": true,
       "important": false,
-      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
+      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b",
+      "completedDate": "18.03.2024"
     },
     {
       "id": "9c4934fd-1192-40ff-b185-9916433f97af",
@@ -155,7 +156,8 @@
       "date": "14.03.2024",
       "completed": false,
       "important": true,
-      "listId": "1"
+      "listId": "1",
+      "completedDate": "18.03.2024"
     },
     {
       "id": "2114e1a8-fc64-4e8d-b7b4-e3ae22264fa2",

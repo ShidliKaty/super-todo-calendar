@@ -5,7 +5,6 @@ import {
   ButtonGroup,
   Checkbox,
   Divider,
-  HStack,
   Icon,
   ListItem,
   Text,
@@ -21,6 +20,7 @@ import { updateTodoImportance } from "../../model/services/updateTodoImportance"
 import { fetchTodoLists } from "../../model/services/fetchTodoLists";
 import { useLocation } from "react-router-dom";
 import { updateTodoCompleted } from "../../model/services/updateTodoCompleted";
+import { formatDate } from "../../../../utils/formatDate";
 
 interface TodoItemProps {
   todo: Todo;
@@ -59,10 +59,16 @@ const TodoItem = ({ todo }: TodoItemProps) => {
 
   const onToggleCompleted = useCallback(
     async (e: ChangeEvent<HTMLInputElement>) => {
+      const date = new Date();
+      const formattedDate = formatDate(date, {});
       const isChecked = e.target.checked;
       setIsCompleted(isChecked);
       const result = await dispatch(
-        updateTodoCompleted({ id: todo.id, completed: isChecked })
+        updateTodoCompleted({
+          id: todo.id,
+          completed: isChecked,
+          completedDate: formattedDate,
+        })
       );
 
       if (result.meta.requestStatus === "rejected") {
@@ -93,18 +99,23 @@ const TodoItem = ({ todo }: TodoItemProps) => {
             colorScheme="purple"
             spacing={3}
           >
-            <VStack spacing={0.5} align="flex-start">
+            <VStack spacing={0.1} align="flex-start">
               <Text color={isCompleted ? "gray.500" : "black"} fontSize="l">
                 {todo.name}
               </Text>
-              <HStack>
-                <Text color="blackAlpha.600" fontSize="xs">
-                  {todo.date}
+              <Text color="blackAlpha.600" fontSize="sm">
+                {todo.note}
+              </Text>
+              <VStack spacing={0.1} align="flex-start">
+                <Text color="blackAlpha.600" fontSize="12px">
+                  Создано: {todo.date}
                 </Text>
-                <Text color="blackAlpha.600" fontSize="xs">
-                  {todo.note}
-                </Text>
-              </HStack>
+                {isCompleted && todo.completedDate && (
+                  <Text color="blackAlpha.600" fontSize="12px">
+                    Завершено: {todo.completedDate}
+                  </Text>
+                )}
+              </VStack>
             </VStack>
           </Checkbox>
           <ButtonGroup

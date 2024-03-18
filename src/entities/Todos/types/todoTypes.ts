@@ -4,6 +4,7 @@ export type Todo = {
   date?: string;
   note?: string;
   completed?: boolean;
+  completedDate?: string;
   important?: boolean;
   listId?: string;
 };
