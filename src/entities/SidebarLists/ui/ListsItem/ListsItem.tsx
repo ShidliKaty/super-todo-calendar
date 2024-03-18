@@ -37,26 +37,50 @@ const ListsItem = ({ list, isEdditing, isNew }: ListsItemProps) => {
   const nameRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
-  const handleClickOutside = useCallback(
-    (event: MouseEvent) => {
-      if (formRef.current && !formRef.current.contains(event.target as Node)) {
-        if (isNew && nameRef.current?.value.trim() === "") {
-          dispatch(removeSidebarList(id));
-        }
-        setIsEditing(false);
-      }
-    },
-    [dispatch, id, isNew]
-  );
+  // const handleClickOutside = useCallback(
+  //   (event: MouseEvent) => {
+  //     if (formRef.current && !formRef.current.contains(event.target as Node)) {
+  //       if (isNew && nameRef.current?.value.trim() === "") {
+  //         dispatch(removeSidebarList(id));
+  //       }
+  //       setIsEditing(false);
+  //     }
+  //   },
+  //   [dispatch, id, isNew]
+  // );
+
+  const { id: paramsId } = useParams();
+  const navigate = useNavigate();
+
+  const handleSendForm = useCallback(() => {
+    const inputValue = nameRef.current?.value.trim();
+    if (isNew && inputValue === "") {
+      dispatch(removeSidebarList(id));
+    } else if (!inputValue) {
+      setIsEditing(false);
+    }
+
+    if (isNew && inputValue) {
+      dispatch(addSidebarList({ id, name: inputValue }));
+    } else if (inputValue) {
+      dispatch(updateListName({ id, name: inputValue }));
+    }
+
+    if (id === paramsId) {
+      navigate("/mylist/" + inputValue + "/" + list.id);
+    }
+
+    setIsEditing(false);
+  }, [dispatch, id, isNew, list.id, navigate, paramsId]);
 
   useEffect(() => {
-    if (isEditing) {
-      document.body.addEventListener("click", handleClickOutside);
+    const input = nameRef?.current;
+    if (isEditing && input) {
+      input.addEventListener("blur", handleSendForm);
 
-      return () =>
-        document.body.removeEventListener("click", handleClickOutside);
+      return () => input.addEventListener("blur", handleSendForm);
     }
-  }, [handleClickOutside, isEditing]);
+  }, [handleSendForm, isEditing]);
 
   const onToggleEditing = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -65,27 +89,15 @@ const ListsItem = ({ list, isEdditing, isNew }: ListsItemProps) => {
 
   const onDeleteList = () => {
     dispatch(deleteSidebarList(id));
+    if (id === paramsId) {
+      navigate("/plans");
+    }
   };
-
-  const { id: paramsId } = useParams();
-  const navigate = useNavigate();
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    const name = nameRef.current?.value.trim();
-
-    if (!name) return;
-
-    if (name && isNew) {
-      dispatch(addSidebarList({ id, name }));
-    }
-    dispatch(updateListName({ id, name }));
-    if (id === paramsId) {
-      navigate("/mylist/" + name + "/" + list.id);
-    }
-
-    setIsEditing(false);
+    handleSendForm();
   }
 
   return (

@@ -111,18 +111,23 @@ const TodoListFilter = ({ id }: TodoListFilterProps) => {
             error={error}
           />
           {lists.map((list) => {
-            return (
-              <Fragment key={list.id}>
-                <Heading as="h4" size="md">
-                  {list.name}
-                </Heading>
-                <TodoList
-                  todos={myListTodosMap[list.id] || []}
-                  isLoading={isLoading}
-                  error={error}
-                />
-              </Fragment>
-            );
+            if (
+              myListTodosMap[list.id] &&
+              myListTodosMap[list.id].length !== 0
+            ) {
+              return (
+                <Fragment key={list.id}>
+                  <Heading as="h4" size="md">
+                    {list.name}
+                  </Heading>
+                  <TodoList
+                    todos={myListTodosMap[list.id] || []}
+                    isLoading={isLoading}
+                    error={error}
+                  />
+                </Fragment>
+              );
+            }
           })}
         </>
       )}
