@@ -1,4 +1,4 @@
-import { Heading } from "@chakra-ui/react";
+import { Button, HStack, Heading } from "@chakra-ui/react";
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -12,6 +12,10 @@ import {
 import { fetchTodoLists } from "../../model/services/fetchTodoLists";
 import { Todo } from "../../types/todoTypes";
 import TodoList from "../TodoList/TodoList";
+
+import cls from "../TodoList.module.scss";
+import { classNames } from "../../../../utils/classNames";
+import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
 interface TodoListFilterProps {
   id?: string;
@@ -99,6 +103,25 @@ const TodoListFilter = ({ id }: TodoListFilterProps) => {
     completedTodos,
   ]);
 
+  type ExpandedLists = {
+    [listId: string]: boolean;
+  };
+
+  const [expandedLists, setExpandedLists] = useState(() => {
+    const initialExpandedLists: ExpandedLists = {};
+    lists.forEach((list) => {
+      initialExpandedLists[list.id] = true;
+    });
+    return initialExpandedLists;
+  });
+
+  const toggleList = (listId: string) => {
+    setExpandedLists((prevState) => ({
+      ...prevState,
+      [listId]: !prevState[listId],
+    }));
+  };
+
   return (
     <>
       {location.pathname.includes("mylist") ? (
@@ -117,14 +140,31 @@ const TodoListFilter = ({ id }: TodoListFilterProps) => {
             ) {
               return (
                 <Fragment key={list.id}>
-                  <Heading as="h4" size="md">
-                    {list.name}
-                  </Heading>
-                  <TodoList
-                    todos={myListTodosMap[list.id] || []}
-                    isLoading={isLoading}
-                    error={error}
-                  />
+                  <HStack>
+                    <Heading as="h4" size="md">
+                      {list.name}
+                    </Heading>
+                    <Button onClick={() => toggleList(list.id)}>
+                      {expandedLists[list.id] ? (
+                        <ChevronDownIcon boxSize={6} />
+                      ) : (
+                        <ChevronUpIcon boxSize={6} />
+                      )}
+                    </Button>
+                  </HStack>
+                  <div
+                    className={classNames(
+                      cls.animationContainer,
+                      { [cls.hidden]: !expandedLists[list.id] },
+                      []
+                    )}
+                  >
+                    <TodoList
+                      todos={myListTodosMap[list.id] || []}
+                      isLoading={isLoading}
+                      error={error}
+                    />
+                  </div>
                 </Fragment>
               );
             }

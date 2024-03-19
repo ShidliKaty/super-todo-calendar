@@ -49,18 +49,20 @@
       "id": "9c4934fd-1192-40ff-b185-9916433f97af",
       "name": "добавить скрытие листа с анимацией",
       "date": "14.03.2024",
-      "completed": false,
+      "completed": true,
       "important": false,
-      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
+      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b",
+      "completedDate": "19.03.2024"
     },
     {
       "id": "9fa076e8-f758-43c4-9a86-a330fd8792b4",
       "name": "добавить модалку ",
       "note": "Вы уверены что хотите удалить список",
       "date": "14.03.2024",
-      "completed": false,
+      "completed": true,
       "important": false,
-      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
+      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b",
+      "completedDate": "18.03.2024"
     },
     {
       "id": "d98ec516-9fad-4322-8102-71cb496acccf",
@@ -168,8 +170,16 @@
       "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
     },
     {
-      "id": "331a9db7-1eba-4ee1-997a-4b6717849d0e",
-      "name": "добавить удаление списка вместе со всеми тудушками",
+      "id": "a659aca2-5ffc-49d2-9ce8-f5676ac43be8",
+      "name": "реализовать поиск",
+      "date": "18.03.2024",
+      "completed": false,
+      "important": false,
+      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
+    },
+    {
+      "id": "a8246ad3-ef79-4d14-a265-d8a387ff01c0",
+      "name": "убрать имя списка из url на кириллице",
       "date": "18.03.2024",
       "completed": false,
       "important": false,
