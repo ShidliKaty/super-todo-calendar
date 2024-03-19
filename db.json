@@ -15,14 +15,6 @@
   ],
   "todos": [
     {
-      "id": "421caae8-115f-4c6b-b70c-bfae80d06790",
-      "name": "аураоута",
-      "date": "12.03.2024",
-      "completed": true,
-      "important": false,
-      "listId": "2"
-    },
-    {
       "id": "5a282e69-21c2-43d3-87e2-cc7edaf4d318",
       "name": "uuu",
       "date": "12.03.2024",
@@ -134,7 +126,8 @@
       "date": "14.03.2024",
       "completed": false,
       "important": false,
-      "listId": "2"
+      "listId": "2",
+      "completedDate": "19.03.2024"
     },
     {
       "id": "b6a6e1b8-ebfe-42cf-9881-4b14f60587b6",
