@@ -1,16 +1,16 @@
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import PageContainer from "../../components/PageContainer/PageContainer";
-import TodoListFilter from "../../entities/Todos/ui/TodoListFilter/TodoListFilter";
 import { makeSelectListById } from "../../entities/SidebarLists/model/selectors/getSidebarListById";
-import { useSelector } from "react-redux";
+import { getMiniLists } from "../../entities/SidebarLists/model/selectors/miniLists";
+import TodoListFilter from "../../entities/Todos/ui/TodoListFilter/TodoListFilter";
 import { StateSchema } from "../../redux/store";
-import { getSidebarLists } from "../../entities/SidebarLists/model/selectors/sidebarLists";
 
-const MyListPage = () => {
+const MyMiniListPage = () => {
   const { id } = useParams();
 
-  const getListById = makeSelectListById(getSidebarLists);
+  const getListById = makeSelectListById(getMiniLists);
 
   const list = useSelector((state: StateSchema) => getListById(state, id));
 
@@ -22,4 +22,4 @@ const MyListPage = () => {
   );
 };
 
-export default MyListPage;
+export default MyMiniListPage;

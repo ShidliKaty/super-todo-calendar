@@ -1,38 +1,38 @@
 import { memo, useCallback, useEffect } from "react";
 import { useAppDispatch } from "../../../../redux/store";
-import { ListsGroup } from "../ListsGroup/ListsGroup";
 import { useSelector } from "react-redux";
-import {
-  getSidebarLists,
-  getSidebarListsIsError,
-  getSidebarListsIsLoading,
-} from "../../model/selectors/sidebarLists";
-import { fetchSidebarLists } from "../../model/services/fetchSidebarLists";
-import { Text } from "@chakra-ui/react";
 import { SidebarList } from "../../types/sidebarListTypes";
-import { addSidebarList } from "../../model/services/addSidebarList";
-import { updateListName } from "../../model/services/updateListName";
+import { ListsGroup } from "../ListsGroup/ListsGroup";
+import { Text } from "@chakra-ui/react";
+import { fetchMiniLists } from "../../model/services/fetchMiniLists";
+import {
+  getMiniLists,
+  getMiniListsIsError,
+  getMiniListsIsLoading,
+} from "../../model/selectors/miniLists";
+import { addMiniList } from "../../model/services/addMiniList";
+import { updateMiniList } from "../../model/services/updateMiniList";
 
-export const SidebarLists = memo(() => {
+export const MiniLists = memo(() => {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchSidebarLists());
+    dispatch(fetchMiniLists());
   }, [dispatch]);
 
-  const lists = useSelector(getSidebarLists);
-  const isLoading = useSelector(getSidebarListsIsLoading);
-  const error = useSelector(getSidebarListsIsError);
+  const lists = useSelector(getMiniLists);
+  const isLoading = useSelector(getMiniListsIsLoading);
+  const error = useSelector(getMiniListsIsError);
 
   const addNewSidebarList = useCallback(
     (newList: SidebarList) => {
-      dispatch(addSidebarList(newList));
+      dispatch(addMiniList(newList));
     },
     [dispatch]
   );
 
   const updateSidebarList = useCallback(
     (updatedList: SidebarList) => {
-      dispatch(updateListName(updatedList));
+      dispatch(updateMiniList(updatedList));
     },
     [dispatch]
   );
@@ -50,8 +50,8 @@ export const SidebarLists = memo(() => {
         updateListName={updateSidebarList}
         isLoading={isLoading}
         lists={lists}
-        heading={"Мои Списки"}
-        main
+        heading={"Мои Списочки"}
+        secondary
       />
     </>
   );

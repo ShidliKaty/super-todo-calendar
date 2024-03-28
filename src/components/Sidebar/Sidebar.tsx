@@ -18,9 +18,10 @@ import {
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
-import SidebarLists from "../../entities/SidebarLists/ui/SidebarLists/SidebarLists";
+import { SidebarLists } from "../../entities/SidebarLists/ui/SidebarLists/SidebarLists";
 import { classNames } from "../../utils/classNames";
 import cls from "./Sidebar.module.scss";
+import { MiniLists } from "../../entities/SidebarLists/ui/MiniLists/MiniLists";
 
 interface SidebarProps {
   className?: string;
@@ -88,6 +89,7 @@ const Sidebar = (props: SidebarProps) => {
         <Divider w="100%" borderColor="gray.300" />
       </VStack>
       <SidebarLists />
+      <MiniLists />
     </div>
   );
 };

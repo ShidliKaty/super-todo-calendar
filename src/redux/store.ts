@@ -6,10 +6,12 @@ import { TodoListsState } from "../entities/Todos/types/todoTypes";
 import { todosSliceReducer } from "../entities/Todos/model/slices/todosSlice";
 import { todoSliceReducer } from "../entities/Todos/model/slices/todoSlice";
 import { TodoState } from "../entities/Todos/types/todoSchema";
+import { miniListsSliceReducer } from "../entities/SidebarLists/model/slices/miniListsSlice";
 // import { rtkApi } from "../api/rtkApi";
 
 export interface StateSchema {
   sidebarLists: SidebarListsState;
+  miniLists: SidebarListsState;
   todos: TodoListsState;
   todo: TodoState;
 }
@@ -29,6 +31,7 @@ export interface StateSchema {
 export const store = configureStore({
   reducer: {
     sidebarLists: sidebarListsSliceReducer,
+    miniLists: miniListsSliceReducer,
     todos: todosSliceReducer,
     todo: todoSliceReducer,
   },

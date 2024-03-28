@@ -1,24 +1,29 @@
 import { FormEvent, useCallback, useEffect, useRef } from "react";
-import { useAppDispatch } from "../../../../redux/store";
-import { addSidebarList } from "../../model/services/addSidebarList";
-import { updateListName } from "../../model/services/updateListName";
+import { SidebarList } from "../../types/sidebarListTypes";
 
 interface ListItemFormProps {
   listName?: string;
   isEdit?: boolean;
   listId?: string;
   isNew?: boolean;
-  secondary?: boolean;
   onCloseForm: () => void;
+  addSidebarList?: (newList: SidebarList) => void;
+  updateListName?: (updatedList: SidebarList) => void;
 }
 
 const ListItemForm = (props: ListItemFormProps) => {
-  const { listName, isEdit, isNew, secondary, onCloseForm, listId } = props;
+  const {
+    listName,
+    isEdit,
+    isNew,
+    onCloseForm,
+    listId,
+    addSidebarList,
+    updateListName,
+  } = props;
 
   const nameRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
-
-  const dispatch = useAppDispatch();
 
   const addNewList = useCallback(() => {
     const inputValue = nameRef.current?.value.trim();
@@ -26,18 +31,17 @@ const ListItemForm = (props: ListItemFormProps) => {
       const newList = {
         id: crypto.randomUUID(),
         name: inputValue,
-        secondary: secondary,
       };
-      dispatch(addSidebarList(newList));
+      addSidebarList && addSidebarList(newList);
     }
-  }, [dispatch, secondary]);
+  }, [addSidebarList]);
 
   const updateList = useCallback(() => {
     const inputValue = nameRef.current?.value.trim();
     if (inputValue && listId) {
-      dispatch(updateListName({ id: listId, name: inputValue }));
+      updateListName && updateListName({ id: listId, name: inputValue });
     }
-  }, [dispatch, listId]);
+  }, [updateListName, listId]);
 
   const handleItemBlur = useCallback(() => {
     const inputValue = nameRef.current?.value.trim();

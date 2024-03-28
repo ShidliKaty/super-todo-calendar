@@ -3,19 +3,25 @@ import Modal, { ModalProps } from "../../../../components/Modal/Modal";
 import { useAppDispatch } from "../../../../redux/store";
 import { deleteSidebarList } from "../../model/services/deleteSidebarList";
 import { useNavigate, useParams } from "react-router-dom";
+import { deleteMiniList } from "../../model/services/deleteMiniList";
 
 type ConfirmModalProps = {
   deletingId: string;
+  isMainList?: boolean;
 } & Omit<ModalProps, "children">;
 
 const ConfirmDeleteModal = (props: ConfirmModalProps) => {
-  const { deletingId, ...modalProps } = props;
+  const { deletingId, isMainList, ...modalProps } = props;
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
 
   const onConfirmDelete = () => {
-    dispatch(deleteSidebarList(deletingId));
+    if (isMainList) {
+      dispatch(deleteSidebarList(deletingId));
+    } else {
+      dispatch(deleteMiniList(deletingId));
+    }
     if (deletingId === id) {
       navigate("/plans");
     }

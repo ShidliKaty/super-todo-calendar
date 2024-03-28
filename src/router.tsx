@@ -5,6 +5,7 @@ import ImportantPage from "./pages/ImportantPage/ImportantPage";
 import MyPlansMain from "./pages/MyPlansMain/MyPlansMain";
 import DonePage from "./pages/DonePage/DonePage";
 import MyListPage from "./pages/MyListPage/MyListPage";
+import MyMiniListPage from "./pages/MyMiniListPage/MyMiniListPage";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "mylist/:id",
         element: <MyListPage />,
+      },
+      {
+        path: "my_mini_list/:id",
+        element: <MyMiniListPage />,
       },
     ],
   },

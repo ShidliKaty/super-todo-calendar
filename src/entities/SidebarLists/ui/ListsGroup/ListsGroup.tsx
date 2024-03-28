@@ -6,17 +6,17 @@ import {
   List,
   Skeleton,
   SkeletonCircle,
-  VStack,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 
 import { memo, useMemo, useState } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import AddButton from "../../../../components/AddButton/AddButton";
 import { SidebarList } from "../../types/sidebarListTypes";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 import ListItemForm from "../ListsItem/ListItemForm";
 import { ListsItem } from "../ListsItem/ListsItem";
-import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 
 interface ListsGroupProps {
   lists: SidebarList[];
@@ -24,10 +24,20 @@ interface ListsGroupProps {
   isLoading?: boolean;
   main?: boolean;
   secondary?: boolean;
+  updateListName: (updatedList: SidebarList) => void;
+  addSidebarList: (newList: SidebarList) => void;
 }
 
 export const ListsGroup = memo((props: ListsGroupProps) => {
-  const { lists, heading, isLoading, secondary, main } = props;
+  const {
+    lists,
+    heading,
+    isLoading,
+    secondary,
+    main,
+    updateListName,
+    addSidebarList,
+  } = props;
   const [isOpenForm, setIsOpenForm] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deletingId, setDeletingId] = useState<string>("");
@@ -76,18 +86,25 @@ export const ListsGroup = memo((props: ListsGroupProps) => {
         )}
         {isOpenForm && (
           <ListItemForm
+            addSidebarList={addSidebarList}
             onCloseForm={() => setIsOpenForm(false)}
             isNew={true}
-            secondary
           />
         )}
         {sortedLists.map((list) => (
-          <ListsItem key={list.id} list={list} onDelete={onDeleteList} />
+          <ListsItem
+            key={list.id}
+            list={list}
+            onDelete={onDeleteList}
+            updateListName={updateListName}
+            isMain={main}
+          />
         ))}
         <ConfirmDeleteModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           deletingId={deletingId}
+          isMainList={main}
         />
       </List>
 

@@ -11,16 +11,12 @@
     {
       "id": "b8c5a663-913e-4281-8dd9-3294b1473a4b",
       "name": "Работа"
-    },
+    }
+  ],
+  "miniLists": [
     {
-      "id": "9e3cd317-180c-47f6-9157-f9ddbef39d4a",
-      "name": "ppppppooo",
-      "secondary": true
-    },
-    {
-      "id": "e2850af9-56a2-418f-b230-ca0bc7f2e8fe",
-      "name": "iiii",
-      "secondary": true
+      "id": "073544d0-37b1-49be-93bf-3e93f734235b",
+      "name": "Посмотреть из Кино"
     }
   ],
   "todos": [

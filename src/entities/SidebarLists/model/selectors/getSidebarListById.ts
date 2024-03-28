@@ -1,8 +1,11 @@
 import { createSelector } from "@reduxjs/toolkit/react";
-import { getSidebarLists } from "./sidebarLists";
+import { StateSchema } from "../../../../redux/store";
+import { SidebarList } from "../../types/sidebarListTypes";
 
-export const makeSelectListById = () => {
-  return createSelector([getSidebarLists, (_, id) => id], (lists, id) => {
+export const makeSelectListById = (
+  getListSelector: (state: StateSchema) => SidebarList[]
+) => {
+  return createSelector([getListSelector, (_, id) => id], (lists, id) => {
     return lists.find((list) => id == list.id);
   });
 };
