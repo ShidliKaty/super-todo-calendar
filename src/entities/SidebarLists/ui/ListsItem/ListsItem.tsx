@@ -13,75 +13,20 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import { memo, useState } from "react";
 import { FaListAlt } from "react-icons/fa";
 import { PiDotsThreeOutlineVerticalBold } from "react-icons/pi";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useAppDispatch } from "../../../../redux/store";
-import { addSidebarList } from "../../model/services/addSidebarList";
-import { updateListName } from "../../model/services/updateListName";
-import { removeSidebarList } from "../../model/slices/sidebarListsSlice";
+import { Link } from "react-router-dom";
 import { SidebarList } from "../../types/sidebarListTypes";
+import ListItemForm from "./ListItemForm";
 
 interface ListsItemProps {
   list: SidebarList;
-  isEdditing: boolean | undefined;
-  isNew: boolean | undefined;
   onDelete: (id: string) => void;
 }
 
-const ListsItem = ({ list, isEdditing, isNew, onDelete }: ListsItemProps) => {
-  const { id } = list;
-  const [isEditing, setIsEditing] = useState(isEdditing || false);
-
-  const dispatch = useAppDispatch();
-  const nameRef = useRef<HTMLInputElement>(null);
-  const formRef = useRef<HTMLDivElement>(null);
-
-  // const handleClickOutside = useCallback(
-  //   (event: MouseEvent) => {
-  //     if (formRef.current && !formRef.current.contains(event.target as Node)) {
-  //       if (isNew && nameRef.current?.value.trim() === "") {
-  //         dispatch(removeSidebarList(id));
-  //       }
-  //       setIsEditing(false);
-  //     }
-  //   },
-  //   [dispatch, id, isNew]
-  // );
-
-  const { id: paramsId } = useParams();
-  const navigate = useNavigate();
-
-  const handleSendForm = useCallback(() => {
-    const inputValue = nameRef.current?.value.trim();
-    if (isNew && inputValue === "") {
-      dispatch(removeSidebarList(id));
-    } else if (!inputValue) {
-      setIsEditing(false);
-    }
-
-    if (isNew && inputValue) {
-      dispatch(addSidebarList({ id, name: inputValue }));
-    } else if (inputValue) {
-      dispatch(updateListName({ id, name: inputValue }));
-    }
-
-    if (id === paramsId) {
-      navigate("/mylist/" + inputValue + "/" + list.id);
-    }
-
-    setIsEditing(false);
-  }, [dispatch, id, isNew, list.id, navigate, paramsId]);
-
-  useEffect(() => {
-    const input = nameRef?.current;
-    if (isEditing && input) {
-      input.addEventListener("blur", handleSendForm);
-
-      return () => input.addEventListener("blur", handleSendForm);
-    }
-  }, [handleSendForm, isEditing]);
+export const ListsItem = memo(({ list, onDelete }: ListsItemProps) => {
+  const [isEditing, setIsEditing] = useState(false);
 
   const onToggleEditing = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -89,14 +34,8 @@ const ListsItem = ({ list, isEdditing, isNew, onDelete }: ListsItemProps) => {
   };
 
   const onDeleteList = () => {
-    onDelete(id);
+    onDelete(list.id);
   };
-
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-
-    handleSendForm();
-  }
 
   return (
     <ListItem
@@ -109,22 +48,18 @@ const ListsItem = ({ list, isEdditing, isNew, onDelete }: ListsItemProps) => {
         <HStack justify="space-between" w="100%">
           <HStack spacing={0.5}>
             <ListIcon as={FaListAlt} />
-            <div ref={formRef}>
-              <form onSubmit={handleSubmit}>
-                <input
-                  autoFocus
-                  type="text"
-                  defaultValue={list.name}
-                  ref={nameRef}
-                />
-              </form>
-            </div>
+            <ListItemForm
+              listName={list.name}
+              listId={list.id}
+              onCloseForm={() => setIsEditing(false)}
+              isEdit
+            />
           </HStack>
         </HStack>
       ) : (
         <HStack justify="space-between" w="100%">
           <Link to={"/mylist/" + list.id}>
-            <HStack spacing={0.5}>
+            <HStack spacing={0.5} paddingRight="60px">
               <ListIcon as={FaListAlt} />
               <Text>{list.name}</Text>
             </HStack>
@@ -165,6 +100,4 @@ const ListsItem = ({ list, isEdditing, isNew, onDelete }: ListsItemProps) => {
       )}
     </ListItem>
   );
-};
-
-export default ListsItem;
+});

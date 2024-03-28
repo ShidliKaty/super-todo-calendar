@@ -6,17 +6,19 @@ import {
 } from "@chakra-ui/icons";
 import {
   Divider,
+  HStack,
   Input,
   InputGroup,
   InputLeftElement,
   List,
   ListIcon,
   ListItem,
+  Text,
   VStack,
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
-import { ListsGroup } from "../../entities/SidebarLists/ui/ListsGroup/ListsGroup";
+import SidebarLists from "../../entities/SidebarLists/ui/SidebarLists/SidebarLists";
 import { classNames } from "../../utils/classNames";
 import cls from "./Sidebar.module.scss";
 
@@ -52,8 +54,10 @@ const Sidebar = (props: SidebarProps) => {
             cursor="pointer"
           >
             <Link to="/plans">
-              <ListIcon as={SunIcon} />
-              Мои Планы
+              <HStack spacing={0.5} paddingRight="60px">
+                <ListIcon as={SunIcon} />
+                <Text>Мои Планы</Text>
+              </HStack>
             </Link>
           </ListItem>
           <ListItem
@@ -62,8 +66,10 @@ const Sidebar = (props: SidebarProps) => {
             cursor="pointer"
           >
             <Link to="/important">
-              <ListIcon as={StarIcon} />
-              Важно
+              <HStack spacing={0.5} paddingRight="60px">
+                <ListIcon as={StarIcon} />
+                <Text>Важно</Text>
+              </HStack>
             </Link>
           </ListItem>
           <ListItem
@@ -72,15 +78,16 @@ const Sidebar = (props: SidebarProps) => {
             cursor="pointer"
           >
             <Link to="/done">
-              <ListIcon as={CheckCircleIcon} />
-              Завершено
+              <HStack spacing={0.5} paddingRight="60px">
+                <ListIcon as={CheckCircleIcon} />
+                <Text>Завершено</Text>
+              </HStack>
             </Link>
           </ListItem>
         </List>
         <Divider w="100%" borderColor="gray.300" />
       </VStack>
-
-      <ListsGroup />
+      <SidebarLists />
     </div>
   );
 };

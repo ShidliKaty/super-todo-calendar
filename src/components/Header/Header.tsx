@@ -34,7 +34,7 @@ const Header = (props: HeaderProps) => {
           </Heading>
           <Text color="blackAlpha.600">Сегодня {formattedDate}</Text>
         </VStack>
-        <AddButton onClick={() => setIsTodoModalOpen(true)}>
+        <AddButton main onClick={() => setIsTodoModalOpen(true)}>
           <Icon as={BsPlusLg} boxSize={6} />
         </AddButton>
         <TodoModal

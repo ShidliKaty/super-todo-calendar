@@ -1,60 +1,95 @@
-import { Divider, HStack, Heading, Icon, Text, VStack } from "@chakra-ui/react";
-
-import { memo, useEffect } from "react";
-import { BsPlusLg } from "react-icons/bs";
-import { useSelector } from "react-redux";
-import AddButton from "../../../../components/AddButton/AddButton";
-import { useAppDispatch } from "../../../../redux/store";
 import {
-  getSidebarLists,
-  getSidebarListsIsError,
-  getSidebarListsIsLoading,
-} from "../../model/selectors/sidebarLists";
-import { fetchSidebarLists } from "../../model/services/fetchSidebarLists";
-import { addingSidebarList } from "../../model/slices/sidebarListsSlice";
-import { MyLists } from "./MyLists";
+  Divider,
+  HStack,
+  Heading,
+  Icon,
+  List,
+  Skeleton,
+  SkeletonCircle,
+  VStack,
+  Text,
+} from "@chakra-ui/react";
 
-export const ListsGroup = memo(() => {
-  const dispatch = useAppDispatch();
+import { memo, useMemo, useState } from "react";
+import { BsPlusLg } from "react-icons/bs";
+import AddButton from "../../../../components/AddButton/AddButton";
+import { SidebarList } from "../../types/sidebarListTypes";
+import ListItemForm from "../ListsItem/ListItemForm";
+import { ListsItem } from "../ListsItem/ListsItem";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 
-  useEffect(() => {
-    dispatch(fetchSidebarLists());
-  }, [dispatch]);
+interface ListsGroupProps {
+  lists: SidebarList[];
+  heading: string;
+  isLoading?: boolean;
+  main?: boolean;
+  secondary?: boolean;
+}
 
-  const lists = useSelector(getSidebarLists);
-  const isLoading = useSelector(getSidebarListsIsLoading);
-  const error = useSelector(getSidebarListsIsError);
+export const ListsGroup = memo((props: ListsGroupProps) => {
+  const { lists, heading, isLoading, secondary, main } = props;
+  const [isOpenForm, setIsOpenForm] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deletingId, setDeletingId] = useState<string>("");
+  const sortedLists = useMemo(() => {
+    return [...lists].sort((a, b) => a.name.localeCompare(b.name));
+  }, [lists]);
 
-  const addList = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    const newId = crypto.randomUUID();
-    const newList = {
-      id: newId,
-      name: "",
-      isEditing: true,
-      isNew: true,
-    };
-
-    dispatch(addingSidebarList(newList));
+  const onDeleteList = (id: string) => {
+    setIsModalOpen(true);
+    setDeletingId(id);
   };
 
   return (
     <VStack align="flex-start" spacing={5} mt={5}>
       <HStack justify="space-between" w="100%">
         <Heading color="blackAlpha.600" size="md">
-          Мои списки
+          {heading}
         </Heading>
-        <AddButton onClick={addList}>
+        <AddButton
+          main={main}
+          secondary={secondary}
+          onClick={() => setIsOpenForm(true)}
+        >
           <Icon as={BsPlusLg} boxSize={6} />
         </AddButton>
       </HStack>
-      {error ? (
-        <Text color="red.600">
-          Произошла ошибка! Попробуйте перезагрузить страницу
-        </Text>
-      ) : (
-        <MyLists lists={lists} isLoading={isLoading} />
-      )}
+      <List spacing={5} w="100%">
+        {!isLoading && !lists.length ? (
+          <Text color="blackAlpha.600">Нет списков</Text>
+        ) : null}
+        {isLoading && (
+          <VStack align="flex-start" spacing={5}>
+            <HStack spacing={2}>
+              <SkeletonCircle size="5" />
+              <Skeleton width="130px" height="15px" />
+            </HStack>
+            <HStack spacing={2}>
+              <SkeletonCircle size="5" />
+              <Skeleton width="130px" height="15px" />
+            </HStack>
+            <HStack spacing={2}>
+              <SkeletonCircle size="5" />
+              <Skeleton width="130px" height="15px" />
+            </HStack>
+          </VStack>
+        )}
+        {isOpenForm && (
+          <ListItemForm
+            onCloseForm={() => setIsOpenForm(false)}
+            isNew={true}
+            secondary
+          />
+        )}
+        {sortedLists.map((list) => (
+          <ListsItem key={list.id} list={list} onDelete={onDeleteList} />
+        ))}
+        <ConfirmDeleteModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          deletingId={deletingId}
+        />
+      </List>
 
       <Divider w="100%" borderColor="gray.300" />
     </VStack>

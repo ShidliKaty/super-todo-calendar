@@ -5,11 +5,12 @@ import { fetchSidebarLists } from "./fetchSidebarLists";
 
 export const addSidebarList = createAsyncThunk<SidebarList, SidebarList>(
   "lists/addSidebarList",
-  async ({ id, name }, { dispatch, rejectWithValue }) => {
+  async ({ id, name, secondary }, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await baseAPI.post<SidebarList>("lists", {
         id,
         name,
+        secondary,
       });
 
       if (!data) {
