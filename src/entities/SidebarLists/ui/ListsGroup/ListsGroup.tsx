@@ -2,7 +2,6 @@ import {
   Divider,
   HStack,
   Heading,
-  Icon,
   List,
   Skeleton,
   SkeletonCircle,
@@ -11,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 
 import { memo, useMemo, useState } from "react";
-import { BsPlusLg } from "react-icons/bs";
 import AddButton from "../../../../components/AddButton/AddButton";
 import { SidebarList } from "../../types/sidebarListTypes";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
@@ -60,9 +58,7 @@ export const ListsGroup = memo((props: ListsGroupProps) => {
           main={main}
           secondary={secondary}
           onClick={() => setIsOpenForm(true)}
-        >
-          <Icon as={BsPlusLg} boxSize={6} />
-        </AddButton>
+        />
       </HStack>
       <List spacing={5} w="100%">
         {!isLoading && !lists.length ? (

@@ -1,18 +1,20 @@
-import { HStack, Heading, Icon, Text, VStack } from "@chakra-ui/react";
-import { BsPlusLg } from "react-icons/bs";
+import { HStack, Heading, Text, VStack } from "@chakra-ui/react";
+import { useState } from "react";
 import TodoModal from "../../entities/Todos/ui/TodoFormModal/TodoModal/TodoModal";
 import { classNames } from "../../utils/classNames";
+import { formatDate } from "../../utils/formatDate";
 import AddButton from "../AddButton/AddButton";
 import cls from "./Header.module.scss";
-import { useState } from "react";
-import { formatDate } from "../../utils/formatDate";
 
 interface HeaderProps {
   className?: string;
   name?: string;
+  isMini?: boolean;
 }
 
 const Header = (props: HeaderProps) => {
+  const { className, name = "Мои планы", isMini } = props;
+
   const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
 
   const date = new Date();
@@ -24,19 +26,16 @@ const Header = (props: HeaderProps) => {
     year: "numeric",
   });
 
-  const { className, name = "Мои планы" } = props;
   return (
     <div className={classNames(cls.Header, {}, [className])}>
-      <HStack justify="space-between">
+      <HStack justify="space-between" mb="20px">
         <VStack align="flex-start" spacing={1}>
           <Heading as="h1" size="xl">
             {name}
           </Heading>
           <Text color="blackAlpha.600">Сегодня {formattedDate}</Text>
         </VStack>
-        <AddButton main onClick={() => setIsTodoModalOpen(true)}>
-          <Icon as={BsPlusLg} boxSize={6} />
-        </AddButton>
+        {!isMini && <AddButton main onClick={() => setIsTodoModalOpen(true)} />}
         <TodoModal
           isOpen={isTodoModalOpen}
           onClose={() => setIsTodoModalOpen(false)}

@@ -9,7 +9,7 @@ const initialState: SidebarListsState = {
 };
 
 export const miniListsSlice = createSlice({
-  name: "sidebarLists",
+  name: "miniLists",
   initialState,
   reducers: {},
   extraReducers: (builder) => {

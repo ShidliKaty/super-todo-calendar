@@ -23,7 +23,6 @@ const ListItemForm = (props: ListItemFormProps) => {
   } = props;
 
   const nameRef = useRef<HTMLInputElement>(null);
-  const formRef = useRef<HTMLDivElement>(null);
 
   const addNewList = useCallback(() => {
     const inputValue = nameRef.current?.value.trim();
@@ -76,11 +75,9 @@ const ListItemForm = (props: ListItemFormProps) => {
   }
 
   return (
-    <div ref={formRef}>
-      <form onSubmit={handleSubmit}>
-        <input autoFocus type="text" defaultValue={listName} ref={nameRef} />
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input autoFocus type="text" defaultValue={listName} ref={nameRef} />
+    </form>
   );
 };
 

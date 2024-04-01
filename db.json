@@ -17,6 +17,10 @@
     {
       "id": "073544d0-37b1-49be-93bf-3e93f734235b",
       "name": "Посмотреть из Кино"
+    },
+    {
+      "id": "0e6e25ae-a790-4046-bed4-243f52b42f60",
+      "name": "Взять в дорогу"
     }
   ],
   "todos": [
@@ -153,16 +157,6 @@
       "important": true
     },
     {
-      "id": "358312f5-670f-4fa3-89d3-6c25f82838f8",
-      "name": "test",
-      "note": "r",
-      "date": "14.03.2024",
-      "completed": false,
-      "important": true,
-      "listId": "1",
-      "completedDate": "18.03.2024"
-    },
-    {
       "id": "2114e1a8-fc64-4e8d-b7b4-e3ae22264fa2",
       "name": "blur input",
       "date": "14.03.2024",
@@ -200,17 +194,19 @@
       "id": "2b98018e-94fd-434e-b52c-59ec03ec3e01",
       "name": "сделать отдельный сервис для списочков",
       "date": "26.03.2024",
-      "completed": false,
+      "completed": true,
       "important": false,
-      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
+      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b",
+      "completedDate": "28.03.2024"
     },
     {
       "id": "ef841d48-1067-4ec0-8074-a3a3cf64efda",
       "name": "сделать тодо списочков",
       "date": "26.03.2024",
-      "completed": false,
+      "completed": true,
       "important": false,
-      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
+      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b",
+      "completedDate": "29.03.2024"
     },
     {
       "id": "f4fc0b23-1921-4231-a1c0-3322c472168a",
@@ -219,6 +215,40 @@
       "completed": false,
       "important": false,
       "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
+    },
+    {
+      "id": "5ba96ba5-7262-4012-9b31-c7d1e504651e",
+      "name": "добавить обновление completed",
+      "date": "29.03.2024",
+      "completed": false,
+      "important": false,
+      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
+    }
+  ],
+  "miniTodos": [
+    {
+      "id": "f5f45321-1662-4a2a-83cc-cce8d61d1311",
+      "name": "Тар",
+      "completed": false,
+      "miniListId": "073544d0-37b1-49be-93bf-3e93f734235b"
+    },
+    {
+      "id": "dd9a1738-8e90-4adf-98fd-903d1d90a91f",
+      "name": "Любовное настроение",
+      "completed": false,
+      "miniListId": "073544d0-37b1-49be-93bf-3e93f734235b"
+    },
+    {
+      "id": "6305182f-4075-4532-a517-0caf4fcdaf86",
+      "name": "Эами",
+      "completed": false,
+      "miniListId": "073544d0-37b1-49be-93bf-3e93f734235b"
+    },
+    {
+      "id": "dc727a4b-dcff-42a4-b08b-f7b1ecd25b9d",
+      "name": "Банши Инишерина",
+      "completed": false,
+      "miniListId": "073544d0-37b1-49be-93bf-3e93f734235b"
     }
   ]
 }
