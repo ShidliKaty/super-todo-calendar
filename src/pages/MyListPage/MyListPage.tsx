@@ -1,11 +1,11 @@
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import PageContainer from "../../components/PageContainer/PageContainer";
-import TodoListFilter from "../../entities/Todos/ui/TodoListFilter/TodoListFilter";
 import { makeSelectListById } from "../../entities/SidebarLists/model/selectors/getSidebarListById";
-import { useSelector } from "react-redux";
-import { StateSchema } from "../../redux/store";
 import { getSidebarLists } from "../../entities/SidebarLists/model/selectors/sidebarLists";
+import { StateSchema } from "../../redux/store";
+import { MyList } from "./MyList";
 
 const MyListPage = () => {
   const { id } = useParams();
@@ -17,7 +17,7 @@ const MyListPage = () => {
   return (
     <PageContainer>
       <Header name={list?.name} />
-      <TodoListFilter id={id} />
+      <MyList id={id} />
     </PageContainer>
   );
 };

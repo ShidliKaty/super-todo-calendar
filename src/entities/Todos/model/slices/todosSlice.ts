@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit/react";
 import { TodoListsState } from "../../types/todoTypes";
-import { fetchTodoLists } from "../services/fetchTodoLists";
+import { fetchTodos } from "../services/fetchTodos";
 
 const initialState: TodoListsState = {
   todos: [],
@@ -14,15 +14,15 @@ export const todosSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTodoLists.pending, (state) => {
+      .addCase(fetchTodos.pending, (state) => {
         state.error = undefined;
         state.isLoading = true;
       })
-      .addCase(fetchTodoLists.fulfilled, (state, action) => {
+      .addCase(fetchTodos.fulfilled, (state, action) => {
         state.isLoading = false;
         state.todos = action.payload;
       })
-      .addCase(fetchTodoLists.rejected, (state) => {
+      .addCase(fetchTodos.rejected, (state) => {
         state.isLoading = false;
         state.error = "error";
       });

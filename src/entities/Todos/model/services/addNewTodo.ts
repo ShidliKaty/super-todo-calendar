@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseAPI } from "../../../../api/baseAPI";
 import { Todo } from "../../types/todoTypes";
-import { fetchTodoLists } from "./fetchTodoLists";
+import { fetchTodos } from "./fetchTodos";
 
 export const addNewTodo = createAsyncThunk<Todo, Todo>(
   "todos/addNewTodo",
@@ -23,7 +23,7 @@ export const addNewTodo = createAsyncThunk<Todo, Todo>(
       if (!data) {
         throw new Error();
       }
-      dispatch(fetchTodoLists());
+      dispatch(fetchTodos());
 
       return data;
     } catch (e) {

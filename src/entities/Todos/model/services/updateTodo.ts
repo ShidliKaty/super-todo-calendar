@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit/react";
 import { baseAPI } from "../../../../api/baseAPI";
 import { Todo } from "../../types/todoTypes";
-import { fetchTodoLists } from "./fetchTodoLists";
+import { fetchTodos } from "./fetchTodos";
 
 interface UpdateProps {
   todo: Todo;
@@ -17,7 +17,7 @@ export const updateTodo = createAsyncThunk<Todo, UpdateProps>(
       if (!data) {
         throw new Error();
       }
-      dispatch(fetchTodoLists());
+      dispatch(fetchTodos());
       return data;
     } catch (e) {
       console.log(e);

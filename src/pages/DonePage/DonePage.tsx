@@ -1,12 +1,12 @@
 import Header from "../../components/Header/Header";
 import PageContainer from "../../components/PageContainer/PageContainer";
-import TodoListFilter from "../../entities/Todos/ui/TodoListFilter/TodoListFilter";
+import { DoneList } from "./DoneList";
 
 const DonePage = () => {
   return (
     <PageContainer>
       <Header name={"Завершено"} />
-      <TodoListFilter />
+      <DoneList />
     </PageContainer>
   );
 };

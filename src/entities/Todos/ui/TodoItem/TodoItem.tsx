@@ -17,7 +17,7 @@ import { deleteTodo } from "../../model/services/deleteTodo";
 import TodoModal from "../TodoFormModal/TodoModal/TodoModal";
 import { ChangeEvent, useCallback, useState } from "react";
 import { updateTodoImportance } from "../../model/services/updateTodoImportance";
-import { fetchTodoLists } from "../../model/services/fetchTodoLists";
+import { fetchTodos } from "../../model/services/fetchTodos";
 import { useLocation } from "react-router-dom";
 import { updateTodoCompleted } from "../../model/services/updateTodoCompleted";
 import { formatDate } from "../../../../utils/formatDate";
@@ -53,7 +53,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
       setIsImportant(!updatedImportant);
     }
     if (result.meta.requestStatus === "fulfilled" && onImportantPage) {
-      dispatch(fetchTodoLists());
+      dispatch(fetchTodos());
     }
   }, [dispatch, isImportant, todo, onImportantPage]);
 
@@ -76,7 +76,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
       }
 
       if (result.meta.requestStatus === "fulfilled") {
-        dispatch(fetchTodoLists());
+        dispatch(fetchTodos());
       }
     },
     [dispatch, todo.id]

@@ -18,10 +18,10 @@ import {
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
+import { MiniLists } from "../../entities/SidebarLists/ui/MiniLists/MiniLists";
 import { SidebarLists } from "../../entities/SidebarLists/ui/SidebarLists/SidebarLists";
 import { classNames } from "../../utils/classNames";
 import cls from "./Sidebar.module.scss";
-import { MiniLists } from "../../entities/SidebarLists/ui/MiniLists/MiniLists";
 
 interface SidebarProps {
   className?: string;

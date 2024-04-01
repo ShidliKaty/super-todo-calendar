@@ -4,18 +4,12 @@ import TodoItem from "../TodoItem/TodoItem";
 interface TodoListProps {
   todos: Todo[];
   isLoading?: boolean;
-  error?: string;
   onImportantPage?: boolean;
 }
 
-const TodoList = ({ todos, isLoading, error }: TodoListProps) => {
+const TodoList = ({ todos, isLoading }: TodoListProps) => {
   return (
     <>
-      {error && (
-        <Text color="red.600">
-          Произошла ошибка! Попробуйте перезагрузить страницу
-        </Text>
-      )}
       {isLoading ? (
         <VStack alignItems="flex-start" mt="20px" spacing={3}>
           <Skeleton width="100%" height="60px" borderRadius={10} />
