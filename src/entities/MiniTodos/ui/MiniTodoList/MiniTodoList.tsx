@@ -1,5 +1,5 @@
 import { List, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import AddButton from "../../../../components/AddButton/AddButton";
 import { MiniTodo } from "../../types/miniTodosSchema";
 import MiniTodoItem from "../MiniTodoItem/MiniTodoItem";
@@ -14,6 +14,28 @@ interface MiniTodoListProps {
 
 const MiniTodoList = ({ miniTodos, isLoading, listId }: MiniTodoListProps) => {
   const [isOpenForm, setIsOpenForm] = useState(false);
+
+  const sortTodosByCompleted = useCallback((todos: MiniTodo[]) => {
+    todos.sort((a, b) => {
+      if (a.completed === b.completed) {
+        return 0;
+      }
+
+      if (!a.completed) {
+        return -1;
+      }
+
+      return 1;
+    });
+
+    return todos;
+  }, []);
+
+  const sortedTodos = useMemo(
+    () => sortTodosByCompleted(miniTodos),
+    [miniTodos, sortTodosByCompleted]
+  );
+
   return (
     <>
       <AddButton secondary onClick={() => setIsOpenForm(true)} />
@@ -31,7 +53,7 @@ const MiniTodoList = ({ miniTodos, isLoading, listId }: MiniTodoListProps) => {
       )}
 
       <List spacing={3} my="20px">
-        {miniTodos.map((todo) => (
+        {sortedTodos.map((todo) => (
           <MiniTodoItem key={todo.id} todo={todo} />
         ))}
       </List>

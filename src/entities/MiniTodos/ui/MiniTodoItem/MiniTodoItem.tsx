@@ -12,8 +12,10 @@ import { MiniTodo } from "../../types/miniTodosSchema";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useAppDispatch } from "../../../../redux/store";
 import { deleteMiniTodo } from "../../model/services/deleteMiniTodo";
-import { useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import { MiniTodoListForm } from "../MiniTodoListForm/MiniTodoListForm";
+import { updateMiniTodoCompleted } from "../../model/services/updateMiniTodoCompleted";
+import { fetchMiniTodos } from "../../model/services/fetchMiniTodos";
 
 interface MiniTodoItemProps {
   todo: MiniTodo;
@@ -24,11 +26,35 @@ const MiniTodoItem = (props: MiniTodoItemProps) => {
   const dispatch = useAppDispatch();
   const [isEdit, setIsEdit] = useState(false);
 
+  const [isCompleted, setIsCompleted] = useState(todo.completed);
+
   const onDeleteTodo = () => {
     if (todo && todo.id) {
       dispatch(deleteMiniTodo(todo.id));
     }
   };
+
+  const onToggleCompleted = useCallback(
+    async (e: ChangeEvent<HTMLInputElement>) => {
+      const isChecked = e.target.checked;
+      setIsCompleted(isChecked);
+      const result = await dispatch(
+        updateMiniTodoCompleted({
+          id: todo.id,
+          completed: isChecked,
+        })
+      );
+
+      if (result.meta.requestStatus === "rejected") {
+        setIsCompleted(!isChecked);
+      }
+
+      if (result.meta.requestStatus === "fulfilled") {
+        dispatch(fetchMiniTodos());
+      }
+    },
+    [dispatch, todo.id]
+  );
 
   return (
     <>
@@ -49,14 +75,14 @@ const MiniTodoItem = (props: MiniTodoItemProps) => {
             borderRadius={10}
           >
             <Checkbox
-              // isChecked={isCompleted}
-              // onChange={onToggleCompleted}
+              isChecked={isCompleted}
+              onChange={onToggleCompleted}
               defaultChecked={todo.completed}
               colorScheme="purple"
               spacing={3}
             >
               <VStack spacing={0.1} align="flex-start">
-                <Text color="black" fontSize="l">
+                <Text color={isCompleted ? "gray.500" : "black"} fontSize="l">
                   {todo.name}
                 </Text>
               </VStack>
