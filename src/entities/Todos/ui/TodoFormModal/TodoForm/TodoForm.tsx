@@ -1,7 +1,6 @@
 import {
   Button,
   ButtonGroup,
-  FormControl,
   Input,
   Select,
   Text,
@@ -54,9 +53,7 @@ const TodoForm = (props: TodoFormProps) => {
 
   const todoForm = useSelector(getTodoForm);
 
-  const onAddTodo = (e: FormEvent) => {
-    e.preventDefault();
-
+  const onAddTodo = () => {
     const newId = crypto.randomUUID();
 
     const formattedDate = formatDate(date, {});
@@ -75,9 +72,7 @@ const TodoForm = (props: TodoFormProps) => {
     onClose();
   };
 
-  const onSaveTodo = (e: FormEvent) => {
-    e.preventDefault();
-
+  const onSaveTodo = () => {
     if (!todoForm || todoForm.name === "") return;
 
     if (editing && editingId) {
@@ -85,6 +80,11 @@ const TodoForm = (props: TodoFormProps) => {
     }
 
     onClose();
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    editing ? onSaveTodo() : onAddTodo();
   };
 
   const onCancel = () => {
@@ -111,9 +111,10 @@ const TodoForm = (props: TodoFormProps) => {
       <Text as="b">
         {editing ? "Редактировать запись" : "Добавить новую запись"}
       </Text>
-      <FormControl>
+      <form onSubmit={handleSubmit}>
         <VStack w="500px">
           <Input
+            autoFocus
             isRequired
             placeholder="Новая запись"
             focusBorderColor="purple.600"
@@ -142,14 +143,13 @@ const TodoForm = (props: TodoFormProps) => {
             <Button variant="outline" onClick={onCancel}>
               Отменить
             </Button>
-            {editing ? (
-              <Button onClick={onSaveTodo}>Сохранить</Button>
-            ) : (
-              <Button onClick={onAddTodo}>Добавить</Button>
-            )}
+
+            <Button onClick={handleSubmit}>
+              {editing ? "Сохранить" : "Добавить"}
+            </Button>
           </ButtonGroup>
         </VStack>
-      </FormControl>
+      </form>
     </VStack>
   );
 };
