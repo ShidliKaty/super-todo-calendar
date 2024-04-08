@@ -75,8 +75,6 @@ export const MiniTodoItem = memo((props: MiniTodoItemProps) => {
     [dispatch, miniTodo.id, subTodos, listId, allCompleted]
   );
 
-  console.log(subListOpen);
-
   const updateMiniTodoName = useCallback(
     (name: string) => {
       dispatch(updateMiniTodo({ id: miniTodo.id, name, listId }));

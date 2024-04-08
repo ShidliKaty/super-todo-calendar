@@ -19,10 +19,6 @@
       "name": "Посмотреть из Кино"
     },
     {
-      "id": "0e6e25ae-a790-4046-bed4-243f52b42f60",
-      "name": "Взять в дорогу"
-    },
-    {
       "id": "0d63152c-bd5e-46f9-a08f-52ef7736035c",
       "name": "Почитать"
     }
@@ -227,11 +223,12 @@
     },
     {
       "id": "4234a295-426f-4332-92f5-662d1a2a0255",
-      "name": "добавить подсписки",
+      "name": "добавить мини подсписки",
       "date": "01.04.2024",
-      "completed": false,
+      "completed": true,
       "important": false,
-      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
+      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b",
+      "completedDate": "08.04.2024"
     },
     {
       "id": "dab50963-8463-4a4b-9553-cce2d1d417f5",
@@ -241,6 +238,14 @@
       "important": false,
       "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b",
       "completedDate": "04.04.2024"
+    },
+    {
+      "id": "b85c5061-524b-49f8-b744-d2fd5e69364f",
+      "name": "добавить тултипы",
+      "date": "08.04.2024",
+      "completed": false,
+      "important": false,
+      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
     }
   ],
   "miniTodos": [
@@ -291,30 +296,6 @@
       "name": "Набоков",
       "completed": false,
       "miniListId": "0d63152c-bd5e-46f9-a08f-52ef7736035c"
-    },
-    {
-      "id": "32d75450-c8b1-4bd3-ac4a-c2a15e345309",
-      "name": "jhkjkj",
-      "completed": false,
-      "miniListId": "0e6e25ae-a790-4046-bed4-243f52b42f60"
-    },
-    {
-      "id": "10ab2196-f8cd-45b0-b86a-d095cc835f4e",
-      "name": "ghhhj",
-      "completed": false,
-      "miniListId": "0e6e25ae-a790-4046-bed4-243f52b42f60"
-    },
-    {
-      "id": "3bb9d064-6e8e-4277-abc2-5d85056f0ac2",
-      "name": "gjgj",
-      "completed": true,
-      "miniListId": "0e6e25ae-a790-4046-bed4-243f52b42f60"
-    },
-    {
-      "id": "e1da56f3-1996-4b5c-b0db-633a4060392c",
-      "name": "rdtfh",
-      "completed": true,
-      "miniListId": "0e6e25ae-a790-4046-bed4-243f52b42f60"
     }
   ],
   "subMiniTodos": [
@@ -345,13 +326,6 @@
       "completed": true,
       "miniListId": "0d63152c-bd5e-46f9-a08f-52ef7736035c",
       "miniTodoId": "fbb91b59-2786-4f0e-95c4-7b2795453195"
-    },
-    {
-      "id": "1786d4d4-b79e-42cc-8980-90f6c2ca6807",
-      "name": "jhgjh",
-      "completed": false,
-      "miniListId": "073544d0-37b1-49be-93bf-3e93f734235b",
-      "miniTodoId": "dc727a4b-dcff-42a4-b08b-f7b1ecd25b9d"
     }
   ]
 }
