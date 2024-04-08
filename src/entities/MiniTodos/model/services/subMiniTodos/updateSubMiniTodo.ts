@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { baseAPI } from "../../../../api/baseAPI";
-import { MiniTodo } from "../../types/miniTodosSchema";
-import { fetchMiniTodos } from "./fetchMiniTodosByListId";
+import { baseAPI } from "../../../../../api/baseAPI";
+import { SubMiniTodo } from "../../../types/subMiniTodosSchema";
+import { fetchSubMiniTodosByListId } from "./fetchSubMiniTodosByListId";
 
 interface UpdateProps {
   name?: string;
@@ -10,11 +10,11 @@ interface UpdateProps {
   listId?: string;
 }
 
-export const updateMiniTodo = createAsyncThunk<MiniTodo, UpdateProps>(
-  "miniTodos/updateMiniTodo",
+export const updateSubMiniTodo = createAsyncThunk<SubMiniTodo, UpdateProps>(
+  "subMiniTodos/updateSubMiniTodo",
   async ({ name, id, completed, listId }, { dispatch, rejectWithValue }) => {
     try {
-      const { data } = await baseAPI.patch<MiniTodo>(`miniTodos/${id}`, {
+      const { data } = await baseAPI.patch<SubMiniTodo>(`subMiniTodos/${id}`, {
         name,
         completed,
       });
@@ -22,7 +22,7 @@ export const updateMiniTodo = createAsyncThunk<MiniTodo, UpdateProps>(
       if (!data) {
         throw new Error();
       }
-      dispatch(fetchMiniTodos(listId));
+      dispatch(fetchSubMiniTodosByListId(listId));
       return data;
     } catch (e) {
       console.log(e);

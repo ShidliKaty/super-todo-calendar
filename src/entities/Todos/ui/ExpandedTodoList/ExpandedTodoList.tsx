@@ -1,13 +1,12 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { Button, HStack, Heading, Text } from "@chakra-ui/react";
 import { Fragment } from "react";
-import { classNames } from "../../../../utils/classNames";
+import ExpandedList from "../../../../components/ExpandedList/ExpandedList";
 import { todosMap } from "../../../../utils/todosMap";
 import { useExpandedLists } from "../../../../utils/useExpandedLists";
 import { SidebarList } from "../../../SidebarLists/types/sidebarListTypes";
 import { Todo } from "../../types/todoTypes";
 import TodoList from "../TodoList/TodoList";
-import cls from "./ExpandedList.module.scss";
 
 interface ExpandedListProps {
   lists: SidebarList[];
@@ -16,7 +15,7 @@ interface ExpandedListProps {
   error?: string;
 }
 
-export const ExpandedList = (props: ExpandedListProps) => {
+export const ExpandedTodoList = (props: ExpandedListProps) => {
   const { lists, todos, isLoading, error } = props;
 
   const myListTodosMap = todosMap({ lists, todos });
@@ -53,18 +52,12 @@ export const ExpandedList = (props: ExpandedListProps) => {
                   )}
                 </Button>
               </HStack>
-              <div
-                className={classNames(
-                  cls.animationContainer,
-                  { [cls.hidden]: !expandedLists[list.id] },
-                  []
-                )}
-              >
+              <ExpandedList isHidden={!expandedLists[list.id]}>
                 <TodoList
                   todos={myListTodosMap[list.id] || []}
                   isLoading={isLoading}
                 />
-              </div>
+              </ExpandedList>
             </Fragment>
           );
         }

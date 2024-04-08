@@ -3,11 +3,19 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseAPI } from "../../../../api/baseAPI";
 import { MiniTodo } from "../../types/miniTodosSchema";
 
-export const fetchMiniTodos = createAsyncThunk<MiniTodo[]>(
+export const fetchMiniTodos = createAsyncThunk<MiniTodo[], string | undefined>(
   "miniTodos/fetchMiniTodos",
-  async (_, { rejectWithValue }) => {
+  async (miniListId, { rejectWithValue }) => {
+    if (!miniListId) {
+      return rejectWithValue("error");
+    }
+
     try {
-      const { data } = await baseAPI.get<MiniTodo[]>("miniTodos");
+      const { data } = await baseAPI.get<MiniTodo[]>("miniTodos", {
+        params: {
+          miniListId,
+        },
+      });
 
       if (!data) {
         throw new Error();

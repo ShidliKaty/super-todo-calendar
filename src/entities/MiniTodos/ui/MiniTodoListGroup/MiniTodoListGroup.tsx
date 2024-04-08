@@ -1,32 +1,56 @@
 import { Skeleton, Text, VStack } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../../redux/store";
-import { getMiniTodosByListId } from "../../model/selectors/getMiniTodosByListId";
 import {
+  getMiniTodos,
   getMiniTodosIsError,
   getMiniTodosIsLoading,
 } from "../../model/selectors/miniTodos";
-import { fetchMiniTodos } from "../../model/services/fetchMiniTodos";
-import MiniTodoList from "../MiniTodoList/MiniTodoList";
+import { fetchMiniTodos } from "../../model/services/fetchMiniTodosByListId";
+import { MiniTodoList } from "../MiniTodoList/MiniTodoList";
+import AddButton from "../../../../components/AddButton/AddButton";
+import { MiniTodoListForm } from "../MiniTodoListForm/MiniTodoListForm";
+import { MiniTodo } from "../../types/miniTodosSchema";
+import { addMiniTodo } from "../../model/services/addMiniTodo";
+import { fetchSubMiniTodosByListId } from "../../model/services/subMiniTodos/fetchSubMiniTodosByListId";
+import { sortTodosByCompleted } from "../../../../utils/sortTodosByCompleted";
 
 interface MiniTodoListGroupProps {
   id?: string;
 }
 
-const MiniTodoListGroup = ({ id }: MiniTodoListGroupProps) => {
+export const MiniTodoListGroup = memo(({ id }: MiniTodoListGroupProps) => {
   const dispatch = useAppDispatch();
+  const [isOpenForm, setIsOpenForm] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchMiniTodos());
+    dispatch(fetchMiniTodos(id));
+    dispatch(fetchSubMiniTodosByListId(id));
   }, [dispatch, id]);
 
   const error = useSelector(getMiniTodosIsError);
   const isLoading = useSelector(getMiniTodosIsLoading);
 
-  const getMiniTodos = getMiniTodosByListId();
+  const miniTodos = useSelector(getMiniTodos);
 
-  const miniTodos = useSelector((state) => getMiniTodos(state, id)).reverse();
+  const sortedTodos = useMemo(
+    () => sortTodosByCompleted(miniTodos),
+    [miniTodos]
+  );
+
+  const addNewMiniTodo = useCallback(
+    (inputValue: string) => {
+      const newTodo: MiniTodo = {
+        id: crypto.randomUUID(),
+        name: inputValue,
+        completed: false,
+        miniListId: id,
+      };
+      dispatch(addMiniTodo(newTodo));
+    },
+    [dispatch, id]
+  );
 
   return (
     <>
@@ -45,10 +69,24 @@ const MiniTodoListGroup = ({ id }: MiniTodoListGroupProps) => {
         </VStack>
       )}
       {!error && !isLoading && (
-        <MiniTodoList miniTodos={miniTodos} isLoading={isLoading} listId={id} />
+        <>
+          <AddButton secondary onClick={() => setIsOpenForm(true)} />
+
+          {isOpenForm && (
+            <MiniTodoListForm
+              isNew
+              onCloseForm={() => setIsOpenForm(false)}
+              addNewTodo={addNewMiniTodo}
+            />
+          )}
+
+          {!isLoading && miniTodos.length === 0 ? (
+            <Text mt={5}>Нет записей</Text>
+          ) : (
+            <MiniTodoList miniTodos={sortedTodos} />
+          )}
+        </>
       )}
     </>
   );
-};
-
-export default MiniTodoListGroup;
+});

@@ -5,7 +5,7 @@ import { getIncompletedTodos } from "../../entities/Todos/model/selectors/getInc
 import { getTodoIsLoading } from "../../entities/Todos/model/selectors/todo";
 import { getTodosIsError } from "../../entities/Todos/model/selectors/todos";
 import { fetchTodos } from "../../entities/Todos/model/services/fetchTodos";
-import { ExpandedList } from "../../entities/Todos/ui/ExpandedList/ExpandedList";
+import { ExpandedTodoList } from "../../entities/Todos/ui/ExpandedTodoList/ExpandedTodoList";
 import { useAppDispatch } from "../../redux/store";
 
 export const MainList = memo(() => {
@@ -22,7 +22,7 @@ export const MainList = memo(() => {
   const doneTodos = useSelector(getIncompletedTodos);
 
   return (
-    <ExpandedList
+    <ExpandedTodoList
       lists={lists}
       todos={doneTodos}
       isLoading={isLoading}

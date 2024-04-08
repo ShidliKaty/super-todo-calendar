@@ -9,6 +9,8 @@ import { TodoState } from "../entities/Todos/types/todoSchema";
 import { miniListsSliceReducer } from "../entities/SidebarLists/model/slices/miniListsSlice";
 import { MiniTodoListsState } from "../entities/MiniTodos/types/miniTodosSchema";
 import { miniTodosSliceReducer } from "../entities/MiniTodos/model/slices/miniTodosSlice";
+import { subMiniTodosSliceReducer } from "../entities/MiniTodos/model/slices/subMiniTodosSlice";
+import { SubMiniTodosState } from "../entities/MiniTodos/types/subMiniTodosSchema";
 // import { rtkApi } from "../api/rtkApi";
 
 export interface StateSchema {
@@ -17,6 +19,7 @@ export interface StateSchema {
   todos: TodoListsState;
   todo: TodoState;
   miniTodos: MiniTodoListsState;
+  subMiniTodos: SubMiniTodosState;
 }
 
 // // создаем отдельную функцию для переиспользования в jest, storybook
@@ -38,6 +41,7 @@ export const store = configureStore({
     todos: todosSliceReducer,
     todo: todoSliceReducer,
     miniTodos: miniTodosSliceReducer,
+    subMiniTodos: subMiniTodosSliceReducer,
   },
   devTools: true,
 });

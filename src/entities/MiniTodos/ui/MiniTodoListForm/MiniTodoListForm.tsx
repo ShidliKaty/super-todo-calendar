@@ -1,44 +1,42 @@
 import { Box } from "@chakra-ui/react";
-import cls from "./MiniTodoListForm.module.scss";
 import { FormEvent, useCallback, useEffect, useRef } from "react";
-import { useAppDispatch } from "../../../../redux/store";
-import { addMiniTodo } from "../../model/services/addMiniTodo";
-import { MiniTodo } from "../../types/miniTodosSchema";
-import { updateMiniTodo } from "../../model/services/updateMiniTodo";
+import cls from "./MiniTodoListForm.module.scss";
 
 interface MiniTodoListFormProps {
   todoName?: string;
   todoId?: string;
-  listId?: string;
   isNew?: boolean;
   isEdit?: boolean;
+  isSub?: boolean;
   onCloseForm: () => void;
+  addNewTodo?: (inputValue: string) => void;
+  updateMiniTodoName?: (inputValue: string) => void;
 }
 export const MiniTodoListForm = (props: MiniTodoListFormProps) => {
-  const { isNew, onCloseForm, listId, isEdit, todoName, todoId } = props;
+  const {
+    isNew,
+    onCloseForm,
+    isEdit,
+    isSub,
+    todoName,
+    addNewTodo,
+    updateMiniTodoName,
+  } = props;
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const dispatch = useAppDispatch();
 
   const addNewMiniTodo = useCallback(() => {
     const inputValue = inputRef.current?.value.trim();
-    if (inputValue && inputValue !== "") {
-      const newTodo: MiniTodo = {
-        id: crypto.randomUUID(),
-        name: inputValue,
-        completed: false,
-        miniListId: listId,
-      };
-      dispatch(addMiniTodo(newTodo));
+    if (addNewTodo && inputValue && inputValue !== "") {
+      addNewTodo(inputValue);
     }
-  }, [dispatch, listId]);
+  }, [addNewTodo]);
 
-  const updateMiniTodoName = useCallback(() => {
+  const updateMiniTodo = useCallback(() => {
     const inputValue = inputRef.current?.value.trim();
-    if (inputValue && todoId) {
-      dispatch(updateMiniTodo({ id: todoId, name: inputValue }));
+    if (updateMiniTodoName && inputValue) {
+      updateMiniTodoName(inputValue);
     }
-  }, [dispatch, todoId]);
+  }, [updateMiniTodoName]);
 
   const handleTodoBlur = useCallback(() => {
     if (isNew) {
@@ -46,10 +44,10 @@ export const MiniTodoListForm = (props: MiniTodoListFormProps) => {
     }
 
     if (isEdit) {
-      updateMiniTodoName();
+      updateMiniTodo();
     }
     onCloseForm();
-  }, [onCloseForm, addNewMiniTodo, isNew, updateMiniTodoName, isEdit]);
+  }, [onCloseForm, addNewMiniTodo, isNew, updateMiniTodo, isEdit]);
 
   useEffect(() => {
     const input = inputRef?.current;
@@ -71,9 +69,10 @@ export const MiniTodoListForm = (props: MiniTodoListFormProps) => {
       display="flex"
       bg="white"
       justifyContent="space-between"
-      p="10px 20px"
+      p={isSub ? "5px 20px" : "10px 20px"}
       borderRadius={10}
       mt="20px"
+      ml={isSub ? "32px" : 0}
     >
       <form className={cls.todoListForm} onSubmit={handleSubmit}>
         <input autoFocus type="text" ref={inputRef} defaultValue={todoName} />

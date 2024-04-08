@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseAPI } from "../../../../api/baseAPI";
 import { MiniTodo } from "../../types/miniTodosSchema";
-import { fetchMiniTodos } from "./fetchMiniTodos";
+import { fetchMiniTodos } from "./fetchMiniTodosByListId";
 
 export const addMiniTodo = createAsyncThunk<MiniTodo, MiniTodo>(
   "miniTodos/addMiniTodo",
@@ -20,7 +20,7 @@ export const addMiniTodo = createAsyncThunk<MiniTodo, MiniTodo>(
       if (!data) {
         throw new Error();
       }
-      dispatch(fetchMiniTodos());
+      dispatch(fetchMiniTodos(miniListId));
 
       return data;
     } catch (e) {

@@ -4,7 +4,7 @@ import { getSidebarLists } from "../../entities/SidebarLists/model/selectors/sid
 import { getCompletedTodos } from "../../entities/Todos/model/selectors/getCompletedTodos";
 import { getTodosIsError } from "../../entities/Todos/model/selectors/todos";
 import { fetchTodos } from "../../entities/Todos/model/services/fetchTodos";
-import { ExpandedList } from "../../entities/Todos/ui/ExpandedList/ExpandedList";
+import { ExpandedTodoList } from "../../entities/Todos/ui/ExpandedTodoList/ExpandedTodoList";
 import { useAppDispatch } from "../../redux/store";
 import { getTodoIsLoading } from "../../entities/Todos/model/selectors/todo";
 
@@ -22,7 +22,7 @@ export const DoneList = memo(() => {
   const doneTodos = useSelector(getCompletedTodos);
 
   return (
-    <ExpandedList
+    <ExpandedTodoList
       lists={lists}
       todos={doneTodos}
       isLoading={isLoading}

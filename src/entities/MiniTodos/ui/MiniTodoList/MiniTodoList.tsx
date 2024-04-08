@@ -1,64 +1,36 @@
 import { List, Text } from "@chakra-ui/react";
-import { useCallback, useMemo, useState } from "react";
-import AddButton from "../../../../components/AddButton/AddButton";
+import { memo } from "react";
 import { MiniTodo } from "../../types/miniTodosSchema";
-import MiniTodoItem from "../MiniTodoItem/MiniTodoItem";
-import { MiniTodoListForm } from "../MiniTodoListForm/MiniTodoListForm";
+import { MiniTodoItem } from "../MiniTodoItem/MiniTodoItem";
+import { useSelector } from "react-redux";
+import {
+  getSubMiniTodos,
+  getSubMiniTodosIsError,
+} from "../../model/selectors/getSubMiniTodos";
 
 interface MiniTodoListProps {
   miniTodos: MiniTodo[];
-  isLoading?: boolean;
-  error?: string;
-  listId?: string;
 }
 
-const MiniTodoList = ({ miniTodos, isLoading, listId }: MiniTodoListProps) => {
-  const [isOpenForm, setIsOpenForm] = useState(false);
-
-  const sortTodosByCompleted = useCallback((todos: MiniTodo[]) => {
-    todos.sort((a, b) => {
-      if (a.completed === b.completed) {
-        return 0;
-      }
-
-      if (!a.completed) {
-        return -1;
-      }
-
-      return 1;
-    });
-
-    return todos;
-  }, []);
-
-  const sortedTodos = useMemo(
-    () => sortTodosByCompleted(miniTodos),
-    [miniTodos, sortTodosByCompleted]
-  );
-
+export const MiniTodoList = memo(({ miniTodos }: MiniTodoListProps) => {
+  const subMiniTodos = useSelector(getSubMiniTodos);
+  const subItemsError = useSelector(getSubMiniTodosIsError);
   return (
-    <>
-      <AddButton secondary onClick={() => setIsOpenForm(true)} />
-
-      {!isLoading && miniTodos.length === 0 ? (
-        <Text mt={5}>Нет записей</Text>
-      ) : null}
-
-      {isOpenForm && (
-        <MiniTodoListForm
-          listId={listId}
-          isNew
-          onCloseForm={() => setIsOpenForm(false)}
-        />
+    <List spacing={3} my="20px">
+      {subItemsError && (
+        <Text color="red.600">
+          Произошла ошибка при загрузке подсписков! Попробуйте перезагрузить
+          страницу
+        </Text>
       )}
+      {miniTodos.map((todo) => {
+        const subTodos = subMiniTodos.filter(
+          (subTodo) => subTodo.miniTodoId === todo.id
+        );
+        const todos = subTodos?.length !== 0 ? subTodos : undefined;
 
-      <List spacing={3} my="20px">
-        {sortedTodos.map((todo) => (
-          <MiniTodoItem key={todo.id} todo={todo} />
-        ))}
-      </List>
-    </>
+        return <MiniTodoItem key={todo.id} miniTodo={todo} subTodos={todos} />;
+      })}
+    </List>
   );
-};
-
-export default MiniTodoList;
+});

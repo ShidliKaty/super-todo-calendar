@@ -239,14 +239,8 @@
       "date": "01.04.2024",
       "completed": false,
       "important": false,
-      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
-    },
-    {
-      "id": "a40da52e-24e3-408b-a23b-7b80c4d5b5c3",
-      "name": "jhjhj",
-      "date": "01.04.2024",
-      "completed": false,
-      "important": false
+      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b",
+      "completedDate": "04.04.2024"
     }
   ],
   "miniTodos": [
@@ -294,15 +288,70 @@
     },
     {
       "id": "fbb91b59-2786-4f0e-95c4-7b2795453195",
-      "name": "Дар Набоков",
+      "name": "Набоков",
       "completed": false,
       "miniListId": "0d63152c-bd5e-46f9-a08f-52ef7736035c"
     },
     {
-      "id": "d44af93b-fb72-4e3b-a577-3813751145c8",
-      "name": "Пнин Набоков",
+      "id": "32d75450-c8b1-4bd3-ac4a-c2a15e345309",
+      "name": "jhkjkj",
       "completed": false,
-      "miniListId": "0d63152c-bd5e-46f9-a08f-52ef7736035c"
+      "miniListId": "0e6e25ae-a790-4046-bed4-243f52b42f60"
+    },
+    {
+      "id": "10ab2196-f8cd-45b0-b86a-d095cc835f4e",
+      "name": "ghhhj",
+      "completed": false,
+      "miniListId": "0e6e25ae-a790-4046-bed4-243f52b42f60"
+    },
+    {
+      "id": "3bb9d064-6e8e-4277-abc2-5d85056f0ac2",
+      "name": "gjgj",
+      "completed": true,
+      "miniListId": "0e6e25ae-a790-4046-bed4-243f52b42f60"
+    },
+    {
+      "id": "e1da56f3-1996-4b5c-b0db-633a4060392c",
+      "name": "rdtfh",
+      "completed": true,
+      "miniListId": "0e6e25ae-a790-4046-bed4-243f52b42f60"
+    }
+  ],
+  "subMiniTodos": [
+    {
+      "id": "8fb25396-53c3-4a81-86be-0c82ce2d72e0",
+      "name": "Дар",
+      "completed": false,
+      "miniListId": "0d63152c-bd5e-46f9-a08f-52ef7736035c",
+      "miniTodoId": "fbb91b59-2786-4f0e-95c4-7b2795453195"
+    },
+    {
+      "id": "8b9fbe93-f000-4592-9ebd-9e493ff705cf",
+      "name": "Пнин",
+      "completed": false,
+      "miniListId": "0d63152c-bd5e-46f9-a08f-52ef7736035c",
+      "miniTodoId": "fbb91b59-2786-4f0e-95c4-7b2795453195"
+    },
+    {
+      "id": "862d4d3c-8302-4383-8e9e-2cd1185bbb8d",
+      "name": "Подвиг",
+      "completed": false,
+      "miniListId": "0d63152c-bd5e-46f9-a08f-52ef7736035c",
+      "miniTodoId": "fbb91b59-2786-4f0e-95c4-7b2795453195"
+    },
+    {
+      "id": "e253c171-5b07-4897-bb8a-24fad7834c75",
+      "name": "Камера Обскура",
+      "completed": true,
+      "miniListId": "0d63152c-bd5e-46f9-a08f-52ef7736035c",
+      "miniTodoId": "fbb91b59-2786-4f0e-95c4-7b2795453195"
+    },
+    {
+      "id": "1786d4d4-b79e-42cc-8980-90f6c2ca6807",
+      "name": "jhgjh",
+      "completed": false,
+      "miniListId": "073544d0-37b1-49be-93bf-3e93f734235b",
+      "miniTodoId": "dc727a4b-dcff-42a4-b08b-f7b1ecd25b9d"
     }
   ]
 }

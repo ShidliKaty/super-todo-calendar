@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit/react";
 import { MiniTodoListsState } from "../../types/miniTodosSchema";
-import { fetchMiniTodos } from "../services/fetchMiniTodos";
+import { fetchMiniTodos } from "../services/fetchMiniTodosByListId";
 
 const initialState: MiniTodoListsState = {
   miniTodos: [],
