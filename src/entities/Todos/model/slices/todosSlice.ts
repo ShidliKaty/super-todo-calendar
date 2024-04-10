@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit/react";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit/react";
 import { TodoListsState } from "../../types/todoTypes";
 import { fetchTodos } from "../services/fetchTodos";
 
@@ -6,12 +6,17 @@ const initialState: TodoListsState = {
   todos: [],
   isLoading: false,
   error: undefined,
+  search: "",
 };
 
 export const todosSlice = createSlice({
   name: "todos",
   initialState,
-  reducers: {},
+  reducers: {
+    setSearch: (state, action: PayloadAction<string>) => {
+      state.search = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTodos.pending, (state) => {
@@ -29,4 +34,5 @@ export const todosSlice = createSlice({
   },
 });
 
-export const { reducer: todosSliceReducer } = todosSlice;
+export const { reducer: todosSliceReducer, actions: todosSliceActions } =
+  todosSlice;

@@ -13,6 +13,11 @@ import { subMiniTodosSliceReducer } from "../entities/MiniTodos/model/slices/sub
 import { SubMiniTodosState } from "../entities/MiniTodos/types/subMiniTodosSchema";
 // import { rtkApi } from "../api/rtkApi";
 
+export interface ThunkConfig<T> {
+  rejectValue: T;
+  state: StateSchema;
+}
+
 export interface StateSchema {
   sidebarLists: SidebarListsState;
   miniLists: SidebarListsState;

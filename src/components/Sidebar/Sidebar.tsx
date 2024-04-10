@@ -1,15 +1,7 @@
-import {
-  CheckCircleIcon,
-  SearchIcon,
-  StarIcon,
-  SunIcon,
-} from "@chakra-ui/icons";
+import { CheckCircleIcon, StarIcon, SunIcon } from "@chakra-ui/icons";
 import {
   Divider,
   HStack,
-  Input,
-  InputGroup,
-  InputLeftElement,
   List,
   ListIcon,
   ListItem,
@@ -18,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
+import { Search } from "../../entities/Search/Search";
 import { MiniLists } from "../../entities/SidebarLists/ui/MiniLists/MiniLists";
 import { SidebarLists } from "../../entities/SidebarLists/ui/SidebarLists/SidebarLists";
 import { classNames } from "../../utils/classNames";
@@ -32,22 +25,7 @@ const Sidebar = (props: SidebarProps) => {
   return (
     <div className={classNames(cls.Sidebar, {}, [className])}>
       <VStack spacing={5} align="flex-start">
-        <InputGroup>
-          <InputLeftElement pointerEvents="none">
-            <SearchIcon color="gray.300" />
-          </InputLeftElement>
-          <Input
-            variant="outline"
-            borderColor="purple.300"
-            backgroundColor="white"
-            borderRadius="50"
-            type="search"
-            color="black"
-            placeholder="Поиск"
-            focusBorderColor="purple.600"
-            _hover={{ borderColor: "purple.300" }}
-          />
-        </InputGroup>
+        <Search />
         <List spacing={5}>
           <ListItem
             color="blackAlpha.600"

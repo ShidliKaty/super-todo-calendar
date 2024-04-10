@@ -12,4 +12,5 @@ export interface TodoListsState {
   todos: Todo[];
   isLoading?: boolean;
   error?: string;
+  search?: string;
 }
