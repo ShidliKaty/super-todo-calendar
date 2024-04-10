@@ -35,7 +35,10 @@ export const ExpandedTodoList = (props: ExpandedListProps) => {
         </Text>
       )}
 
-      {/* <TodoList todos={myListTodosMap["0"] || []} isLoading={isLoading} /> */}
+      {!isLoading && todos.length === 0 ? (
+        <Text mt={5}>Нет записей</Text>
+      ) : null}
+
       {listsPlusOne.map((list) => {
         if (myListTodosMap[list.id] && myListTodosMap[list.id].length !== 0) {
           return (

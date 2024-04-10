@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./pages/Layout";
 import ErrorPage from "./pages/ErrorPage";
-import ImportantPage from "./pages/ImportantPage/ImportantPage";
-import MyPlansMain from "./pages/MyPlansMain/MyPlansMain";
-import DonePage from "./pages/DonePage/DonePage";
-import MyListPage from "./pages/MyListPage/MyListPage";
-import MyMiniListPage from "./pages/MyMiniListPage/MyMiniListPage";
+
+import { MyListPage } from "./pages/MyListPage";
+import { DonePage } from "./pages/DonePage";
+import { ImportantPage } from "./pages/ImportantPage";
+import { MyPlansMain } from "./pages/MyPlansMain";
+import { MyMiniListPage } from "./pages/MyMiniListPage";
 
 export const router = createBrowserRouter([
   {
