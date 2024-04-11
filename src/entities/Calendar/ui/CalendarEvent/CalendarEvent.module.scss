@@ -1,0 +1,35 @@
+.calendarEvent {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+  background: none;
+  width: 100%;
+  border: none;
+  font-size: 1rem;
+  padding: 0;
+}
+.allDayEvent {
+  color: white;
+  padding: 0.15rem 0.25rem;
+  border-radius: 0.25rem;
+  background-color: #ed64a6;
+}
+
+.allDayEvent .eventName {
+  overflow: hidden;
+}
+
+.event > * {
+  margin-right: 0.5rem;
+}
+
+.event > :last-child {
+  margin-right: 0;
+}
+
+.eventTime {
+  color: #777;
+}

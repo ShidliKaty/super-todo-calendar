@@ -1,0 +1,74 @@
+.calendarDay {
+  background-color: white;
+  padding: 5px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.dayHeader {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.weekName {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  color: #777;
+}
+
+.dayNumber {
+  font-size: 13px;
+  width: 23px;
+  height: 23px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.today {
+  background-color: #805ad5;
+  border-radius: 50%;
+  color: white;
+}
+
+.calendarDay:hover .addEventBtn,
+.addEventBtn:focus {
+  opacity: 1;
+}
+
+.addEventBtn {
+  opacity: 0;
+  position: absolute;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  width: 23px;
+  height: 23px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+  top: 0;
+  font-size: 15px;
+  cursor: pointer;
+  color: white;
+  background-color: #fed7e2;
+}
+
+.addEventBtn:hover {
+  color: white;
+  background-color: #ed64a6;
+}
+
+.events {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+  overflow: hidden;
+}
