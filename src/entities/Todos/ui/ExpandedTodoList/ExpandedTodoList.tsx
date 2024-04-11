@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import ExpandedList from "../../../../components/ExpandedList/ExpandedList";
 import { todosMap } from "../../../../utils/todosMap";
 import { useExpandedLists } from "../../../../utils/useExpandedLists";
-import { SidebarList } from "../../../SidebarLists/types/sidebarListTypes";
+import { SidebarList } from "../../../Sidebar/SidebarLists/types/sidebarListTypes";
 import { Todo } from "../../types/todoTypes";
 import TodoList from "../TodoList/TodoList";
 

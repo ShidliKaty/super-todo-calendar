@@ -8,7 +8,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import { getSidebarLists } from "../../../../SidebarLists/model/selectors/sidebarLists";
+import { getSidebarLists } from "../../../../Sidebar/SidebarLists/model/selectors/sidebarLists";
 import { useAppDispatch } from "../../../../../redux/store";
 import { addNewTodo } from "../../../model/services/addNewTodo";
 import { getTodoForm } from "../../../model/selectors/todo";

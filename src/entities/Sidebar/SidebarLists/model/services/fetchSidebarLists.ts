@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { SidebarList } from "../../types/sidebarListTypes";
-import { baseAPI } from "../../../../api/baseAPI";
+import { baseAPI } from "../../../../../api/baseAPI";
 
 export const fetchSidebarLists = createAsyncThunk<SidebarList[]>(
   "lists/fetchSidebarLists",

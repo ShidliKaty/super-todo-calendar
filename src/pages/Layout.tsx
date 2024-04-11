@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import Sidebar from "../components/Sidebar/Sidebar";
 import { Outlet } from "react-router-dom";
+import { Sidebar } from "../entities/Sidebar";
 
 const Layout = () => {
   return (

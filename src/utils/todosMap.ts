@@ -1,4 +1,4 @@
-import { SidebarList } from "../entities/SidebarLists/types/sidebarListTypes";
+import { SidebarList } from "../entities/Sidebar/SidebarLists/types/sidebarListTypes";
 import { Todo } from "../entities/Todos/types/todoTypes";
 
 type todosMapProps = {

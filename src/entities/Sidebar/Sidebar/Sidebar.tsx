@@ -1,4 +1,9 @@
-import { CheckCircleIcon, StarIcon, SunIcon } from "@chakra-ui/icons";
+import {
+  CalendarIcon,
+  CheckCircleIcon,
+  StarIcon,
+  SunIcon,
+} from "@chakra-ui/icons";
 import {
   Divider,
   HStack,
@@ -10,23 +15,35 @@ import {
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
-import { Search } from "../../entities/Search/Search";
-import { MiniLists } from "../../entities/SidebarLists/ui/MiniLists/MiniLists";
-import { SidebarLists } from "../../entities/SidebarLists/ui/SidebarLists/SidebarLists";
-import { classNames } from "../../utils/classNames";
+import { Search } from "../Search/Search";
+import { MiniLists } from "../SidebarLists/ui/MiniLists/MiniLists";
+import { SidebarLists } from "../SidebarLists/ui/SidebarLists/SidebarLists";
+import { classNames } from "../../../utils/classNames";
 import cls from "./Sidebar.module.scss";
 
 interface SidebarProps {
   className?: string;
 }
 
-const Sidebar = (props: SidebarProps) => {
+export const Sidebar = (props: SidebarProps) => {
   const { className } = props;
   return (
     <div className={classNames(cls.Sidebar, {}, [className])}>
       <VStack spacing={5} align="flex-start">
         <Search />
         <List spacing={5}>
+          <ListItem
+            color="blackAlpha.600"
+            _hover={{ color: "#6B46C1" }}
+            cursor="pointer"
+          >
+            <Link to="/calendar">
+              <HStack spacing={0.5} paddingRight="60px">
+                <ListIcon as={CalendarIcon} />
+                <Text>Календарь</Text>
+              </HStack>
+            </Link>
+          </ListItem>
           <ListItem
             color="blackAlpha.600"
             _hover={{ color: "#6B46C1" }}
@@ -71,5 +88,3 @@ const Sidebar = (props: SidebarProps) => {
     </div>
   );
 };
-
-export default Sidebar;

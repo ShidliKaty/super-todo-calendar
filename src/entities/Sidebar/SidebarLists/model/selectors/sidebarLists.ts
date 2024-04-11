@@ -1,4 +1,4 @@
-import { StateSchema } from "../../../../redux/store";
+import { StateSchema } from "../../../../../redux/store";
 
 export const getSidebarLists = (state: StateSchema) =>
   state.sidebarLists?.lists;

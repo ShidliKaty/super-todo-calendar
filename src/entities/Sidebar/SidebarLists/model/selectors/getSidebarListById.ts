@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit/react";
-import { StateSchema } from "../../../../redux/store";
+import { StateSchema } from "../../../../../redux/store";
 import { SidebarList } from "../../types/sidebarListTypes";
 
 export const makeSelectListById = (

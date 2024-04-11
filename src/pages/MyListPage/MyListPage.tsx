@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import PageContainer from "../../components/PageContainer/PageContainer";
-import { makeSelectListById } from "../../entities/SidebarLists/model/selectors/getSidebarListById";
-import { getSidebarLists } from "../../entities/SidebarLists/model/selectors/sidebarLists";
+import { makeSelectListById } from "../../entities/Sidebar/SidebarLists/model/selectors/getSidebarListById";
+import { getSidebarLists } from "../../entities/Sidebar/SidebarLists/model/selectors/sidebarLists";
 import { StateSchema } from "../../redux/store";
 import { MyList } from "./MyList";
 

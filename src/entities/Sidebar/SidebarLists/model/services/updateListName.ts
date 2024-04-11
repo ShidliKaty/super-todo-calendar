@@ -1,23 +1,23 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { SidebarList } from "../../types/sidebarListTypes";
-import { baseAPI } from "../../../../api/baseAPI";
-import { fetchMiniLists } from "./fetchMiniLists";
+import { baseAPI } from "../../../../../api/baseAPI";
+import { fetchSidebarLists } from "./fetchSidebarLists";
 
-export const updateMiniList = createAsyncThunk<SidebarList[], SidebarList>(
-  "miniLists/updateMiniList",
+export const updateListName = createAsyncThunk<SidebarList[], SidebarList>(
+  "lists/updateListName",
   async (
     { id, name }: { id: string; name: string },
     { dispatch, rejectWithValue }
   ) => {
     try {
-      const { data } = await baseAPI.patch<SidebarList[]>(`miniLists/${id}`, {
+      const { data } = await baseAPI.patch<SidebarList[]>(`lists/${id}`, {
         name,
       });
 
       if (!data) {
         throw new Error();
       }
-      dispatch(fetchMiniLists());
+      dispatch(fetchSidebarLists());
       return data;
     } catch (e) {
       console.log(e);

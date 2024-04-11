@@ -1,12 +1,12 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import { getTodosSearch } from "../Todos/model/selectors/todos";
+import { getTodosSearch } from "../../Todos/model/selectors/todos";
 import { ChangeEvent, useCallback } from "react";
-import { useDebounce } from "../../utils/useDebounce";
-import { useAppDispatch } from "../../redux/store";
-import { todosSliceActions } from "../Todos/model/slices/todosSlice";
-import { fetchTodos } from "../Todos/model/services/fetchTodos";
+import { useDebounce } from "../../../utils/useDebounce";
+import { useAppDispatch } from "../../../redux/store";
+import { todosSliceActions } from "../../Todos/model/slices/todosSlice";
+import { fetchTodos } from "../../Todos/model/services/fetchTodos";
 
 export const Search = () => {
   const dispatch = useAppDispatch();

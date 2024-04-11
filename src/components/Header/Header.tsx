@@ -9,11 +9,11 @@ import cls from "./Header.module.scss";
 interface HeaderProps {
   className?: string;
   name?: string;
-  isMini?: boolean;
+  noBtn?: boolean;
 }
 
 const Header = (props: HeaderProps) => {
-  const { className, name = "Мои планы", isMini } = props;
+  const { className, name = "Мои планы", noBtn } = props;
 
   const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
 
@@ -35,7 +35,7 @@ const Header = (props: HeaderProps) => {
           </Heading>
           <Text color="blackAlpha.600">Сегодня {formattedDate}</Text>
         </VStack>
-        {!isMini && <AddButton main onClick={() => setIsTodoModalOpen(true)} />}
+        {!noBtn && <AddButton main onClick={() => setIsTodoModalOpen(true)} />}
         <TodoModal
           isOpen={isTodoModalOpen}
           onClose={() => setIsTodoModalOpen(false)}

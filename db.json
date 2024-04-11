@@ -154,9 +154,10 @@
       "id": "a659aca2-5ffc-49d2-9ce8-f5676ac43be8",
       "name": "реализовать поиск",
       "date": "18.03.2024",
-      "completed": false,
+      "completed": true,
       "important": false,
-      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
+      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b",
+      "completedDate": "11.04.2024"
     },
     {
       "id": "a8246ad3-ef79-4d14-a265-d8a387ff01c0",
@@ -296,6 +297,12 @@
       "name": "Набоков",
       "completed": false,
       "miniListId": "0d63152c-bd5e-46f9-a08f-52ef7736035c"
+    },
+    {
+      "id": "c9e1d3c9-dace-469e-8a13-bc250cf560d5",
+      "name": "Улицкая",
+      "completed": false,
+      "miniListId": "0d63152c-bd5e-46f9-a08f-52ef7736035c"
     }
   ],
   "subMiniTodos": [
@@ -326,6 +333,13 @@
       "completed": true,
       "miniListId": "0d63152c-bd5e-46f9-a08f-52ef7736035c",
       "miniTodoId": "fbb91b59-2786-4f0e-95c4-7b2795453195"
+    },
+    {
+      "id": "9b78d8b8-d558-4832-a188-571e7b16a860",
+      "name": "Зеленый шатер",
+      "completed": true,
+      "miniListId": "0d63152c-bd5e-46f9-a08f-52ef7736035c",
+      "miniTodoId": "c9e1d3c9-dace-469e-8a13-bc250cf560d5"
     }
   ]
 }

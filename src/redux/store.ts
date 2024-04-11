@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { SidebarListsState } from "../entities/SidebarLists/types/sidebarListTypes";
-import { sidebarListsSliceReducer } from "../entities/SidebarLists/model/slices/sidebarListsSlice";
+import { SidebarListsState } from "../entities/Sidebar/SidebarLists/types/sidebarListTypes";
+import { sidebarListsSliceReducer } from "../entities/Sidebar/SidebarLists/model/slices/sidebarListsSlice";
 import { useDispatch } from "react-redux";
 import { TodoListsState } from "../entities/Todos/types/todoTypes";
 import { todosSliceReducer } from "../entities/Todos/model/slices/todosSlice";
 import { todoSliceReducer } from "../entities/Todos/model/slices/todoSlice";
 import { TodoState } from "../entities/Todos/types/todoSchema";
-import { miniListsSliceReducer } from "../entities/SidebarLists/model/slices/miniListsSlice";
+import { miniListsSliceReducer } from "../entities/Sidebar/SidebarLists/model/slices/miniListsSlice";
 import { MiniTodoListsState } from "../entities/MiniTodos/types/miniTodosSchema";
 import { miniTodosSliceReducer } from "../entities/MiniTodos/model/slices/miniTodosSlice";
 import { subMiniTodosSliceReducer } from "../entities/MiniTodos/model/slices/subMiniTodosSlice";

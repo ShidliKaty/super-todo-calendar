@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SidebarList } from "../entities/SidebarLists/types/sidebarListTypes";
+import { SidebarList } from "../entities/Sidebar/SidebarLists/types/sidebarListTypes";
 
 type ExpandedLists = {
   [listId: string]: boolean;

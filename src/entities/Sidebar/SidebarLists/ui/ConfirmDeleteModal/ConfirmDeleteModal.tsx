@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, Text, VStack } from "@chakra-ui/react";
-import Modal, { ModalProps } from "../../../../components/Modal/Modal";
-import { useAppDispatch } from "../../../../redux/store";
+import Modal, { ModalProps } from "../../../../../components/Modal/Modal";
+import { useAppDispatch } from "../../../../../redux/store";
 import { deleteSidebarList } from "../../model/services/deleteSidebarList";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteMiniList } from "../../model/services/deleteMiniList";

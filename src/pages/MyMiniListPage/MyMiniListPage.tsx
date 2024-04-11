@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import PageContainer from "../../components/PageContainer/PageContainer";
 import { MiniTodoListGroup } from "../../entities/MiniTodos/ui/MiniTodoListGroup/MiniTodoListGroup";
-import { makeSelectListById } from "../../entities/SidebarLists/model/selectors/getSidebarListById";
-import { getMiniLists } from "../../entities/SidebarLists/model/selectors/miniLists";
+import { makeSelectListById } from "../../entities/Sidebar/SidebarLists/model/selectors/getSidebarListById";
+import { getMiniLists } from "../../entities/Sidebar/SidebarLists/model/selectors/miniLists";
 import { StateSchema } from "../../redux/store";
 
 const MyMiniListPage = () => {
@@ -16,7 +16,7 @@ const MyMiniListPage = () => {
 
   return (
     <PageContainer>
-      <Header name={list?.name} isMini />
+      <Header name={list?.name} noBtn />
       <MiniTodoListGroup id={id} />
     </PageContainer>
   );

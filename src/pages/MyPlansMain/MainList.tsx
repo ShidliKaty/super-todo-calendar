@@ -1,6 +1,6 @@
 import { memo, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { getSidebarLists } from "../../entities/SidebarLists/model/selectors/sidebarLists";
+import { getSidebarLists } from "../../entities/Sidebar/SidebarLists/model/selectors/sidebarLists";
 import { getIncompletedTodos } from "../../entities/Todos/model/selectors/getIncompletedTodos";
 import {
   getTodosIsError,

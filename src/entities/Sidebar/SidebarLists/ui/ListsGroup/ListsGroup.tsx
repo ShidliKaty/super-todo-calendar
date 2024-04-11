@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 import { memo, useMemo, useState } from "react";
-import AddButton from "../../../../components/AddButton/AddButton";
+import AddButton from "../../../../../components/AddButton/AddButton";
 import { SidebarList } from "../../types/sidebarListTypes";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 import ListItemForm from "../ListsItem/ListItemForm";
