@@ -146,7 +146,6 @@ const TodoItem = ({ todo }: TodoItemProps) => {
         isOpen={isEditing}
         onClose={() => setIsEditing(false)}
         editingId={todo.id}
-        editing={isEditing}
       />
     </>
   );

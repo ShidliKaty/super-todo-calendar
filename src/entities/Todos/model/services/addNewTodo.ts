@@ -2,11 +2,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseAPI } from "../../../../api/baseAPI";
 import { Todo } from "../../types/todoTypes";
 import { fetchTodos } from "./fetchTodos";
+import { ThunkConfig } from "../../../../redux/store";
 
-export const addNewTodo = createAsyncThunk<Todo, Todo>(
+export const addNewTodo = createAsyncThunk<Todo, Todo, ThunkConfig<string>>(
   "todos/addNewTodo",
   async (
-    { id, name, note, date, completed, important, listId },
+    { id, name, note, date, completed, important, listId, todoDate, startTime },
     { dispatch, rejectWithValue }
   ) => {
     try {
@@ -18,6 +19,8 @@ export const addNewTodo = createAsyncThunk<Todo, Todo>(
         completed,
         important,
         listId,
+        todoDate,
+        startTime,
       });
 
       if (!data) {

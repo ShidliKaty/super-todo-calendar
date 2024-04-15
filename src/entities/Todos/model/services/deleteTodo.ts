@@ -2,8 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseAPI } from "../../../../api/baseAPI";
 import { Todo } from "../../types/todoTypes";
 import { fetchTodos } from "./fetchTodos";
+import { ThunkConfig } from "../../../../redux/store";
 
-export const deleteTodo = createAsyncThunk<Todo[], string>(
+export const deleteTodo = createAsyncThunk<Todo[], string, ThunkConfig<string>>(
   "todos/deleteTodoLists",
   async (id, { dispatch, rejectWithValue }) => {
     try {

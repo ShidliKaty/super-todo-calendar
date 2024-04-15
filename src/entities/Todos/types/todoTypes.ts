@@ -7,6 +7,8 @@ export type Todo = {
   completedDate?: string;
   important?: boolean;
   listId?: string;
+  todoDate?: string;
+  startTime?: string;
 };
 export interface TodoListsState {
   todos: Todo[];

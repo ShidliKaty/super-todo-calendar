@@ -1,7 +1,11 @@
 import {
   Button,
   ButtonGroup,
+  Checkbox,
+  HStack,
   Input,
+  InputGroup,
+  InputLeftAddon,
   Select,
   Text,
   Textarea,
@@ -26,21 +30,20 @@ import { useParams } from "react-router-dom";
 
 interface TodoFormProps {
   onClose: () => void;
-  editing?: boolean;
   editingId?: string;
 }
 
 const TodoForm = (props: TodoFormProps) => {
-  const { onClose, editing, editingId } = props;
-
-  const date = new Date();
-  const lists = useSelector(getSidebarLists);
+  const { onClose, editingId } = props;
   const dispatch = useAppDispatch();
-
+  const date = new Date();
   const { id: paramsId } = useParams();
 
+  const lists = useSelector(getSidebarLists);
+  const todoForm = useSelector(getTodoForm);
+
   useEffect(() => {
-    if (editing && editingId) {
+    if (editingId) {
       dispatch(fetchTodoById(editingId));
     }
     if (paramsId) {
@@ -49,9 +52,7 @@ const TodoForm = (props: TodoFormProps) => {
     return () => {
       dispatch(clearTodoForm());
     };
-  }, [editing, editingId, dispatch, paramsId]);
-
-  const todoForm = useSelector(getTodoForm);
+  }, [editingId, dispatch, paramsId]);
 
   const onAddTodo = () => {
     const newId = crypto.randomUUID();
@@ -75,7 +76,7 @@ const TodoForm = (props: TodoFormProps) => {
   const onSaveTodo = () => {
     if (!todoForm || todoForm.name === "") return;
 
-    if (editing && editingId) {
+    if (editingId) {
       dispatch(updateTodo({ todo: todoForm, id: editingId }));
     }
 
@@ -84,11 +85,11 @@ const TodoForm = (props: TodoFormProps) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    editing ? onSaveTodo() : onAddTodo();
+    editingId ? onSaveTodo() : onAddTodo();
   };
 
   const onCancel = () => {
-    if (editing) {
+    if (editingId) {
       dispatch(cancelEdit());
     }
     onClose();
@@ -106,10 +107,19 @@ const TodoForm = (props: TodoFormProps) => {
     dispatch(updateTodoForm({ listId: e.target.value || paramsId }));
   };
 
+  const onChangeDate = (e: ChangeEvent<HTMLInputElement>) => {
+    const date = new Date(e.target.value).toISOString();
+    dispatch(updateTodoForm({ todoDate: date || "" }));
+  };
+
+  const onChangeTime = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(updateTodoForm({ startTime: e.target.value || "" }));
+  };
+
   return (
     <VStack spacing="15px">
       <Text as="b">
-        {editing ? "Редактировать запись" : "Добавить новую запись"}
+        {editingId ? "Редактировать запись" : "Добавить новую запись"}
       </Text>
       <form onSubmit={handleSubmit}>
         <VStack w="500px">
@@ -127,6 +137,29 @@ const TodoForm = (props: TodoFormProps) => {
             value={todoForm?.note || ""}
             onChange={onChangeNote}
           />
+          <InputGroup>
+            <InputLeftAddon>Дата</InputLeftAddon>
+            <Input
+              isRequired
+              focusBorderColor="purple.600"
+              type="date"
+              onChange={onChangeDate}
+            />
+          </InputGroup>
+          <HStack w="100%">
+            <Checkbox colorScheme="purple" w="150px">
+              <Text>Весь день</Text>
+            </Checkbox>
+            <InputGroup>
+              <InputLeftAddon>Время</InputLeftAddon>
+              <Input
+                isRequired
+                focusBorderColor="purple.600"
+                type="time"
+                onChange={onChangeTime}
+              />
+            </InputGroup>
+          </HStack>
           <Select
             placeholder="Выберите список"
             focusBorderColor="purple.600"
@@ -145,7 +178,7 @@ const TodoForm = (props: TodoFormProps) => {
             </Button>
 
             <Button onClick={handleSubmit}>
-              {editing ? "Сохранить" : "Добавить"}
+              {editingId ? "Сохранить" : "Добавить"}
             </Button>
           </ButtonGroup>
         </VStack>
