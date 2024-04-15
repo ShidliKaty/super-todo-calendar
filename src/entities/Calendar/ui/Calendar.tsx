@@ -1,5 +1,4 @@
-import { useMemo, useState } from "react";
-import { classNames } from "../../../utils/classNames";
+import { useEffect, useMemo, useState } from "react";
 import cls from "./Calendar.module.scss";
 import { CalendarDay } from "./CalendarDay/CalendarDay";
 import {
@@ -7,6 +6,7 @@ import {
   eachDayOfInterval,
   endOfMonth,
   endOfWeek,
+  isSameDay,
   startOfMonth,
   startOfWeek,
   subMonths,
@@ -14,13 +14,23 @@ import {
 import { Button, ButtonGroup, HStack, Text } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { formatDate } from "../../../utils/formatDate";
+import { useAppDispatch } from "../../../redux/store";
+import { useSelector } from "react-redux";
+import { fetchTodos, getTodos } from "../../Todos";
 
-interface CalendarProps {
-  className?: string;
-}
+export const Calendar = () => {
+  const dispatch = useAppDispatch();
 
-export const Calendar = (props: CalendarProps) => {
-  const { className } = props;
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, [dispatch]);
+
+  const todos = useSelector(getTodos);
+
+  const calendarTodos = useMemo(() => {
+    return todos.filter((todo) => todo.todoDate);
+  }, [todos]);
+
   const [selectedMonth, setSelectedMonth] = useState(new Date());
 
   const calendarDays = useMemo(() => {
@@ -39,7 +49,7 @@ export const Calendar = (props: CalendarProps) => {
   }, [selectedMonth]);
 
   return (
-    <div className={classNames(cls.calendar, {}, [className])}>
+    <div className={cls.calendar}>
       <HStack justify="flex-start" alignItems="center">
         <ButtonGroup
           colorScheme="purple"
@@ -70,6 +80,9 @@ export const Calendar = (props: CalendarProps) => {
             day={day}
             showWeekName={i < 7}
             selectedMonth={selectedMonth}
+            events={calendarTodos.filter((event) =>
+              isSameDay(day, new Date(event.todoDate!))
+            )}
           />
         ))}
       </div>

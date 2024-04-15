@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit/react";
 import { TodoState } from "../../types/todoSchema";
-import { fetchTodoById } from "../services/fetchTodoById";
 import { Todo } from "../../types/todoTypes";
 
 const initialState: TodoState = {
@@ -25,24 +24,6 @@ export const todoSlice = createSlice({
     cancelEdit: (state) => {
       state.data = undefined;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchTodoById.pending, (state) => {
-        state.error = undefined;
-        state.isLoading = true;
-      })
-      .addCase(
-        fetchTodoById.fulfilled,
-        (state, action: PayloadAction<Todo>) => {
-          state.isLoading = false;
-          state.data = action.payload;
-        }
-      )
-      .addCase(fetchTodoById.rejected, (state) => {
-        state.isLoading = false;
-        state.error = "error";
-      });
   },
 });
 

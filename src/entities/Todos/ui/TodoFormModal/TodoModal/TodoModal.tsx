@@ -1,18 +1,22 @@
+import { Todo } from "../../..";
 import Modal, { ModalProps } from "../../../../../components/Modal/Modal";
-import TodoForm from "../TodoForm/TodoForm";
+import { TodoForm } from "../TodoForm/TodoForm";
 
 type TodoModalProps = {
-  editingId?: string;
+  todo?: Todo;
+  completeDate?: Date;
 } & Omit<ModalProps, "children">;
 
-const TodoModal = (props: TodoModalProps) => {
-  const { editingId, ...modalProps } = props;
+export const TodoModal = (props: TodoModalProps) => {
+  const { todo, completeDate, ...modalProps } = props;
 
   return (
     <Modal {...modalProps}>
-      <TodoForm onClose={modalProps.onClose} editingId={editingId} />
+      <TodoForm
+        onClose={modalProps.onClose}
+        todo={todo}
+        completeDate={completeDate}
+      />
     </Modal>
   );
 };
-
-export default TodoModal;

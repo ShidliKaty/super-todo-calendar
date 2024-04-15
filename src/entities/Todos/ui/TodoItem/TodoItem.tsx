@@ -14,13 +14,14 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 import { Todo } from "../../types/todoTypes";
 import { useAppDispatch } from "../../../../redux/store";
 import { deleteTodo } from "../../model/services/deleteTodo";
-import TodoModal from "../TodoFormModal/TodoModal/TodoModal";
+
 import { ChangeEvent, useCallback, useState } from "react";
 import { updateTodoImportance } from "../../model/services/updateTodoImportance";
 import { fetchTodos } from "../../model/services/fetchTodos";
 import { useLocation } from "react-router-dom";
 import { updateTodoCompleted } from "../../model/services/updateTodoCompleted";
 import { formatDate } from "../../../../utils/formatDate";
+import { TodoModal } from "../..";
 
 interface TodoItemProps {
   todo: Todo;
@@ -145,7 +146,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
       <TodoModal
         isOpen={isEditing}
         onClose={() => setIsEditing(false)}
-        editingId={todo.id}
+        todo={todo}
       />
     </>
   );

@@ -1,18 +1,45 @@
-import { classNames } from "../../../../utils/classNames";
+import { parse } from "date-fns";
+import { Mods, classNames } from "../../../../utils/classNames";
+import { formatDate } from "../../../../utils/formatDate";
+import { Todo, TodoModal } from "../../../Todos";
 import cls from "./CalendarEvent.module.scss";
+import { useState } from "react";
 
 interface CalendarEventProps {
-  className?: string;
+  event: Todo;
 }
 
 export const CalendarEvent = (props: CalendarEventProps) => {
-  const { className } = props;
-  const allDay = true;
+  const { event } = props;
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const mods: Mods = {
+    [cls.allDayEvent]: !event.startTime,
+  };
+
   return (
-    <div
-      className={classNames(cls.calendarEvent, {}, [allDay && cls.allDayEvent])}
-    >
-      <div className={cls.eventName}>Event Name</div>
-    </div>
+    <>
+      <button
+        className={classNames(cls.calendarEvent, mods, [])}
+        onClick={() => setIsEditModalOpen(true)}
+      >
+        <div className={cls.eventTime}>
+          {event.startTime &&
+            event.todoDate &&
+            formatDate(
+              parse(event.startTime, "HH:mm", new Date(event.todoDate)),
+              {
+                timeStyle: "short",
+              }
+            )}
+        </div>
+        <div className={cls.eventName}>{event.name}</div>
+      </button>
+      <TodoModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        todo={event}
+      />
+    </>
   );
 };

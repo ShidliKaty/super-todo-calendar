@@ -1,10 +1,10 @@
 import { HStack, Heading, Text, VStack } from "@chakra-ui/react";
 import { useState } from "react";
-import TodoModal from "../../entities/Todos/ui/TodoFormModal/TodoModal/TodoModal";
 import { classNames } from "../../utils/classNames";
 import { formatDate } from "../../utils/formatDate";
 import AddButton from "../AddButton/AddButton";
 import cls from "./Header.module.scss";
+import { TodoModal } from "../../entities/Todos";
 
 interface HeaderProps {
   className?: string;

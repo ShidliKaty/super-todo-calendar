@@ -7,8 +7,8 @@ import {
   getTodosIsLoading,
 } from "../../entities/Todos/model/selectors/todos";
 import { fetchTodos } from "../../entities/Todos/model/services/fetchTodos";
-import { ExpandedTodoList } from "../../entities/Todos/ui/ExpandedTodoList/ExpandedTodoList";
 import { useAppDispatch } from "../../redux/store";
+import { ExpandedTodoList } from "../../entities/Todos";
 
 export const DoneList = memo(() => {
   const dispatch = useAppDispatch();

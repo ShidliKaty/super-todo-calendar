@@ -1,8 +1,6 @@
 import {
   Button,
   ButtonGroup,
-  Checkbox,
-  HStack,
   Input,
   InputGroup,
   InputLeftAddon,
@@ -11,40 +9,41 @@ import {
   Textarea,
   VStack,
 } from "@chakra-ui/react";
+import { ChangeEvent, FormEvent, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { getSidebarLists } from "../../../../Sidebar/SidebarLists/model/selectors/sidebarLists";
+import { useParams } from "react-router-dom";
+import { Todo } from "../../..";
 import { useAppDispatch } from "../../../../../redux/store";
-import { addNewTodo } from "../../../model/services/addNewTodo";
+import { formatDate } from "../../../../../utils/formatDate";
+import { getSidebarLists } from "../../../../Sidebar/SidebarLists/model/selectors/sidebarLists";
 import { getTodoForm } from "../../../model/selectors/todo";
+import { addNewTodo } from "../../../model/services/addNewTodo";
+import { updateTodo } from "../../../model/services/updateTodo";
 import {
   cancelEdit,
   clearTodoForm,
   updateTodoForm,
 } from "../../../model/slices/todoSlice";
-import { ChangeEvent, FormEvent, useEffect } from "react";
-import { formatDate } from "../../../../../utils/formatDate";
-import { Todo } from "../../../types/todoTypes";
-import { updateTodo } from "../../../model/services/updateTodo";
-import { fetchTodoById } from "../../../model/services/fetchTodoById";
-import { useParams } from "react-router-dom";
 
 interface TodoFormProps {
   onClose: () => void;
-  editingId?: string;
+  todo?: Todo;
+  completeDate?: Date;
 }
 
-const TodoForm = (props: TodoFormProps) => {
-  const { onClose, editingId } = props;
+export const TodoForm = (props: TodoFormProps) => {
+  const { todo, completeDate, onClose } = props;
   const dispatch = useAppDispatch();
-  const date = new Date();
+  const createDate = new Date();
+  const date = completeDate?.toISOString();
   const { id: paramsId } = useParams();
 
   const lists = useSelector(getSidebarLists);
   const todoForm = useSelector(getTodoForm);
 
   useEffect(() => {
-    if (editingId) {
-      dispatch(fetchTodoById(editingId));
+    if (todo) {
+      dispatch(updateTodoForm({ ...todo }));
     }
     if (paramsId) {
       dispatch(updateTodoForm({ listId: paramsId }));
@@ -52,14 +51,14 @@ const TodoForm = (props: TodoFormProps) => {
     return () => {
       dispatch(clearTodoForm());
     };
-  }, [editingId, dispatch, paramsId]);
+  }, [dispatch, paramsId, todo]);
 
   const onAddTodo = () => {
     const newId = crypto.randomUUID();
 
-    const formattedDate = formatDate(date, {});
+    const formattedDate = formatDate(createDate, {});
 
-    if (!todoForm || todoForm.name === "") return;
+    if (!todoForm?.name || todoForm.name === "") return;
 
     const newTodo: Todo = {
       ...todoForm,
@@ -67,6 +66,7 @@ const TodoForm = (props: TodoFormProps) => {
       date: formattedDate,
       completed: false,
       important: false,
+      todoDate: date,
     };
 
     dispatch(addNewTodo(newTodo));
@@ -74,10 +74,10 @@ const TodoForm = (props: TodoFormProps) => {
   };
 
   const onSaveTodo = () => {
-    if (!todoForm || todoForm.name === "") return;
+    if (!todoForm?.name || todoForm.name === "") return;
 
-    if (editingId) {
-      dispatch(updateTodo({ todo: todoForm, id: editingId }));
+    if (todo && todo.id) {
+      dispatch(updateTodo({ todo: todoForm, id: todo.id }));
     }
 
     onClose();
@@ -85,11 +85,11 @@ const TodoForm = (props: TodoFormProps) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    editingId ? onSaveTodo() : onAddTodo();
+    todo ? onSaveTodo() : onAddTodo();
   };
 
   const onCancel = () => {
-    if (editingId) {
+    if (todo) {
       dispatch(cancelEdit());
     }
     onClose();
@@ -119,7 +119,7 @@ const TodoForm = (props: TodoFormProps) => {
   return (
     <VStack spacing="15px">
       <Text as="b">
-        {editingId ? "Редактировать запись" : "Добавить новую запись"}
+        {todo ? "Редактировать запись" : "Добавить новую запись"}
       </Text>
       <form onSubmit={handleSubmit}>
         <VStack w="500px">
@@ -137,29 +137,6 @@ const TodoForm = (props: TodoFormProps) => {
             value={todoForm?.note || ""}
             onChange={onChangeNote}
           />
-          <InputGroup>
-            <InputLeftAddon>Дата</InputLeftAddon>
-            <Input
-              isRequired
-              focusBorderColor="purple.600"
-              type="date"
-              onChange={onChangeDate}
-            />
-          </InputGroup>
-          <HStack w="100%">
-            <Checkbox colorScheme="purple" w="150px">
-              <Text>Весь день</Text>
-            </Checkbox>
-            <InputGroup>
-              <InputLeftAddon>Время</InputLeftAddon>
-              <Input
-                isRequired
-                focusBorderColor="purple.600"
-                type="time"
-                onChange={onChangeTime}
-              />
-            </InputGroup>
-          </HStack>
           <Select
             placeholder="Выберите список"
             focusBorderColor="purple.600"
@@ -172,13 +149,33 @@ const TodoForm = (props: TodoFormProps) => {
               </option>
             ))}
           </Select>
+          {!completeDate && (
+            <InputGroup>
+              <InputLeftAddon>Дата</InputLeftAddon>
+              <Input
+                focusBorderColor="purple.600"
+                type="date"
+                value={todo?.todoDate?.split("T")[0] || ""}
+                onChange={onChangeDate}
+              />
+            </InputGroup>
+          )}
+          <InputGroup>
+            <InputLeftAddon>Время</InputLeftAddon>
+            <Input
+              focusBorderColor="purple.600"
+              type="time"
+              value={todoForm?.startTime || ""}
+              onChange={onChangeTime}
+            />
+          </InputGroup>
           <ButtonGroup colorScheme="purple" w="100%" justifyContent="flex-end">
             <Button variant="outline" onClick={onCancel}>
               Отменить
             </Button>
 
             <Button onClick={handleSubmit}>
-              {editingId ? "Сохранить" : "Добавить"}
+              {todo ? "Сохранить" : "Добавить"}
             </Button>
           </ButtonGroup>
         </VStack>
@@ -186,5 +183,3 @@ const TodoForm = (props: TodoFormProps) => {
     </VStack>
   );
 };
-
-export default TodoForm;
