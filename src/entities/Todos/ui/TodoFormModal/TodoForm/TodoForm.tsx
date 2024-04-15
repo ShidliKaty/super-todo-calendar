@@ -1,6 +1,7 @@
 import {
   Button,
   ButtonGroup,
+  HStack,
   Input,
   InputGroup,
   InputLeftAddon,
@@ -24,6 +25,7 @@ import {
   clearTodoForm,
   updateTodoForm,
 } from "../../../model/slices/todoSlice";
+import { deleteTodo } from "../../../model/services/deleteTodo";
 
 interface TodoFormProps {
   onClose: () => void;
@@ -83,6 +85,13 @@ export const TodoForm = (props: TodoFormProps) => {
     onClose();
   };
 
+  const onDeleteTodo = () => {
+    if (todo && todo.id) {
+      dispatch(deleteTodo(todo.id));
+    }
+    onClose();
+  };
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     todo ? onSaveTodo() : onAddTodo();
@@ -137,6 +146,7 @@ export const TodoForm = (props: TodoFormProps) => {
             value={todoForm?.note || ""}
             onChange={onChangeNote}
           />
+
           <Select
             placeholder="Выберите список"
             focusBorderColor="purple.600"
@@ -149,6 +159,7 @@ export const TodoForm = (props: TodoFormProps) => {
               </option>
             ))}
           </Select>
+
           {!completeDate && (
             <InputGroup>
               <InputLeftAddon>Дата</InputLeftAddon>
@@ -169,15 +180,26 @@ export const TodoForm = (props: TodoFormProps) => {
               onChange={onChangeTime}
             />
           </InputGroup>
-          <ButtonGroup colorScheme="purple" w="100%" justifyContent="flex-end">
-            <Button variant="outline" onClick={onCancel}>
-              Отменить
-            </Button>
+          <HStack w="100%" justifyContent="space-between">
+            {todo && (
+              <Button onClick={onDeleteTodo} w="250px">
+                Удалить запись
+              </Button>
+            )}
+            <ButtonGroup
+              colorScheme="purple"
+              w="100%"
+              justifyContent="flex-end"
+            >
+              <Button variant="outline" onClick={onCancel}>
+                Отменить
+              </Button>
 
-            <Button onClick={handleSubmit}>
-              {todo ? "Сохранить" : "Добавить"}
-            </Button>
-          </ButtonGroup>
+              <Button onClick={handleSubmit}>
+                {todo ? "Сохранить" : "Добавить"}
+              </Button>
+            </ButtonGroup>
+          </HStack>
         </VStack>
       </form>
     </VStack>

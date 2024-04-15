@@ -1,4 +1,4 @@
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { EditIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -11,17 +11,16 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { FaRegStar, FaStar } from "react-icons/fa";
-import { Todo } from "../../types/todoTypes";
 import { useAppDispatch } from "../../../../redux/store";
-import { deleteTodo } from "../../model/services/deleteTodo";
+import { Todo } from "../../types/todoTypes";
 
 import { ChangeEvent, useCallback, useState } from "react";
-import { updateTodoImportance } from "../../model/services/updateTodoImportance";
-import { fetchTodos } from "../../model/services/fetchTodos";
 import { useLocation } from "react-router-dom";
-import { updateTodoCompleted } from "../../model/services/updateTodoCompleted";
-import { formatDate } from "../../../../utils/formatDate";
 import { TodoModal } from "../..";
+import { formatDate } from "../../../../utils/formatDate";
+import { fetchTodos } from "../../model/services/fetchTodos";
+import { updateTodoCompleted } from "../../model/services/updateTodoCompleted";
+import { updateTodoImportance } from "../../model/services/updateTodoImportance";
 
 interface TodoItemProps {
   todo: Todo;
@@ -34,12 +33,6 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isImportant, setIsImportant] = useState(todo.important);
   const [isCompleted, setIsCompleted] = useState(todo.completed);
-
-  const onDeleteTodo = () => {
-    if (todo && todo.id) {
-      dispatch(deleteTodo(todo.id));
-    }
-  };
 
   const onImportantPage = location.pathname.includes("important");
 
@@ -111,6 +104,16 @@ const TodoItem = ({ todo }: TodoItemProps) => {
                 <Text color="blackAlpha.600" fontSize="12px">
                   Создано: {todo.date}
                 </Text>
+                {todo.todoDate && (
+                  <Text color="blackAlpha.600" fontSize="12px">
+                    Назначено на:{" "}
+                    {formatDate(new Date(todo?.todoDate), {
+                      day: "numeric",
+                      month: "numeric",
+                      year: "numeric",
+                    })}
+                  </Text>
+                )}
                 {isCompleted && todo.completedDate && (
                   <Text color="blackAlpha.600" fontSize="12px">
                     Завершено: {todo.completedDate}
@@ -136,9 +139,6 @@ const TodoItem = ({ todo }: TodoItemProps) => {
 
             <Button p="8px" onClick={() => setIsEditing(true)}>
               <EditIcon color="blackAlpha.600" />
-            </Button>
-            <Button p="8px" onClick={onDeleteTodo}>
-              <DeleteIcon color="blackAlpha.600" />
             </Button>
           </ButtonGroup>
         </Box>
