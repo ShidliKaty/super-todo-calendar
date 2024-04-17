@@ -37,7 +37,7 @@ export const TodoForm = (props: TodoFormProps) => {
   const { todo, completeDate, onClose } = props;
   const dispatch = useAppDispatch();
   const createDate = new Date();
-  const date = completeDate?.toISOString();
+
   const { id: paramsId } = useParams();
 
   const lists = useSelector(getSidebarLists);
@@ -54,6 +54,14 @@ export const TodoForm = (props: TodoFormProps) => {
       dispatch(clearTodoForm());
     };
   }, [dispatch, paramsId, todo]);
+
+  const toLocalISOString = (date: Date) => {
+    const offset = date.getTimezoneOffset() * 60000; // смещение в миллисекундах
+    const localISOTime = new Date(date.getTime() - offset).toISOString();
+    return localISOTime;
+  };
+
+  const date = completeDate && toLocalISOString(completeDate);
 
   const onAddTodo = () => {
     const newId = crypto.randomUUID();

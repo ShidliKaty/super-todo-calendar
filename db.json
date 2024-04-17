@@ -259,31 +259,20 @@
       "completedDate": "17.04.2024"
     },
     {
-      "id": "6f86d047-6a46-45d1-ba11-c77ea3bbabf2",
-      "name": "ДР у Кита",
-      "date": "15.04.2024",
+      "id": "062b8d43-c5e2-4780-a3bb-b5e3fc33076a",
+      "name": "ДР Кита",
+      "date": "17.04.2024",
       "completed": false,
       "important": false,
-      "todoDate": "2024-04-18T21:00:00.000Z",
-      "completedDate": "15.04.2024"
+      "todoDate": "2024-04-19T00:00:00.000Z"
     },
     {
-      "id": "5dd4d938-75e6-4ce2-9ee2-b963319e10ee",
+      "id": "088d104f-feb4-4154-a7cd-2929acdf32a9",
       "name": "ДР мамы",
-      "date": "15.04.2024",
+      "date": "17.04.2024",
       "completed": false,
       "important": false,
-      "todoDate": "2024-04-19T21:00:00.000Z"
-    },
-    {
-      "id": "6c49663b-9b14-41ba-a6dd-aa20084a7bba",
-      "name": "стол",
-      "date": "15.04.2024",
-      "completed": true,
-      "important": false,
-      "todoDate": "2024-04-15T21:00:00.000Z",
-      "startTime": "11:00",
-      "completedDate": "16.04.2024"
+      "todoDate": "2024-04-20T00:00:00.000Z"
     }
   ],
   "miniTodos": [
