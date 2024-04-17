@@ -236,10 +236,10 @@
       "id": "dab50963-8463-4a4b-9553-cce2d1d417f5",
       "name": "календарь",
       "date": "01.04.2024",
-      "completed": false,
+      "completed": true,
       "important": false,
       "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b",
-      "completedDate": "04.04.2024"
+      "completedDate": "17.04.2024"
     },
     {
       "id": "b85c5061-524b-49f8-b744-d2fd5e69364f",

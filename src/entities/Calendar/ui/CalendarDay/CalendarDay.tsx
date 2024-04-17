@@ -6,6 +6,8 @@ import { formatDate } from "../../../../utils/formatDate";
 import { endOfDay, isBefore, isSameMonth, isToday } from "date-fns";
 import { Todo, TodoModal } from "../../../Todos";
 import { useMemo, useState } from "react";
+import { OverflowContainer } from "./OverflowContainer/OverflowContainer";
+import ViewMoreEventsModal from "./ViewMoreEventsModal/ViewMoreEventsModal";
 
 interface CalendarDayProps {
   day: Date;
@@ -18,6 +20,7 @@ export const CalendarDay = (props: CalendarDayProps) => {
   const { day, showWeekName, selectedMonth, events } = props;
 
   const [isNewEventModalOpen, setIsNewEventModalOpen] = useState(false);
+  const [isViewEventsModalOpen, setIsViewEventsModalOpen] = useState(false);
 
   const sortedEvents = useMemo(() => {
     const timeToNumber = (time: string) => parseFloat(time.replace(":", "."));
@@ -68,12 +71,31 @@ export const CalendarDay = (props: CalendarDayProps) => {
           <SmallAddIcon />
         </button>
       </div>
-      <div className={cls.events}>
-        {sortedEvents?.length > 0 &&
-          sortedEvents.map((event) => (
-            <CalendarEvent key={event.id} event={event} />
-          ))}
-      </div>
+      {sortedEvents.length > 0 && (
+        <OverflowContainer
+          className={cls.events}
+          items={sortedEvents}
+          getKey={(event) => event.id}
+          renderItem={(event) => <CalendarEvent event={event} />}
+          renderOverflow={(amount) => (
+            <>
+              <button
+                onClick={() => setIsViewEventsModalOpen(true)}
+                className={cls.eventsViewMoreBtn}
+              >
+                +{amount}
+              </button>
+              <ViewMoreEventsModal
+                className={cls.events}
+                date={day}
+                events={sortedEvents}
+                isOpen={isViewEventsModalOpen}
+                onClose={() => setIsViewEventsModalOpen(false)}
+              />
+            </>
+          )}
+        />
+      )}
       <TodoModal
         completeDate={day}
         isOpen={isNewEventModalOpen}
