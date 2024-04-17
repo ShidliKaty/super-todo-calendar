@@ -1,7 +1,7 @@
 import { List } from "@chakra-ui/react";
-import ExpandedList from "../../../../components/ExpandedList/ExpandedList";
-import { MiniTodoSubitem } from "../MiniTodoSubItem/MiniTodoSubItem";
-import { SubMiniTodo } from "../../types/subMiniTodosSchema";
+import ExpandedList from "../../../../../../components/ExpandedList/ExpandedList";
+import { MiniTodoSubitem } from "./MiniTodoSubItem/MiniTodoSubItem";
+import { SubMiniTodo } from "../../../../types/subMiniTodosSchema";
 
 interface MiniTodoSublistProps {
   hidden: boolean;

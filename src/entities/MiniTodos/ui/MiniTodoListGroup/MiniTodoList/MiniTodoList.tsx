@@ -1,12 +1,12 @@
 import { List, Text } from "@chakra-ui/react";
 import { memo } from "react";
-import { MiniTodo } from "../../types/miniTodosSchema";
-import { MiniTodoItem } from "../MiniTodoItem/MiniTodoItem";
+import { MiniTodo } from "../../../types/miniTodosSchema";
+import { MiniTodoItem } from "./MiniTodoItem/MiniTodoItem";
 import { useSelector } from "react-redux";
 import {
   getSubMiniTodos,
   getSubMiniTodosIsError,
-} from "../../model/selectors/getSubMiniTodos";
+} from "../../../model/selectors/getSubMiniTodos";
 
 interface MiniTodoListProps {
   miniTodos: MiniTodo[];

@@ -13,19 +13,19 @@ import {
 import { ChangeEvent, FormEvent, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Todo } from "../../..";
-import { useAppDispatch } from "../../../../../redux/store";
-import { formatDate } from "../../../../../utils/formatDate";
-import { getSidebarLists } from "../../../../Sidebar/SidebarLists/model/selectors/sidebarLists";
-import { getTodoForm } from "../../../model/selectors/todo";
-import { addNewTodo } from "../../../model/services/addNewTodo";
-import { updateTodo } from "../../../model/services/updateTodo";
+import { Todo } from "../../../..";
+import { useAppDispatch } from "../../../../../../redux/store";
+import { formatDate } from "../../../../../../utils/formatDate";
+import { getSidebarLists } from "../../../../../Sidebar/SidebarLists/model/selectors/sidebarLists";
+import { getTodoForm } from "../../../../model/selectors/todo";
+import { addNewTodo } from "../../../../model/services/addNewTodo";
+import { updateTodo } from "../../../../model/services/updateTodo";
 import {
   cancelEdit,
   clearTodoForm,
   updateTodoForm,
-} from "../../../model/slices/todoSlice";
-import { deleteTodo } from "../../../model/services/deleteTodo";
+} from "../../../../model/slices/todoSlice";
+import { deleteTodo } from "../../../../model/services/deleteTodo";
 
 interface TodoFormProps {
   onClose: () => void;

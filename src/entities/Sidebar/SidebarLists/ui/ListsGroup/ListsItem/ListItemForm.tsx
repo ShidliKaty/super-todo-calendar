@@ -1,5 +1,5 @@
 import { FormEvent, useCallback, useEffect, useRef } from "react";
-import { SidebarList } from "../../types/sidebarListTypes";
+import { SidebarList } from "../../../types/sidebarListTypes";
 
 interface ListItemFormProps {
   listName?: string;

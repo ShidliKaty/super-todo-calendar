@@ -1,6 +1,6 @@
 import { List, Skeleton, Text, VStack } from "@chakra-ui/react";
-import { Todo } from "../../types/todoTypes";
-import TodoItem from "../TodoItem/TodoItem";
+import { Todo } from "../../../types/todoTypes";
+import TodoItem from "./TodoItem/TodoItem";
 interface TodoListProps {
   todos: Todo[];
   isLoading?: boolean;

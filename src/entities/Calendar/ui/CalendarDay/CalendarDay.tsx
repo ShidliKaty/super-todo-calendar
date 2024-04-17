@@ -1,7 +1,7 @@
 import { SmallAddIcon } from "@chakra-ui/icons";
 import { Mods, classNames } from "../../../../utils/classNames";
 import cls from "./CalendarDay.module.scss";
-import { CalendarEvent } from "../CalendarEvent/CalendarEvent";
+import { CalendarEvent } from "./CalendarEvent/CalendarEvent";
 import { formatDate } from "../../../../utils/formatDate";
 import { endOfDay, isBefore, isSameMonth, isToday } from "date-fns";
 import { Todo, TodoModal } from "../../../Todos";

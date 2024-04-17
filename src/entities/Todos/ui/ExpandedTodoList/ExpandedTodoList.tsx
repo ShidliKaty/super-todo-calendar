@@ -6,7 +6,7 @@ import { todosMap } from "../../../../utils/todosMap";
 import { useExpandedLists } from "../../../../utils/useExpandedLists";
 import { SidebarList } from "../../../Sidebar/SidebarLists/types/sidebarListTypes";
 import { Todo } from "../../types/todoTypes";
-import TodoList from "../TodoList/TodoList";
+import TodoList from "./TodoList/TodoList";
 
 interface ExpandedListProps {
   lists: SidebarList[];

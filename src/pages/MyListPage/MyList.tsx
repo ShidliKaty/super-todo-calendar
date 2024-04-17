@@ -7,7 +7,7 @@ import {
   getTodosIsLoading,
 } from "../../entities/Todos/model/selectors/todos";
 import { fetchTodos } from "../../entities/Todos/model/services/fetchTodos";
-import TodoList from "../../entities/Todos/ui/TodoList/TodoList";
+import TodoList from "../../entities/Todos/ui/ExpandedTodoList/TodoList/TodoList";
 import { StateSchema, useAppDispatch } from "../../redux/store";
 
 interface MyListProps {

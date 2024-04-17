@@ -8,9 +8,9 @@ import {
   getMiniTodosIsLoading,
 } from "../../model/selectors/miniTodos";
 import { fetchMiniTodos } from "../../model/services/fetchMiniTodosByListId";
-import { MiniTodoList } from "../MiniTodoList/MiniTodoList";
+import { MiniTodoList } from "./MiniTodoList/MiniTodoList";
 import AddButton from "../../../../components/AddButton/AddButton";
-import { MiniTodoListForm } from "../MiniTodoListForm/MiniTodoListForm";
+import { MiniTodoListForm } from "./MiniTodoListForm/MiniTodoListForm";
 import { MiniTodo } from "../../types/miniTodosSchema";
 import { addMiniTodo } from "../../model/services/addMiniTodo";
 import { fetchSubMiniTodosByListId } from "../../model/services/subMiniTodos/fetchSubMiniTodosByListId";

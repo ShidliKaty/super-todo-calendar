@@ -1,11 +1,11 @@
 import { memo, useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch } from "../../../../redux/store";
-import { deleteSubMiniTodo } from "../../model/services/subMiniTodos/deleteSubMiniTodo";
-import { fetchSubMiniTodosByListId } from "../../model/services/subMiniTodos/fetchSubMiniTodosByListId";
-import { updateSubMiniTodo } from "../../model/services/subMiniTodos/updateSubMiniTodo";
-import { SubMiniTodo } from "../../types/subMiniTodosSchema";
-import { TodoMini } from "../MiniTodo/TodoMini";
+import { useAppDispatch } from "../../../../../../../redux/store";
+import { deleteSubMiniTodo } from "../../../../../model/services/subMiniTodos/deleteSubMiniTodo";
+import { fetchSubMiniTodosByListId } from "../../../../../model/services/subMiniTodos/fetchSubMiniTodosByListId";
+import { updateSubMiniTodo } from "../../../../../model/services/subMiniTodos/updateSubMiniTodo";
+import { SubMiniTodo } from "../../../../../types/subMiniTodosSchema";
+import { TodoMini } from "../../TodoMini/TodoMini";
 
 interface MiniTodoSubitemProps {
   todo: SubMiniTodo;

@@ -11,16 +11,16 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { FaRegStar, FaStar } from "react-icons/fa";
-import { useAppDispatch } from "../../../../redux/store";
-import { Todo } from "../../types/todoTypes";
+import { useAppDispatch } from "../../../../../../redux/store";
+import { Todo } from "../../../../types/todoTypes";
 
 import { ChangeEvent, useCallback, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { TodoModal } from "../..";
-import { formatDate } from "../../../../utils/formatDate";
-import { fetchTodos } from "../../model/services/fetchTodos";
-import { updateTodoCompleted } from "../../model/services/updateTodoCompleted";
-import { updateTodoImportance } from "../../model/services/updateTodoImportance";
+import { TodoModal } from "../../../..";
+import { formatDate } from "../../../../../../utils/formatDate";
+import { fetchTodos } from "../../../../model/services/fetchTodos";
+import { updateTodoCompleted } from "../../../../model/services/updateTodoCompleted";
+import { updateTodoImportance } from "../../../../model/services/updateTodoImportance";
 
 interface TodoItemProps {
   todo: Todo;

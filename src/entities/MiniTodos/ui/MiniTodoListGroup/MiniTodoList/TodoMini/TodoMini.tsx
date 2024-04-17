@@ -9,8 +9,8 @@ import {
   ListItem,
   Text,
 } from "@chakra-ui/react";
-import { Todo } from "../../../Todos/types/todoTypes";
-import { MiniTodoListForm } from "../MiniTodoListForm/MiniTodoListForm";
+import { Todo } from "../../../../../Todos/types/todoTypes";
+import { MiniTodoListForm } from "../../MiniTodoListForm/MiniTodoListForm";
 
 interface TodoMiniProps {
   todo: Todo;

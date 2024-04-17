@@ -17,7 +17,7 @@ import { memo, useState } from "react";
 import { FaListAlt } from "react-icons/fa";
 import { PiDotsThreeOutlineVerticalBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
-import { SidebarList } from "../../types/sidebarListTypes";
+import { SidebarList } from "../../../types/sidebarListTypes";
 import ListItemForm from "./ListItemForm";
 
 interface ListsItemProps {

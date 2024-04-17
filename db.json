@@ -253,9 +253,10 @@
       "id": "3392e922-2d74-4003-8f4a-20ae13333774",
       "name": "добавить дату время в туду",
       "date": "15.04.2024",
-      "completed": false,
+      "completed": true,
       "important": false,
-      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b"
+      "listId": "b8c5a663-913e-4281-8dd9-3294b1473a4b",
+      "completedDate": "17.04.2024"
     },
     {
       "id": "6f86d047-6a46-45d1-ba11-c77ea3bbabf2",
@@ -278,10 +279,11 @@
       "id": "6c49663b-9b14-41ba-a6dd-aa20084a7bba",
       "name": "стол",
       "date": "15.04.2024",
-      "completed": false,
+      "completed": true,
       "important": false,
       "todoDate": "2024-04-15T21:00:00.000Z",
-      "startTime": "11:00"
+      "startTime": "11:00",
+      "completedDate": "16.04.2024"
     }
   ],
   "miniTodos": [

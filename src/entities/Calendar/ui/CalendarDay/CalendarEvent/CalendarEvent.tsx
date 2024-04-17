@@ -1,7 +1,7 @@
 import { parse } from "date-fns";
-import { Mods, classNames } from "../../../../utils/classNames";
-import { formatDate } from "../../../../utils/formatDate";
-import { Todo, TodoModal } from "../../../Todos";
+import { Mods, classNames } from "../../../../../utils/classNames";
+import { formatDate } from "../../../../../utils/formatDate";
+import { Todo, TodoModal } from "../../../../Todos";
 import cls from "./CalendarEvent.module.scss";
 import { useState } from "react";
 
